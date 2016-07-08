@@ -35,8 +35,7 @@ module.exports = {
     // CSS
     {
       test: /\.styl$/,
-      include: path.join(__dirname, 'client'),
-      loader: 'style-loader!css-loader!stylus-loader'
+      loader: 'style-loader!css-loader?sourceMap&localIdentName=[path][name]_[local]__[hash:base64:6]!postcss-loader!stylus-loader?paths=' + path.resolve(__dirname, '../app/stylus')
     },
     {
       test: /\.html?$/,
