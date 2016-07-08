@@ -1,17 +1,23 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-let history = browserHistory;
+// let history = browserHistory;
 
 import RootApp from 'root/app/RootApp';
+import App from 'App.js';
 import DirectionsList from 'directions/list/DirectionsList';
 import DirectionsDetail from 'directions/detail/DirectionsDetail';
 
+import { Provider } from 'react-redux';
+import store, { history } from './store';
+
 export default (
-  <Router history={history}>
-    <Route component={RootApp}>
-      <Route path="/" component={DirectionsList}></Route>
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={DirectionsList} />
+      </Route>
       <Route path="/directions/:id" component={DirectionsDetail}></Route>
-    </Route>
-  </Router>
+    </Router>
+  </Provider>
 );

@@ -21,8 +21,9 @@ module.exports = {
     loaders: [
     // js
     {
-      test: /\.jsx$/,
+      test: /\.jsx?$/,
       loader: 'babel-loader',
+      exclude:/node_modules/,
       query: {
           plugins: ['transform-runtime', 'transform-decorators-legacy'],
           presets: [ 'es2015', 'stage-0', 'react']
@@ -30,7 +31,8 @@ module.exports = {
     },
     {
       test: /\.js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      exclude: /node_modules/
     },
     // CSS
     {
