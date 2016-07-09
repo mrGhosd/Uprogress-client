@@ -13,11 +13,11 @@ import store, { history } from './store';
 
 export default (
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={DirectionsList} />
+        <Route path="/directions/:id" component={DirectionsDetail}></Route>
       </Route>
-      <Route path="/directions/:id" component={DirectionsDetail}></Route>
     </Router>
   </Provider>
 );

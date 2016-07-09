@@ -12,7 +12,7 @@ const defaultState =  {
   directions: []
 };
 
-const store = createStore(rootReducer, defaultState);
+const store = createStore(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
 
 const history = syncHistoryWithStore(browserHistory, store);
 
