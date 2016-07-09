@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 export default class RootHeader extends Component {
 
   render() {
-    console.log(this.props);
+  
     return(
       <div className={CN(css.rootHeader)}>Header</div>
     );

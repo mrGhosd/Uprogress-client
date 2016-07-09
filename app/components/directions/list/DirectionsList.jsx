@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getList } from 'actions/directions';
 
-export default class DirectionsList extends Component {
+class DirectionsList extends Component {
 
   componentWillMount() {
-      console.log(this);
+    this.props.dispatch(getList());
+      // console.log(this);
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="directions-list">
         List
@@ -15,3 +18,4 @@ export default class DirectionsList extends Component {
     );
   }
 }
+export default connect()(DirectionsList)
