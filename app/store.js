@@ -1,7 +1,8 @@
-import { createStore, compse } from 'redux';
+import { createStore, compse, applyMiddleware } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import { hashHistory } from 'react-router'
+import thunk from 'redux-thunk';
 
 // import the root reducer
 import rootReducer from './reducers/index';
@@ -12,7 +13,8 @@ const defaultState =  {
   directions: []
 };
 
-const store = createStore(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
+
+const store = applyMiddleware(thunk)(createStore)(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
 
 const history = syncHistoryWithStore(browserHistory, store);
 

@@ -1,7 +1,6 @@
-export function getList(directions) {
-  return {
-    type: 'GET_DIRECTIONS_LIST',
-    directions: []
+export function getList() {
+  return dispatch => {
+    dispatch({ type: 'GET_DIRECTIONS_LIST', directions: [{title: 1}] });
   }
 }
 
