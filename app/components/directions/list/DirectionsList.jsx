@@ -6,14 +6,16 @@ class DirectionsList extends Component {
 
   componentWillMount() {
     this.props.dispatch(getList());
-      // console.log(this);
   }
 
   render() {
-    console.log(this.props);
+    const { directions } = this.props;
+    const list = directions.list || [];
     return (
       <div className="directions-list">
-        List
+        {list.map((item, index) => {
+          return (<p key={index}>{item.title}</p>)
+        })}
       </div>
     );
   }

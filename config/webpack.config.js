@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-console.log(path.resolve(__dirname, '../app/index.html'));
+console.log("NODE ENV IS " + process.env.NODE_ENV);
 module.exports = {
   devtool: 'source-map',
   entry: {
@@ -15,7 +15,8 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.EnvironmentPlugin("NODE_ENV")
   ],
   module: {
     loaders: [
@@ -32,7 +33,11 @@ module.exports = {
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: /node_modules/
+      exclude: /node_modules/,
+      query: {
+          plugins: ['transform-runtime', 'transform-decorators-legacy'],
+          presets: [ 'es2015', 'stage-0', 'react']
+        }
     },
     // CSS
     {

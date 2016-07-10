@@ -3,10 +3,11 @@ const initialState = {
 }
 
 export default function directions(state = initialState, action) {
-  console.log(action);
   switch(action.type) {
     case 'GET_DIRECTIONS_LIST':
-      return Object.assign({}, state, { directions: action.directions });
+    console.log(action.directions);
+      // state.directions = action.directions;
+      return { ...state, list: action.directions }
     default:
       return state;
   }

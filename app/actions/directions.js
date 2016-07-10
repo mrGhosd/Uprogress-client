@@ -1,6 +1,10 @@
+import { get } from 'utils/ApiRequest';
+
 export function getList() {
   return dispatch => {
-    dispatch({ type: 'GET_DIRECTIONS_LIST', directions: [{title: 1}] });
+    get('/directions').then(response => {
+        dispatch({ type: 'GET_DIRECTIONS_LIST', directions: response.data.directions });
+    });
   }
 }
 

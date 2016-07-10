@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node dev.server ./config/webpack.config"
+    "dev": "NODE_ENV=development node dev.server ./config/webpack.config"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "devPort": 9000
   },
   "dependencies": {
+    "axios": "^0.12.0",
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
