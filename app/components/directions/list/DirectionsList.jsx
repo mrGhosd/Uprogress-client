@@ -17,7 +17,11 @@ class DirectionsList extends Component {
       <div className="directions">
         <div className="directions-list">
           {list.map((item, index) => {
-            return (<p key={index}>{item.title}</p>)
+            return (
+              <div className="direction-item" key={index}>
+                  <p>{item.title}</p>
+              </div>
+            )
           })}
         </div>
         <DirectionsForm />

@@ -1,4 +1,4 @@
-import { update } from 'react/lib';
+import update from 'react/lib/update';
 
 const initialState = {
   list: []
