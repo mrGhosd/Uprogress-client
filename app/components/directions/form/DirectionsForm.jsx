@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createDirection } from 'actions/directions';
 
 import TextField from 'TextField/ElementTextField';
+import TextArea from 'TextArea/ElementTextArea';
 
 class DirectionsForm extends Component {
 
@@ -35,6 +36,9 @@ class DirectionsForm extends Component {
         <form>
           <TextField ref="title"
            name="title"
+           onChange={(event) => this.handleChange(event)} />
+         <TextArea
+           name="description"
            onChange={(event) => this.handleChange(event)} />
           <input type="button" value="Save" onClick={() => this.submitForm()}/>
         </form>
