@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getList } from 'actions/directions';
 
+import DirectionsForm from 'directions/form/DirectionsForm';
+
 class DirectionsList extends Component {
 
   componentWillMount() {
@@ -12,10 +14,13 @@ class DirectionsList extends Component {
     const { directions } = this.props;
     const list = directions.list || [];
     return (
-      <div className="directions-list">
-        {list.map((item, index) => {
-          return (<p key={index}>{item.title}</p>)
-        })}
+      <div className="directions">
+        <div className="directions-list">
+          {list.map((item, index) => {
+            return (<p key={index}>{item.title}</p>)
+          })}
+        </div>
+        <DirectionsForm />
       </div>
     );
   }
