@@ -8,6 +8,12 @@ export function getList() {
   }
 }
 
+export function createDirection(direction) {
+  return dispatch => {
+      dispatch({ type: 'NEW_DIRECTION', direction })
+  }
+}
+
 
 export function setList(directions) {
   return {

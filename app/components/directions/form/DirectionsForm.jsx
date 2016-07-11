@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createDirection } from 'actions/directions';
 
 class DirectionsForm extends Component {
 
   submitForm() {
-    console.log(this.refs.title.value);
+    this.props.dispatch(createDirection({title: this.refs.title.value}))
   }
 
   render() {
