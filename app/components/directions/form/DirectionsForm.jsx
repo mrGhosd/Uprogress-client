@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createDirection } from 'actions/directions';
 
+import TextField from 'TextField/ElementTextField';
+
 class DirectionsForm extends Component {
 
   static propTypes = {
@@ -31,7 +33,7 @@ class DirectionsForm extends Component {
     return (
       <div className="directions-form">
         <form>
-          <input ref="title"
+          <TextField ref="title"
            name="title"
            onChange={(event) => this.handleChange(event)} />
           <input type="button" value="Save" onClick={() => this.submitForm()}/>

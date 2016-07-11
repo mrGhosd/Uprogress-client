@@ -52,7 +52,13 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.json', '.jsx'],
-    modulesDirectories: ['web_modules', 'node_modules', '../app', path.join(__dirname, '../app/components')]
+    modulesDirectories: [
+      'web_modules',
+      'node_modules',
+      '../app',
+      path.join(__dirname, '../app/components'),
+      path.join(__dirname, '../app/elements')
+    ]
   },
   devServer: {
     contentBase: path.resolve(__dirname, '..', 'app'),
