@@ -1,4 +1,4 @@
-import { get } from 'utils/ApiRequest';
+import { get, post } from 'utils/ApiRequest';
 
 export function getList() {
   return dispatch => {
@@ -10,7 +10,11 @@ export function getList() {
 
 export function createDirection(direction) {
   return dispatch => {
-      dispatch({ type: 'NEW_DIRECTION', direction })
+    post('/directions', { direction })
+      .then(response => {
+        console.log(response);
+        dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
+      });
   }
 }
 

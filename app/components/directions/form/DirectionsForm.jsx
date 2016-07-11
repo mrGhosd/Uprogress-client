@@ -16,7 +16,8 @@ class DirectionsForm extends Component {
   };
 
   state = {
-    title: ''
+    title: '',
+    description: ''
   };
 
   handleChange(event) {
@@ -26,7 +27,11 @@ class DirectionsForm extends Component {
   }
 
   submitForm() {
-    this.props.dispatch(createDirection({title: this.state.title}))
+    const params = {
+      title: this.state.title,
+      description: this.state.description
+    };
+    this.props.dispatch(createDirection(params))
     this.setState({});
   }
 
