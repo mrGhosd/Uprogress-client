@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import RootApp from 'root/app/RootApp';
 import App from 'App.js';
+import Dashboard from 'dashboard/Dashboard';
 import DirectionsList from 'directions/list/DirectionsList';
 import DirectionsDetail from 'directions/detail/DirectionsDetail';
 
@@ -15,7 +16,7 @@ export default (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={DirectionsList} />
+        <IndexRoute component={Dashboard} />
         <Route path="/directions/:id" component={DirectionsDetail}></Route>
       </Route>
     </Router>

@@ -9,9 +9,7 @@ import rootReducer from './reducers/index';
 
 //create object for default data
 
-const defaultState =  {
-  directions: []
-};
+const defaultState =  {};
 
 
 const store = applyMiddleware(thunk)(createStore)(rootReducer, defaultState, window.devToolsExtension && window.devToolsExtension());
