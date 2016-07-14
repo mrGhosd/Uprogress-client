@@ -9,7 +9,6 @@ class DirectionsForm extends Component {
 
   constructor(props, context) {
     super(props, context);
-    console.log(context.router);
   }
 
   static propTypes = {

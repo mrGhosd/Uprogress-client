@@ -1,0 +1,47 @@
+.divine
+  position: relative
+  box-sizing: border-box
+  display: flex
+
+.divine-a
+  width: 38.196%
+  flex-basis: 38.196%
+
+.divine-b
+  position: relative
+  box-sizing: border-box
+  flex: 0 0 auto
+  width: 61.804%
+  flex-basis: 61.804%
+  padding: 20px
+
+  // workaround
+  .divine-b
+    width: inherit
+    flex: auto
+    width: 100%
+    text-align: center
+    top: center
+    left: center
+
+.divine-m
+  max-width: 50%
+  flex-basis: 50%
+
+.parts
+  display: flex
+
+  .part-a
+    width: 61.804%
+
+  .part-b
+    width: 38.196%
+    text-align: left
+    background: white
+
+  .gradientFooter
+    position: absolute
+    bottom: 0
+    height: 100px
+    width: 100%
+    background: linear-gradient(to top, akme-background-grey-color 0%, rgba(255,255,255,0) 100%)

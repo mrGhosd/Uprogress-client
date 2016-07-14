@@ -1,0 +1,36 @@
+@import 'colors'
+
+border-color-for-claim-status(status)
+  statuses = {
+    new: uprogress-blue-button-color
+    revoked: ave-satani-gray
+    abused: ave-satani-gray
+    expert_consideration: uprogress-blue-color
+    defendant_consideration: uprogress-blue-color
+    expert_decision: uprogress-green-color
+    defendant_decision: uprogress-green-color
+  }
+
+  palette = statuses[status]
+
+  .ClaimStatus_{status} .WidgetCard
+    border-color: palette
+    .ClaimDateStatus label.ClaimStatus
+      border-color: palette
+      color: palette
+
+border-color-for-claim-solution-status(status)
+  statuses = {
+    resolved: uprogress-green-color
+    defendant_wrong: uprogress-red-color
+    claimer_wrong: ave-satani-gray
+    claimer_wrong_abused: uprogress-red-color
+    defendant_wrong: uprogress-red-color
+    unresolved: uprogress-red-color
+  }
+
+  palette = statuses[status]
+
+  label.SolutionStatus_{status}
+    border-color: palette
+    color: palette
