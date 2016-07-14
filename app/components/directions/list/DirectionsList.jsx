@@ -26,7 +26,6 @@ class DirectionsList extends Component {
             )
           })}
         </div>
-        <DirectionsForm />
       </div>
     );
   }
