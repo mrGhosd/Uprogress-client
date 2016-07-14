@@ -18,6 +18,15 @@ export function createDirection(direction) {
   }
 }
 
+export function getDirection(id) {
+  return dispatch => {
+    get(`/directions/${id}`)
+      .then(response => {
+        dispatch({ type: 'DIRECTION', direction: response.data.direction });
+      });
+  }
+}
+
 
 export function setList(directions) {
   return {

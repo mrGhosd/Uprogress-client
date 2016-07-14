@@ -22,6 +22,17 @@ export default class ElementTextArea extends Component {
     placeholder: ''
   }
 
+  componentDidMount() {
+    this.value(this.props.value);
+  }
+
+  value(newVal) {
+    if (typeof newVal !== 'undefined') {
+      this.refs.textarea.value = newVal;
+    }
+    return this.refs.textarea.value;
+  }
+
   render() {
     const name = this.props.name;
     const listener = this.props.onChange;

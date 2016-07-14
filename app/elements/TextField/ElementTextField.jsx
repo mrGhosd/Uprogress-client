@@ -4,6 +4,11 @@ import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 
 export default class ElementTextField extends Component {
+
+  state = {
+    value: ''
+  };
+
   static propTypes = {
     name: PropTypes.string,
     onChange: React.PropTypes.func,
@@ -21,6 +26,17 @@ export default class ElementTextField extends Component {
     value: '',
     placeholder: ''
   }
+
+componentDidMount() {
+  this.value(this.props.value);
+}
+
+value(newVal) {
+  if (typeof newVal !== 'undefined') {
+    this.refs.input.value = newVal;
+  }
+  return this.refs.input.value;
+}
 
   render() {
     const name = this.props.name;
