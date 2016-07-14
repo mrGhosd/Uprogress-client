@@ -1,4 +1,4 @@
-import { get, post } from 'utils/ApiRequest';
+import { get, post, put } from 'utils/ApiRequest';
 
 export function getList() {
   return dispatch => {
@@ -12,8 +12,16 @@ export function createDirection(direction) {
   return dispatch => {
     post('/directions', { direction })
       .then(response => {
-        console.log(response);
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
+      });
+  }
+}
+
+export function updateDirection(id, direction) {
+  return dispatch => {
+    put(`/directions/${id}`, { direction })
+      .then(response => {
+        dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction });
       });
   }
 }
@@ -25,12 +33,4 @@ export function getDirection(id) {
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
       });
   }
-}
-
-
-export function setList(directions) {
-  return {
-    type: 'SET_DIRECTIONS_LIST',
-    directions
-  };
 }

@@ -13,6 +13,8 @@ export default function (state = initialState, action) {
       return { ...state, detail: action.direction }
     case 'NEW_DIRECTION':
       return update(state, {list: {$push: [action.direction]}});
+    case 'UPDATE_DIRECTION':
+      return { ...state, detail: action.direction }
     default:
       return state;
   }

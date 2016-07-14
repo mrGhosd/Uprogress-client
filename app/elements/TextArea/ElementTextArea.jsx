@@ -37,11 +37,12 @@ export default class ElementTextArea extends Component {
     const name = this.props.name;
     const listener = this.props.onChange;
     const placeholder = this.props.placeholder;
+    const value = this.props.value;
 
     return (
       <div className={CN(css.textField)}>
         <textarea name={name} ref="textarea" rows="3"
-        placeholder={this.props.placeholder} onChange={listener}/>
+        placeholder={this.props.placeholder} value={value} onChange={listener}/>
       </div>
     );
   }

@@ -43,11 +43,12 @@ value(newVal) {
     const listener = this.props.onChange;
     const type = this.props.type;
     const placeholder = this.props.placeholder;
+    const value = this.props.value;
 
     return (
       <div className={CN(css.textField)}>
         <input name={name} ref="input" type={type}
-          placeholder={placeholder} onChange={listener}/>
+          placeholder={placeholder} onChange={listener} value={value}/>
       </div>
     );
   }

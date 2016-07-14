@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createDirection, getDirection } from 'actions/directions';
+import { createDirection, getDirection, updateDirection } from 'actions/directions';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
@@ -21,6 +21,7 @@ class DirectionsForm extends Component {
   };
 
   componentWillMount() {
+    console.log(this.props);
     if (this.props.params && this.props.params.id) {
         this.props.dispatch(getDirection(this.props.params.id));
     }
@@ -31,8 +32,10 @@ class DirectionsForm extends Component {
       const direction = props.directions.detail;
 
       if (direction) {
-        if (this.refs.title) this.refs.title.value(direction.title);
-        if (this.refs.description) this.refs.description.value(direction.description);
+        this.setState({title: direction.title, description: direction.description});
+        // console.log(direction.description);
+        // if (this.refs.title) this.refs.title.value(direction.title);
+        // if (this.refs.description) this.refs.description.value(direction.description);
       }
     }
   }
@@ -48,21 +51,28 @@ class DirectionsForm extends Component {
       title: this.state.title,
       description: this.state.description
     };
-    this.props.dispatch(createDirection(params))
+    let func;
+    if (this.props.params && this.props.params.id) {
+      func = updateDirection(this.props.params.id, params);
+    }
+    else {
+      func = createDirection(params)
+    }
+
+    this.props.dispatch(func);
     this.setState({});
   }
 
   render() {
-
     return (
       <div className="directions-form">
         <form>
           <TextField ref="title"
            name="title"
-           onChange={(event) => this.handleChange(event)} />
+           onChange={(event) => this.handleChange(event)} value={this.state.title} />
          <TextArea ref="description"
            name="description"
-           onChange={(event) => this.handleChange(event)} />
+           onChange={(event) => this.handleChange(event)} value={this.state.description} />
           <input type="button" value="Save" onClick={() => this.submitForm()}/>
         </form>
       </div>
