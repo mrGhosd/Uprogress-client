@@ -1,5 +1,9 @@
+import css from './DirectionsForm.styl';
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import CN from 'classnames';
+
 import { createDirection, getDirection, updateDirection } from 'actions/directions';
 
 import TextField from 'TextField/ElementTextField';
@@ -73,7 +77,7 @@ class DirectionsForm extends Component {
 
   render() {
     return (
-      <div className="directions-form">
+      <div className={CN(css.directionsForm)}>
         <form>
           <TextField ref="title"
            name="title"
