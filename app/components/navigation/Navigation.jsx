@@ -20,9 +20,9 @@ class Navigation extends Component {
 
   render() {
     const { directions } = this.props;
-    console.log(directions);
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
+        <Link to='/directions/new'>Add</Link>
         {directions.map((item, index) => {
           return (
             <Link className="navigation-item" key={index} to={`/directions/${item.id}`}>{item.title}</Link>
