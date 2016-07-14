@@ -12,7 +12,7 @@ export default class RootApp extends Component {
       <div className={CN(css.rootApp)}>
         <RootHeader />
         <div className="main-content">
-          <Navigation />
+          <Navigation {...this.props} />
           <div className={CN('content', 'Card')}>
             {React.cloneElement(this.props.children, this.props)}
           </div>
