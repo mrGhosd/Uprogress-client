@@ -77,7 +77,7 @@ class DirectionsForm extends Component {
 
   render() {
     return (
-      <div className={CN(css.directionsForm)}>
+      <div className={CN(css.directionsForm, 'Card')}>
         <form>
           <TextField ref="title"
            name="title"
