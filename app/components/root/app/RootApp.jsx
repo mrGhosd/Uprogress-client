@@ -11,7 +11,6 @@ export default class RootApp extends Component {
     return (
       <div className={CN(css.rootApp)}>
         <RootHeader />
-        Root component
         <div className="main-content">
           <Navigation />
           <div className={CN('content', 'Card')}>
