@@ -21,7 +21,10 @@ export function updateDirection(id, direction) {
   return dispatch => {
     put(`/directions/${id}`, { direction })
       .then(response => {
-        dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction });
+        dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction, updated: true });
+      })
+      .catch(errors => {
+        dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
       });
   }
 }

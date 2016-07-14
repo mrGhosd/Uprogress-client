@@ -14,7 +14,8 @@ export default function (state = initialState, action) {
     case 'NEW_DIRECTION':
       return update(state, {list: {$push: [action.direction]}});
     case 'UPDATE_DIRECTION':
-      return { ...state, detail: action.direction }
+      console.log(action);
+      return { ...state, detail: action.direction, isUpdated: action.updated }
     default:
       return state;
   }

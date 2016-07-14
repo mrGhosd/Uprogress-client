@@ -7,8 +7,17 @@ import TextArea from 'TextArea/ElementTextArea';
 
 class DirectionsForm extends Component {
 
+  constructor(props, context) {
+    super(props, context);
+    console.log(context.router);
+  }
+
   static propTypes = {
     direction: PropTypes.object
+  };
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
   };
 
   static defaultProps = {
@@ -21,9 +30,8 @@ class DirectionsForm extends Component {
   };
 
   componentWillMount() {
-    console.log(this.props);
     if (this.props.params && this.props.params.id) {
-        this.props.dispatch(getDirection(this.props.params.id));
+      this.props.dispatch(getDirection(this.props.params.id));
     }
   }
 
@@ -33,10 +41,12 @@ class DirectionsForm extends Component {
 
       if (direction) {
         this.setState({title: direction.title, description: direction.description});
-        // console.log(direction.description);
-        // if (this.refs.title) this.refs.title.value(direction.title);
-        // if (this.refs.description) this.refs.description.value(direction.description);
       }
+    }
+
+    if (props.directions.isUpdated) {
+      console.log(this);
+      this.context.router.push('/');
     }
   }
 
@@ -60,7 +70,6 @@ class DirectionsForm extends Component {
     }
 
     this.props.dispatch(func);
-    this.setState({});
   }
 
   render() {
