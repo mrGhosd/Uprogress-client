@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router'
+import { Route } from 'react-router';
 
 import DirectionsDetail from 'directions/detail/DirectionsDetail';
 import DirectionsForm from 'directions/form/DirectionsForm';

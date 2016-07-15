@@ -27,16 +27,16 @@ export default class ElementTextField extends Component {
     placeholder: ''
   }
 
-componentDidMount() {
-  this.value(this.props.value);
-}
-
-value(newVal) {
-  if (typeof newVal !== 'undefined') {
-    this.refs.input.value = newVal;
+  componentDidMount() {
+    this.value(this.props.value);
   }
-  return this.refs.input.value;
-}
+
+  value(newVal) {
+    if (typeof newVal !== 'undefined') {
+      this.refs.input.value = newVal;
+    }
+    return this.refs.input.value;
+  }
 
   render() {
     const name = this.props.name;

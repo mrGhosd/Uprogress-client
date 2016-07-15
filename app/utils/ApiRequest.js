@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import envConfig from '../../config/env.config';
-const host = envConfig[process.env.NODE_ENV].host
-const port = envConfig[process.env.NODE_ENV].port
+const host = envConfig[process.env.NODE_ENV].host;
+const port = envConfig[process.env.NODE_ENV].port;
 
 const axios = Axios.create({
   baseURL: `http://${host}:${port}/api/v1`,

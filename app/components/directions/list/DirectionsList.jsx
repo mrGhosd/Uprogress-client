@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import DirectionsForm from 'directions/form/DirectionsForm';
-
 class DirectionsList extends Component {
 
   static propTypes = {
@@ -15,6 +13,7 @@ class DirectionsList extends Component {
 
   render() {
     const { directions } = this.props;
+
     return (
       <div className="directions">
         <div className="directions-list">
@@ -23,11 +22,11 @@ class DirectionsList extends Component {
               <div className="direction-item" key={index}>
                   <p>{item.title}</p>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     );
   }
 }
-export default connect()(DirectionsList)
+export default connect()(DirectionsList);

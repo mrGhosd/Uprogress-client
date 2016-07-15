@@ -5,6 +5,7 @@ import directions from './directions';
 
 const rootReducer = combineReducers({
   directions,
-  routing: routerReducer 
+  routing: routerReducer
 });
+
 export default rootReducer;

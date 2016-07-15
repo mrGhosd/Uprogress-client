@@ -36,7 +36,6 @@ export default class ElementTextArea extends Component {
   render() {
     const name = this.props.name;
     const listener = this.props.onChange;
-    const placeholder = this.props.placeholder;
     const value = this.props.value;
 
     return (

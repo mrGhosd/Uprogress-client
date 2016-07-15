@@ -16,7 +16,9 @@ class DirectionsForm extends Component {
   }
 
   static propTypes = {
-    direction: PropTypes.object
+    direction: PropTypes.object,
+    dispatch: PropTypes.func,
+    params: PropTypes.object
   };
 
   static contextTypes = {
@@ -24,7 +26,9 @@ class DirectionsForm extends Component {
   };
 
   static defaultProps = {
-    direction: {}
+    direction: {},
+    dispatch: () => {},
+    params: {}
   };
 
   state = {
@@ -43,18 +47,18 @@ class DirectionsForm extends Component {
       const direction = props.directions.detail;
 
       if (direction) {
-        this.setState({title: direction.title, description: direction.description});
+        this.setState({ title: direction.title, description: direction.description });
       }
     }
 
     if (props.directions.isUpdated) {
-      console.log(this);
       this.context.router.push('/');
     }
   }
 
   handleChange(event) {
     let lastState = this.state;
+
     this.state[event.target.name] = event.target.value;
     this.setState(lastState);
   }
@@ -65,11 +69,12 @@ class DirectionsForm extends Component {
       description: this.state.description
     };
     let func;
+    
     if (this.props.params && this.props.params.course_id) {
       func = updateDirection(this.props.params.course_id, params);
     }
     else {
-      func = createDirection(params)
+      func = createDirection(params);
     }
 
     this.props.dispatch(func);
