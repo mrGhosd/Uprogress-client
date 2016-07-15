@@ -8,6 +8,10 @@ import  { getDirection } from 'actions/directions';
 
 class DirectionsDetail extends Component {
 
+  state = {
+    directionLoad: true
+  };
+
   static propTypes = {
     params: PropTypes.object,
     dispatch: PropTypes.func,
@@ -24,8 +28,11 @@ class DirectionsDetail extends Component {
     }
   };
 
-  componentWillMount() {
-    this.props.dispatch(getDirection(this.props.params.course_id));
+  componentWillReceiveProps(props) {
+    if (props.params.course_id != this.props.params.course_id || this.state.directionLoad) {
+      this.setState({ directionLoad: false });
+      this.props.dispatch(getDirection(props.params.course_id));
+    }
   }
 
   render() {
