@@ -1,0 +1,9 @@
+PreCommit:
+  EsLint:
+    enabled: true
+    on_warn: fail
+    required_executable: 'eslint'
+    install_command: 'npm install -g eslint'
+    include:
+      - 'app/**/*.js'
+      - 'app/**/*.jsx'
