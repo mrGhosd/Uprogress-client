@@ -28,11 +28,21 @@ class DirectionsDetail extends Component {
     }
   };
 
+  componentWillMount() {
+    if (this.state.directionLoad) {
+      this.loadDirection(this.props);
+    }
+  }
+
   componentWillReceiveProps(props) {
     if (props.params.course_id != this.props.params.course_id || this.state.directionLoad) {
-      this.setState({ directionLoad: false });
-      this.props.dispatch(getDirection(props.params.course_id));
+      this.loadDirection(props);
     }
+  }
+
+  loadDirection(props) {
+    this.setState({ directionLoad: false });
+    this.props.dispatch(getDirection(props.params.course_id));
   }
 
   render() {
