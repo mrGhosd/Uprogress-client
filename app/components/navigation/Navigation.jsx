@@ -54,7 +54,10 @@ class Navigation extends Component {
         {directions.map((item, index) => {
           return (
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}
-                  key={index} to={`/directions/${item.id}`}>{item.title}</Link>
+                  key={index} to={`/directions/${item.id}`}>
+              <span className="title">{item.title}</span>
+              {item.percents_result && <span className="percents-result">{item.percents_result}%</span>}
+            </Link>
           );
         })}
       </div>
