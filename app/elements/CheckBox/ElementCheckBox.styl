@@ -1,0 +1,26 @@
+@import 'toolkit'
+
+:local(.CheckBox)
+  display: flex
+
+  input
+    display: flex
+    margin-right: 10px
+    line-height: 20px
+    height: 20px
+    width: 20px
+    min-width: 20px
+    border: 1px solid inputBorderColor
+    border-radius: 5px
+    appearance: none
+    background: white
+
+    &:checked
+      border-color: aBlueColor
+      background-color: akme-blue-button-color
+
+  label
+    display: flex
+    line-height: 20px
+    font-size: 14px
+    color: ave-satani-gray
