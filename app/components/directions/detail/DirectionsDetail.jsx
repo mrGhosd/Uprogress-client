@@ -4,6 +4,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CN from 'classnames';
 
+import StepsList from 'steps/list/StepsList';
+
 import  { getDirection } from 'actions/directions';
 
 class DirectionsDetail extends Component {
@@ -64,6 +66,7 @@ class DirectionsDetail extends Component {
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {direction.percents_result && progressBar}
+        {direction.steps && <StepsList />}
       </div>
     );
   }
