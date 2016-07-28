@@ -23,8 +23,7 @@ export default function(state = initialState, action) {
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
     case 'UPDATE_STEP':
-      console.log(action);
-      return { ...state, detail: action.direction };
+      return { ...state, detail: action.step.direction };
     default:
       return state;
   }
