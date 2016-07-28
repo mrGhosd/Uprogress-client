@@ -1,3 +1,16 @@
+@import 'toolkit'
+
 :local(.directionsDetail)
   h1
     text-align: left
+  .progress-bar
+    background-color: uprogress-grey-border-color
+    border-radius: 8px
+  for $i in (1..100)
+    .progress_{$i}
+      width: $i * 1%
+      background-color: uprogress-green-color
+      text-align: center
+      border-radius: 8px
+      padding: 5px
+      color: uprogress-nowhite-color

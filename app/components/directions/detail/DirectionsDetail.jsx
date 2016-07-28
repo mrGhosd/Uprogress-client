@@ -45,13 +45,25 @@ class DirectionsDetail extends Component {
     this.props.dispatch(getDirection(props.params.course_id));
   }
 
+  progressBar(direction) {
+    if (direction.percents_result) {
+      return (
+        <div className="progress-bar">
+          <p className={CN(`progress_${direction.percents_result}`)}>{direction.percents_result}%</p>
+        </div>
+      );
+    }
+  }
+
   render() {
     const direction = this.props.directions.detail;
+    const progressBar = this.progressBar(direction);
 
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
+        {direction.percents_result && progressBar}
       </div>
     );
   }
