@@ -39,8 +39,8 @@ class Navigation extends Component {
   itemSelected(item) {
     let result;
 
-    if (this.props.params && this.props.params.course_id) {
-      result = this.props.params.course_id == item.id;
+    if (this.props.params && this.props.params.id) {
+      result = this.props.params.id == item.id;
     }
     return result;
   }

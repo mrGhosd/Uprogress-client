@@ -23,6 +23,9 @@ export default function(state = initialState, action) {
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
     case 'UPDATE_STEP':
+      let directions = state.list.map(item => item.id);
+      const index = directions.indexOf(action.step.direction.id);
+      state.list.splice(index, 1, action.step.direction);
       return { ...state, detail: action.step.direction };
     default:
       return state;
