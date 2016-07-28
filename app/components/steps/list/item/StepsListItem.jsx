@@ -7,6 +7,12 @@ import CheckBox from 'CheckBox/ElementCheckBox';
 
 export default class StepsListItem extends Component {
 
+  state = {
+    step: {
+      is_done: false
+    }
+  };
+
   static propTypes = {
     step: PropTypes.object
   };
@@ -14,6 +20,17 @@ export default class StepsListItem extends Component {
   static defaultProps = {
     step: {}
   };
+
+  componentWillMount() {
+    this.setState({ step: this.props.step });
+  }
+
+  handleChanges(event) {
+    let state = this.state.step;
+    
+    state[event.target.name] = Boolean(event.target.type.match(/text/)) ? event.target.value : event.target.checked;
+    this.setState({ step: state });
+  }
 
   displayCheckbox() {
 
@@ -24,11 +41,13 @@ export default class StepsListItem extends Component {
   }
 
   render() {
-    const { step } = this.props;
+    let { step } = this.state;
 
     return (
       <div className={CN(css.stepsListItem)}>
-        <CheckBox checked={step.is_done} />
+        <CheckBox name="is_done"
+          checked={step.is_done}
+          onChange={ this::this.handleChanges }/>
         <div>{step.title}</div>
       </div>
     );

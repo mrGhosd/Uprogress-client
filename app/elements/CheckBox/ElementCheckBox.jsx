@@ -45,15 +45,16 @@ export default class ElementCheckBox extends Component {
     const value = this.props.value;
     const id = this.props.id;
     const onChange = this.props.onChange;
+    const checked = this.props.checked;
 
     let inputOptions = { type: 'checkbox', ref: 'checkbox', id, value, name, onChange };
 
     inputOptions = this.setOption('disabled', inputOptions);
     inputOptions = this.setOption('checked', inputOptions);
-
+    
     return (
       <div className={css.CheckBox}>
-        <input {...inputOptions} />
+        <input type="checkbox" name={name} checked={checked} onChange={onChange} />
       </div>
     );
   }
