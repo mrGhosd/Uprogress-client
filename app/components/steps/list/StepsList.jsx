@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import StepsListItem from 'steps/list/item/StepsListItem';
+
 export default class StepsList extends Component {
 
   static propTypes = {
@@ -17,7 +19,7 @@ export default class StepsList extends Component {
       <div className="steps-list">
       <h3>Steps List</h3>
       {steps.map((item, index) => {
-        return (<p key={index}>{item.title}</p>);
+        return (<StepsListItem step={item} key={index} />);
       })}
       </div>
     );
