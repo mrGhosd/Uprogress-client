@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from 'actions/directions';
+import * as actionCreators from 'actions';
 import RootApp from 'components/root/app/RootApp.jsx';
 
 /**

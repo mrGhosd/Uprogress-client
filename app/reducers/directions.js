@@ -22,8 +22,25 @@ export default function(state = initialState, action) {
       return update(state, { list: { $push: [action.direction] } });
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
+    case 'UPDATE_STEP':
+      console.log(action);
+      return { ...state, detail: action.direction };
     default:
       return state;
   }
 }
 /*eslint-enable */
+
+// /*
+//  * Find updated step in direction steps
+//  * @param  {Object} state Application state
+//  * @param  {Object} action Action object
+//  * @return {Object} Updated state
+//  */
+//  function updateStep(state, step) {
+//    let steps = state.detail.steps.map(item => item.id);
+//    const index = steps.indexOf(step.id);
+//    state.detail.steps.splice(index, 1, step);
+//
+//    return { ...state, detail: state.detail };
+//  }

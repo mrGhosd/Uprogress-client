@@ -22,7 +22,7 @@ class DirectionsDetail extends Component {
 
   static defaultProps = {
     params: {
-      course_id: ''
+      id: ''
     },
     dispatch: () => {},
     directions: {
@@ -37,14 +37,14 @@ class DirectionsDetail extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.params.course_id != this.props.params.course_id || this.state.directionLoad) {
+    if (props.params.id != this.props.params.id || this.state.directionLoad) {
       this.loadDirection(props);
     }
   }
 
   loadDirection(props) {
     this.setState({ directionLoad: false });
-    this.props.dispatch(getDirection(props.params.course_id));
+    this.props.dispatch(getDirection(props.params.id));
   }
 
   progressBar(direction) {
@@ -60,13 +60,14 @@ class DirectionsDetail extends Component {
   render() {
     const direction = this.props.directions.detail;
     const progressBar = this.progressBar(direction);
+    const dispatch = this.props.dispatch;
 
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {direction.percents_result && progressBar}
-        {direction.steps && <StepsList steps={direction.steps} />}
+        {direction.steps && <StepsList steps={direction.steps} dispatch={dispatch} />}
       </div>
     );
   }
