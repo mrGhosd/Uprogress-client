@@ -66,7 +66,7 @@ class DirectionsDetail extends Component {
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {direction.percents_result && progressBar}
-        {direction.steps && <StepsList />}
+        {direction.steps && <StepsList steps={direction.steps} />}
       </div>
     );
   }
