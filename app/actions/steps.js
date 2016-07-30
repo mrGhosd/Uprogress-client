@@ -13,7 +13,7 @@ export function createStep(id, step) {
         dispatch({ type: 'CREATE_STEP', step: response.data.step });
       })
       .catch((errors) => {
-        dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
+        dispatch({ type: 'FAILED_CREATE_STEP_ACTION', errors: errors.data.errors });
       });
   };
 }

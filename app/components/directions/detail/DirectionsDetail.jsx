@@ -18,7 +18,8 @@ class DirectionsDetail extends Component {
   static propTypes = {
     params: PropTypes.object,
     dispatch: PropTypes.func,
-    directions: PropTypes.object
+    directions: PropTypes.object,
+    steps: PropTypes.object
   };
 
   static defaultProps = {
@@ -30,7 +31,8 @@ class DirectionsDetail extends Component {
       detail: {
         steps: []
       }
-    }
+    },
+    steps: {}
   };
 
   componentWillMount() {
@@ -75,13 +77,14 @@ class DirectionsDetail extends Component {
     const direction = this.props.directions.detail;
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
+    const stepsErrors = this.props.steps.errors;
 
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {progressBar}
-        <StepsForm direction={direction} dispatch={this.props.dispatch} />
+        <StepsForm direction={direction} errors={stepsErrors} dispatch={this.props.dispatch} />
         {!direction.steps.isEmpty && <StepsList steps={direction.steps} dispatch={dispatch} />}
       </div>
     );

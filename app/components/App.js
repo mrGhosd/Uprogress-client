@@ -10,7 +10,8 @@ import RootApp from 'components/root/app/RootApp.jsx';
  */
 function mapStateToProps(state) {
   return {
-    directions: state.directions
+    directions: state.directions,
+    steps: state.steps
   };
 }
 

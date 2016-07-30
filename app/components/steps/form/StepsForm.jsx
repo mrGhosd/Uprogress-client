@@ -11,12 +11,14 @@ export default class StepsForm extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    direction: PropTypes.object
+    direction: PropTypes.object,
+    errors: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
-    direction: {}
+    direction: {},
+    errors: {}
   };
 
   state = {
@@ -38,13 +40,14 @@ export default class StepsForm extends Component {
 
   render() {
     let step = this.state.step;
+    const titleErrors = this.props.errors.title;
 
     return (
       <div className={CN(css.stepsForm)}>
         <form>
           <TextField ref="title"
            name="title"
-           onChange={this::this.handleChange} value={step.title} />
+           onChange={this::this.handleChange} value={step.title} error={titleErrors} />
           <input type="button" value="Save" onClick={() => this.submitForm()}/>
         </form>
       </div>

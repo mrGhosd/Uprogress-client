@@ -38,17 +38,27 @@ export default class ElementTextField extends Component {
     return this.refs.input.value;
   }
 
+  getError() {
+    const error = this.props.error;
+
+    if (error) {
+      return <span className="error">{error === true ? comment : error}</span>;
+    }
+  }
+
   render() {
     const name = this.props.name;
     const listener = this.props.onChange;
     const type = this.props.type;
     const placeholder = this.props.placeholder;
     const value = this.props.value;
+    let error = this.getError();
 
     return (
       <div className={CN(css.textField)}>
         <input name={name} ref="input" type={type}
           placeholder={placeholder} onChange={listener} value={value}/>
+        {error}
       </div>
     );
   }

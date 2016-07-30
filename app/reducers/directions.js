@@ -4,6 +4,9 @@ const initialState = {
   list: [],
   detail: {
     steps: []
+  },
+  errors: {
+    title: []
   }
 };
 
