@@ -29,6 +29,9 @@ export default function(state = initialState, action) {
       const index = directions.indexOf(action.step.direction.id);
       state.list.splice(index, 1, action.step.direction);
       return { ...state, detail: action.step.direction };
+    case 'CREATE_STEP':
+      state.detail.steps.push(action.step);
+      return { ...state, detail: action.step.direction };
     default:
       return state;
   }

@@ -6,6 +6,15 @@
   .progress-bar
     background-color: uprogress-grey-border-color
     border-radius: 8px
+    color: #fff
+
+    &.red
+      background-color: uprogress-red-color
+
+    .percent_empty
+      text-align: center
+      padding: 5px
+
   for $i in (1..100)
     .progress_{$i}
       width: $i * 1%

@@ -59,7 +59,7 @@ class DirectionsForm extends Component {
   handleChange(event) {
     let lastState = this.state;
 
-    this.state[event.target.name] = event.target.value;
+    lastState[event.target.name] = event.target.value;
     this.setState(lastState);
   }
 
@@ -69,7 +69,7 @@ class DirectionsForm extends Component {
       description: this.state.description
     };
     let func;
-    
+
     if (this.props.params && this.props.params.course_id) {
       func = updateDirection(this.props.params.course_id, params);
     }

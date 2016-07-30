@@ -1,4 +1,23 @@
-import { put } from 'utils/ApiRequest';
+import { post, put } from 'utils/ApiRequest';
+
+/**
+ * Create step
+ * @param  {Integer} id Direction id
+ * @param  {Object} step Step parameters
+ * @return {Dispatch} Dispatch function
+ */
+export function createStep(id, step) {
+  return (dispatch) => {
+    post(`/directions/${id}/steps`, { step })
+      .then((response) => {
+        dispatch({ type: 'CREATE_STEP', step: response.data.step });
+      })
+      .catch((errors) => {
+        dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
+      });
+  };
+}
+
 
 /**
  * Update step

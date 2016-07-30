@@ -19,10 +19,12 @@ export default class StepsList extends Component {
 
     return (
       <div className="steps-list">
-      <h3>Steps List</h3>
-      {steps.map((item, index) => {
-        return (<StepsListItem step={item} key={index} dispatch={this.props.dispatch} />);
-      })}
+        <h3>Steps List</h3>
+        <div className="list">
+          {steps.map((item, index) => {
+            return (<StepsListItem step={item} key={index} dispatch={this.props.dispatch} />);
+          })}
+        </div>
       </div>
     );
   }
