@@ -6,6 +6,10 @@ import React, { Component, PropTypes } from 'react';
 import RootHeader from 'root/header/RootHeader';
 import Navigation from 'navigation/Navigation';
 
+/*eslint-disable */
+import utilsPolyfill from 'utils/polifyll';
+/*eslint-enable */
+
 export default class RootApp extends Component {
   static propTypes = {
     children: PropTypes.object

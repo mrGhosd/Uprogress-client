@@ -2,7 +2,9 @@ import update from 'react/lib/update';
 
 const initialState = {
   list: [],
-  detail: {}
+  detail: {
+    steps: []
+  }
 };
 
 /**

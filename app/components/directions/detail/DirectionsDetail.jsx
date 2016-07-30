@@ -26,7 +26,9 @@ class DirectionsDetail extends Component {
     },
     dispatch: () => {},
     directions: {
-      detail: {}
+      detail: {
+        steps: []
+      }
     }
   };
 
@@ -61,13 +63,13 @@ class DirectionsDetail extends Component {
     const direction = this.props.directions.detail;
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
-
+    
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {direction.percents_result && progressBar}
-        {direction.steps && <StepsList steps={direction.steps} dispatch={dispatch} />}
+        {!direction.steps.isEmpty && <StepsList steps={direction.steps} dispatch={dispatch} />}
       </div>
     );
   }
