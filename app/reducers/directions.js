@@ -25,11 +25,10 @@ export default function(state = initialState, action) {
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
     case 'UPDATE_STEP':
-      let directions = state.list.map(item => item.id);
-      const index = directions.indexOf(action.step.direction.id);
-      state.list.splice(index, 1, action.step.direction);
+      replaceInList(state, action.step);
       return { ...state, detail: action.step.direction };
     case 'CREATE_STEP':
+      replaceInList(state, action.step);
       state.detail.steps.push(action.step);
       return { ...state, detail: action.step.direction };
     default:
@@ -38,16 +37,15 @@ export default function(state = initialState, action) {
 }
 /*eslint-enable */
 
-// /*
-//  * Find updated step in direction steps
-//  * @param  {Object} state Application state
-//  * @param  {Object} action Action object
-//  * @return {Object} Updated state
-//  */
-//  function updateStep(state, step) {
-//    let steps = state.detail.steps.map(item => item.id);
-//    const index = steps.indexOf(step.id);
-//    state.detail.steps.splice(index, 1, step);
-//
-//    return { ...state, detail: state.detail };
-//  }
+/**
+  * Find updated step in direction steps
+  * @param  {Object} state Application state
+  * @param  {Object} action Action object
+  * @return {Object} Updated state
+*/
+function replaceInList(state, step) {
+  let directions = state.list.map((item) => item.id);
+  const index = directions.indexOf(step.direction.id);
+
+  state.list.splice(index, 1, step.direction);
+}
