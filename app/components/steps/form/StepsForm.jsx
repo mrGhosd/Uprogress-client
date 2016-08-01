@@ -36,6 +36,7 @@ export default class StepsForm extends Component {
 
   submitForm() {
     this.props.dispatch(createStep(this.props.direction.id, this.state.step));
+    this.setState({ step: { title: '' } });
   }
 
   render() {
