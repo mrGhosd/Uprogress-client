@@ -1,4 +1,4 @@
-import { post, put } from 'utils/ApiRequest';
+import { post, put, destroy } from 'utils/ApiRequest';
 
 /**
  * Create step
@@ -34,6 +34,22 @@ export function updateStep(direction_id, id, step) {
       })
       .catch((errors) => {
         dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
+      });
+  };
+}
+
+/**
+ * Delete step
+ * @param  {Integer} direction_id Direction id
+ * @param  {Integer} id Direction id
+ * @param  {Object} step Step parameters
+ * @return {Dispatch} Dispatch function
+ */
+export function deleteStep(direction_id, id) {
+  return (dispatch) => {
+    destroy(`/directions/${direction_id}/steps/${id}`)
+      .then((response) => {
+        dispatch({ type: 'DELETE_STEP', step: response.data.step });
       });
   };
 }

@@ -2,7 +2,7 @@ import css from './StepsListItem.styl';
 import CN from 'classnames';
 
 import React, { Component, PropTypes } from 'react';
-import { updateStep } from 'actions/steps';
+import { updateStep, deleteStep } from 'actions/steps';
 
 import CheckBox from 'CheckBox/ElementCheckBox';
 
@@ -62,6 +62,10 @@ export default class StepsListItem extends Component {
     return template;
   }
 
+  deleteStep() {
+    this.props.dispatch(deleteStep(this.state.step.direction_id, this.state.step.id));
+  }
+
   render() {
     let { step } = this.state;
     const title = this.displayTitle(step);
@@ -72,6 +76,7 @@ export default class StepsListItem extends Component {
           checked={step.is_done}
           onChange={ this::this.handleChanges }/>
         {title}
+        <button onClick={this::this.deleteStep}>Delete</button>
       </div>
     );
   }

@@ -31,8 +31,12 @@ export default function(state = initialState, action) {
       replaceInList(state, action.step);
       return { ...state, detail: action.step.direction };
     case 'CREATE_STEP':
-      replaceInList(state, action.step);
-      state.detail.steps.push(action.step);
+      // replaceInList(state, action.step);
+      // state.detaild.steps.push(action.step);
+      return { ...state, detail: action.step.direction };
+    case 'DELETE_STEP':
+      // deleteStep(state, action.step);
+      // replaceInList(state, action.step);
       return { ...state, detail: action.step.direction };
     default:
       return state;
@@ -52,3 +56,16 @@ function replaceInList(state, step) {
 
   state.list.splice(index, 1, step.direction);
 }
+
+/**
+  * Find deleted step in direction steps
+  * @param  {Object} state Application state
+  * @param  {Object} action Action object
+  * @return {Object} Updated state
+*/
+// function deleteStep(state, step) {
+//   let ids = state.detail.steps.map((item) => item.id);
+//   const index = ids.indexOf(step.id);
+//
+//   state.detail.steps.splice(index, 1);
+// }

@@ -75,6 +75,8 @@ class DirectionsDetail extends Component {
 
   render() {
     const direction = this.props.directions.detail;
+    let steps = this.props.steps.list;
+    
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
     const stepsErrors = this.props.steps.errors;
@@ -85,7 +87,7 @@ class DirectionsDetail extends Component {
         <p>{direction.description}</p>
         {progressBar}
         <StepsForm direction={direction} errors={stepsErrors} dispatch={this.props.dispatch} />
-        {!direction.steps.isEmpty && <StepsList steps={direction.steps} dispatch={dispatch} />}
+        {!direction.steps.isEmpty && <StepsList steps={steps} dispatch={dispatch} />}
       </div>
     );
   }
