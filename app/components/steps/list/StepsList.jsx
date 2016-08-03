@@ -4,6 +4,10 @@ import StepsListItem from 'steps/list/item/StepsListItem';
 
 export default class StepsList extends Component {
 
+  state = {
+    steps: []
+  };
+
   static propTypes = {
     steps: PropTypes.array,
     dispatch: PropTypes.func
@@ -16,13 +20,13 @@ export default class StepsList extends Component {
 
   render() {
     const { steps } = this.props;
-    
+
     return (
       <div className="steps-list">
         <h3>Steps List</h3>
         <div className="list">
-          {steps.map((item, index) => {
-            return (<StepsListItem step={item} key={index} dispatch={this.props.dispatch} />);
+          {steps.map((item) => {
+            return (<StepsListItem step={item} key={item.id} dispatch={this.props.dispatch} />);
           })}
         </div>
       </div>

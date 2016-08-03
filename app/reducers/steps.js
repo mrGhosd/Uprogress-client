@@ -23,14 +23,7 @@ export default function(state = initialState, action) {
     case 'DELETE_STEP':
       const ids = state.list.map(item => item.id);
       const index = ids.indexOf(action.step.id);
-      // state.list.splice(index, 1)
-      console.log(ids, action);
-      console.log(state);
-      return { ...state, list: [
-        ...state.list.slice(0, index),
-        ...state.list.slice(index + 1)
-      ] };
-      // return update(state, {list: {$splice: [[index, 1]]}});
+      return update(state, {list: {$splice: [[index, 1]]}});
     case 'FAILED_CREATE_STEP_ACTION':
       return { ...state, errors: action.errors };
     default:

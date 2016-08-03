@@ -31,12 +31,8 @@ export default function(state = initialState, action) {
       replaceInList(state, action.step);
       return { ...state, detail: action.step.direction };
     case 'CREATE_STEP':
-      // replaceInList(state, action.step);
-      // state.detaild.steps.push(action.step);
       return { ...state, detail: action.step.direction };
     case 'DELETE_STEP':
-      // deleteStep(state, action.step);
-      // replaceInList(state, action.step);
       return { ...state, detail: action.step.direction };
     default:
       return state;

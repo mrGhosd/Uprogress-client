@@ -46,6 +46,7 @@ export function updateStep(direction_id, id, step) {
  * @return {Dispatch} Dispatch function
  */
 export function deleteStep(direction_id, id) {
+  // dispatch({ type: 'DELETE_STEP', step: response.data.step });
   return (dispatch) => {
     destroy(`/directions/${direction_id}/steps/${id}`)
       .then((response) => {
