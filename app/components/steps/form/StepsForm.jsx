@@ -6,26 +6,39 @@ import React, { Component, PropTypes } from 'react';
 import { createStep } from 'actions/steps';
 
 import TextField from 'TextField/ElementTextField';
+import TextArea from 'TextArea/ElementTextArea';
 
 export default class StepsForm extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
     direction: PropTypes.object,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    form: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     direction: {},
-    errors: {}
+    errors: {},
+    form: {}
   };
 
   state = {
     step: {
-      title: ''
+      title: '',
+      description: ''
+    },
+    direction: {},
+    errors: {
+      title: [],
+      description: []
     }
   };
+
+  componentWillReceiveProps(props) {
+    this.setState({ direction: props.direction, errors: props.errors });
+  }
 
   handleChange(event) {
     let lastState = this.state.step;
@@ -36,12 +49,12 @@ export default class StepsForm extends Component {
 
   submitForm() {
     this.props.dispatch(createStep(this.props.direction.id, this.state.step));
-    this.setState({ step: { title: '' } });
   }
 
   render() {
     let step = this.state.step;
-    const titleErrors = this.props.errors.title;
+    const titleErrors = this.state.errors.title;
+    const descriptionErrors = this.state.errors.description;
 
     return (
       <div className={CN(css.stepsForm)}>
@@ -49,7 +62,12 @@ export default class StepsForm extends Component {
           <TextField ref="title"
            name="title"
            onChange={this::this.handleChange} value={step.title} error={titleErrors} />
-          <input type="button" value="Save" onClick={() => this.submitForm()}/>
+         <TextArea ref="description"
+           name="description"
+           onChange={this::this.handleChange}
+           error={descriptionErrors}
+           value={step.description} />
+         <input type="button" value="Save" onClick={this::this.submitForm}/>
         </form>
       </div>
     );

@@ -85,7 +85,10 @@ class DirectionsDetail extends Component {
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {progressBar}
-        <StepsForm direction={direction} errors={stepsErrors} dispatch={this.props.dispatch} />
+        <StepsForm direction={direction}
+                   errors={stepsErrors}
+                   dispatch={this.props.dispatch}
+        />
         {!steps.isEmpty && <StepsList steps={steps} dispatch={dispatch} />}
       </div>
     );

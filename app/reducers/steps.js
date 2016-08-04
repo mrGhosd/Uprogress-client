@@ -3,7 +3,8 @@ import update from 'react/lib/update';
 const initialState = {
   list: [],
   errors: {
-    title: []
+    title: [],
+    description: []
   }
 };
 
@@ -19,7 +20,10 @@ export default function(state = initialState, action) {
     case 'DIRECTION':
       return { ...state, list: action.direction.steps };
     case 'CREATE_STEP':
-      return update(state, {list: {$push: [action.step]}});
+      return update(state, {
+        list: { $push: [action.step] },
+        errors: { $set: { title: [], description: []} }
+      });
     case 'DELETE_STEP':
       const ids = state.list.map(item => item.id);
       const index = ids.indexOf(action.step.id);
