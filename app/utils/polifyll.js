@@ -59,6 +59,16 @@ Object.defineProperty(Array.prototype, 'isEmpty', {
   }
 });
 
+Object.defineProperty(Object.prototype, 'isEmpty', {
+  enumerable: false,
+  configurable: false,
+  get() {
+    return Object.keys(this).length === 0;
+  },
+  set() {
+    return this;
+  }
+});
 
 if (![].includes) {
   Object.defineProperty(Array.prototype, 'includes', {

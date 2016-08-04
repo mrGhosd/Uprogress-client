@@ -13,15 +13,13 @@ export default class StepsForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     direction: PropTypes.object,
-    errors: PropTypes.object,
-    form: PropTypes.object
+    errors: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     direction: {},
-    errors: {},
-    form: {}
+    errors: {}
   };
 
   state = {
@@ -37,7 +35,12 @@ export default class StepsForm extends Component {
   };
 
   componentWillReceiveProps(props) {
-    this.setState({ direction: props.direction, errors: props.errors });
+    let step = this.state.step;
+
+    if (props.errors.isEmpty) {
+      step = { title: '', description: '' };
+    }
+    this.setState({ direction: props.direction, errors: props.errors, step });
   }
 
   handleChange(event) {
