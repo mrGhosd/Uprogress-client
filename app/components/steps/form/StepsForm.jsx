@@ -40,14 +40,16 @@ export default class StepsForm extends Component {
   componentWillReceiveProps(props) {
     let { step, isEdit } = this.state;
     let { direction, errors } = props;
-    
+
     if (props.errors.isEmpty) {
       step = { title: '', description: '' };
     }
-    if (props.edit) {
+
+    if (!props.edit.isEmpty) {
       step = props.edit;
       isEdit = true;
     }
+
     this.setState({ direction, errors, step, isEdit });
   }
 
