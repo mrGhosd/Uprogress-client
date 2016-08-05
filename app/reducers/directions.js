@@ -28,17 +28,24 @@ export default function(state = initialState, action) {
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
     case 'UPDATE_STEP':
-      const ids = state.list.map(item => item.id);
-      const index = ids.indexOf(action.step.direction.id);
+      const updateIndex = directionIndex(state, action.step.direction);
       return update(state, {
-        list: {$splice: [[index, 1, action.step.direction]]},
+        list: {$splice: [[updateIndex, 1, action.step.direction]]},
         detail: { $set: action.step.direction}
       });
       return state;
     case 'CREATE_STEP':
-      return { ...state, detail: action.step.direction };
+      const createdIndex = directionIndex(state, action.step.direction);
+      return update(state, {
+        list: {$splice: [[createdIndex, 1, action.step.direction]]},
+        detail: { $set: action.step.direction}
+      });
     case 'DELETE_STEP':
-      return { ...state, detail: action.step.direction };
+      const deletedIndex = directionIndex(state, action.step.direction);
+      return update(state, {
+        list: {$splice: [[deletedIndex, 1, action.step.direction]]},
+        detail: { $set: action.step.direction}
+      });
     default:
       return state;
   }
@@ -46,14 +53,14 @@ export default function(state = initialState, action) {
 /*eslint-enable */
 
 /**
-  * Find deleted step in direction steps
+  * Find index of direction
   * @param  {Object} state Application state
   * @param  {Object} action Action object
   * @return {Object} Updated state
 */
-// function deleteStep(state, step) {
-//   let ids = state.detail.steps.map((item) => item.id);
-//   const index = ids.indexOf(step.id);
-//
-//   state.detail.steps.splice(index, 1);
-// }
+function directionIndex(state, direction) {
+  const ids = state.list.map((item) => item.id);
+  const index = ids.indexOf(direction.id);
+
+  return index;
+}
