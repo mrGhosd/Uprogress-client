@@ -10,7 +10,8 @@ export default class StepsListItem extends Component {
 
   state = {
     step: {
-      is_done: false
+      is_done: false,
+      showDescription: false
     }
   };
 
@@ -59,7 +60,24 @@ export default class StepsListItem extends Component {
       template = state.title;
     }
 
-    return template;
+    return (<a onClick={this::this.toggleStepDescription}>{template}</a>);
+  }
+
+  toggleStepDescription() {
+    let prevState = this.state.step;
+
+    prevState.showDescription = !prevState.showDescription;
+    this.setState({ step: prevState });
+  }
+
+  displayDescription(step) {
+    if (this.state.step.showDescription) {
+      return (
+        <div className="step-description">
+          {step.description}
+        </div>
+      );
+    }
   }
 
   deleteStep() {
@@ -69,13 +87,17 @@ export default class StepsListItem extends Component {
   render() {
     let { step } = this.state;
     const title = this.displayTitle(step);
+    const description = this.displayDescription(step);
 
     return (
       <div className={CN(css.stepsListItem)}>
         <CheckBox name="is_done"
           checked={step.is_done}
           onChange={ this::this.handleChanges }/>
-        {title}
+        <div className="step-info">
+          {title}
+          {step.showDescription && description}
+        </div>
         <a className="delete-icon" onClick={this::this.deleteStep}>
           <img title="Delete" src="/images/delete.png" />
         </a>
