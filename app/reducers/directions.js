@@ -28,8 +28,13 @@ export default function(state = initialState, action) {
     case 'UPDATE_DIRECTION':
       return { ...state, detail: action.direction, isUpdated: action.updated };
     case 'UPDATE_STEP':
-      replaceInList(state, action.step);
-      return { ...state, detail: action.step.direction };
+      const ids = state.list.map(item => item.id);
+      const index = ids.indexOf(action.step.direction.id);
+      return update(state, {
+        list: {$splice: [[index, 1, action.step.direction]]},
+        detail: { $set: action.step.direction}
+      });
+      return state;
     case 'CREATE_STEP':
       return { ...state, detail: action.step.direction };
     case 'DELETE_STEP':
@@ -39,19 +44,6 @@ export default function(state = initialState, action) {
   }
 }
 /*eslint-enable */
-
-/**
-  * Find updated step in direction steps
-  * @param  {Object} state Application state
-  * @param  {Object} action Action object
-  * @return {Object} Updated state
-*/
-function replaceInList(state, step) {
-  let directions = state.list.map((item) => item.id);
-  const index = directions.indexOf(step.direction.id);
-
-  state.list.splice(index, 1, step.direction);
-}
 
 /**
   * Find deleted step in direction steps

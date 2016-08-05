@@ -3,7 +3,7 @@ import CN from 'classnames';
 
 import React, { Component, PropTypes } from 'react';
 
-import { createStep } from 'actions/steps';
+import { createStep, updateStep } from 'actions/steps';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
@@ -13,13 +13,15 @@ export default class StepsForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     direction: PropTypes.object,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    edit: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     direction: {},
-    errors: {}
+    errors: {},
+    edit: {}
   };
 
   state = {
@@ -31,16 +33,22 @@ export default class StepsForm extends Component {
     errors: {
       title: [],
       description: []
-    }
+    },
+    isEdit: false
   };
 
   componentWillReceiveProps(props) {
-    let step = this.state.step;
+    let { step, isEdit } = this.state;
+    let { direction, errors } = this.props;
 
     if (props.errors.isEmpty) {
       step = { title: '', description: '' };
     }
-    this.setState({ direction: props.direction, errors: props.errors, step });
+    if (props.edit) {
+      step = props.edit;
+      isEdit = true;
+    }
+    this.setState({ direction, errors, step, isEdit });
   }
 
   handleChange(event) {
@@ -51,7 +59,12 @@ export default class StepsForm extends Component {
   }
 
   submitForm() {
-    this.props.dispatch(createStep(this.props.direction.id, this.state.step));
+    if (this.state.isEdit) {
+      this.props.dispatch(updateStep(this.props.direction.id, this.state.step.id, this.state.step));
+    }
+    else {
+      this.props.dispatch(createStep(this.props.direction.id, this.state.step));
+    }
   }
 
   render() {

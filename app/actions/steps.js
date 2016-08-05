@@ -18,6 +18,17 @@ export function createStep(id, step) {
   };
 }
 
+/**
+ * Edit step
+ * @param  {Object} step Step parameters
+ * @return {Dispatch} Dispatch function
+ */
+export function editStep(step) {
+  return (dispatch) => {
+    dispatch({ type: 'EDIT_STEP', step });
+  };
+}
+
 
 /**
  * Update step

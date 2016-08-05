@@ -2,7 +2,9 @@ import css from './StepsListItem.styl';
 import CN from 'classnames';
 
 import React, { Component, PropTypes } from 'react';
-import { updateStep, deleteStep } from 'actions/steps';
+import Scroll from 'react-scroll';
+
+import { updateStep, deleteStep, editStep } from 'actions/steps';
 
 import CheckBox from 'CheckBox/ElementCheckBox';
 
@@ -84,6 +86,13 @@ export default class StepsListItem extends Component {
     this.props.dispatch(deleteStep(this.state.step.direction_id, this.state.step.id));
   }
 
+  editStep() {
+    const scroll = Scroll.animateScroll;
+
+    this.props.dispatch(editStep(this.state.step));
+    scroll.scrollToTop();
+  }
+
   render() {
     let { step } = this.state;
     const title = this.displayTitle(step);
@@ -98,6 +107,9 @@ export default class StepsListItem extends Component {
           {title}
           {step.showDescription && description}
         </div>
+        <a className="edit-icon" onClick={this::this.editStep}>
+          <img title="Edit" src="/images/edit.png" />
+        </a>
         <a className="delete-icon" onClick={this::this.deleteStep}>
           <img title="Delete" src="/images/delete.png" />
         </a>

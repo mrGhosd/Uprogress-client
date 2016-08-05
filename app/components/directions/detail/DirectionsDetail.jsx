@@ -79,13 +79,15 @@ class DirectionsDetail extends Component {
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
     const stepsErrors = this.props.steps.errors;
-
+    const editStep = this.props.steps.edit;
+    
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {progressBar}
         <StepsForm direction={direction}
+                   edit={editStep}
                    errors={stepsErrors}
                    dispatch={this.props.dispatch}
         />
