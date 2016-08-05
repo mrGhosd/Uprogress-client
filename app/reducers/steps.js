@@ -29,13 +29,15 @@ export default function(state = initialState, action) {
       const stepsIndex = stepIds.indexOf(action.step.id);
       return update(state, {
         list: { $splice: [[stepsIndex, 1, action.step]] },
-        edit: { $set: {} }
+        edit: { $set: {} },
+        errors: { $set: {} }
       });
     case 'DELETE_STEP':
       const ids = state.list.map(item => item.id);
       const index = ids.indexOf(action.step.id);
       return update(state, {list: {$splice: [[index, 1]]}});
-    case 'FAILED_CREATE_STEP_ACTION':
+    case 'FAILED_OPERATION':
+      console.log(action);
       return { ...state, errors: action.errors };
     default:
       return state;
