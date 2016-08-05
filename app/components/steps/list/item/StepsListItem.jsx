@@ -7,6 +7,7 @@ import Scroll from 'react-scroll';
 import { updateStep, deleteStep, editStep } from 'actions/steps';
 
 import CheckBox from 'CheckBox/ElementCheckBox';
+import SvgIcon from 'SVGIcon/SVGIcon';
 
 export default class StepsListItem extends Component {
 
@@ -108,10 +109,10 @@ export default class StepsListItem extends Component {
           {step.showDescription && description}
         </div>
         <a className="edit-icon" onClick={this::this.editStep}>
-          <img title="Edit" src="/images/edit.png" />
+          <SvgIcon icon="edit-step" />
         </a>
         <a className="delete-icon" onClick={this::this.deleteStep}>
-          <img title="Delete" src="/images/delete.png" />
+          <SvgIcon icon="delete-step" />
         </a>
       </div>
     );

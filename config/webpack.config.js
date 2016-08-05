@@ -48,7 +48,7 @@ module.exports = {
         test: /\.html?$/,
         loader: 'file-loader'
       },
-      { test: /\.(png|jpg|jpeg|gif)$/, loader: 'file', exclude: /bootstrap/ }
+      { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file', exclude: /bootstrap/ }
     ]
   },
   resolve: {
