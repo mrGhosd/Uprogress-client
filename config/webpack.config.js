@@ -21,33 +21,34 @@ module.exports = {
   module: {
     loaders: [
     // js
-    {
-      test: /\.jsx?$/,
-      loader: 'babel-loader',
-      exclude:/node_modules/,
-      query: {
-          plugins: ['transform-runtime', 'transform-decorators-legacy'],
-          presets: [ 'es2015', 'stage-0', 'react']
-        }
-    },
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-      query: {
-          plugins: ['transform-runtime', 'transform-decorators-legacy'],
-          presets: [ 'es2015', 'stage-0', 'react']
-        }
-    },
-    // CSS
-    {
-      test: /\.styl$/,
-      loader: 'style-loader!css-loader?sourceMap&localIdentName=[path][name]_[local]__[hash:base64:6]!postcss-loader!stylus-loader?paths=' + path.resolve(__dirname, '../app/stylus')
-    },
-    {
-      test: /\.html?$/,
-      loader: 'file-loader'
-    }
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude:/node_modules/,
+        query: {
+            plugins: ['transform-runtime', 'transform-decorators-legacy'],
+            presets: [ 'es2015', 'stage-0', 'react']
+          }
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+            plugins: ['transform-runtime', 'transform-decorators-legacy'],
+            presets: [ 'es2015', 'stage-0', 'react']
+          }
+      },
+      // CSS
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader?sourceMap&localIdentName=[path][name]_[local]__[hash:base64:6]!postcss-loader!stylus-loader?paths=' + path.resolve(__dirname, '../app/stylus')
+      },
+      {
+        test: /\.html?$/,
+        loader: 'file-loader'
+      },
+      { test: /\.(png|jpg|jpeg|gif)$/, loader: 'file', exclude: /bootstrap/ }
     ]
   },
   resolve: {

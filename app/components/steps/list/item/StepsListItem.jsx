@@ -76,7 +76,9 @@ export default class StepsListItem extends Component {
           checked={step.is_done}
           onChange={ this::this.handleChanges }/>
         {title}
-        <button onClick={this::this.deleteStep}>Delete</button>
+        <a className="delete-icon" onClick={this::this.deleteStep}>
+          <img title="Delete" src="/images/delete.png" />
+        </a>
       </div>
     );
   }
