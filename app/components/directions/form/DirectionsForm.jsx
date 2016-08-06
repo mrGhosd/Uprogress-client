@@ -37,13 +37,13 @@ class DirectionsForm extends Component {
   };
 
   componentWillMount() {
-    if (this.props.params && this.props.params.course_id) {
-      this.props.dispatch(getDirection(this.props.params.course_id));
+    if (this.props.params && this.props.params.id) {
+      this.props.dispatch(getDirection(this.props.params.id));
     }
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.params.course_id) {
+    if (this.props.params.id) {
       const direction = props.directions.detail;
 
       if (direction) {
@@ -70,8 +70,8 @@ class DirectionsForm extends Component {
     };
     let func;
 
-    if (this.props.params && this.props.params.course_id) {
-      func = updateDirection(this.props.params.course_id, params);
+    if (this.props.params && this.props.params.id) {
+      func = updateDirection(this.props.params.id, params);
     }
     else {
       func = createDirection(params);

@@ -56,7 +56,7 @@ class Navigation extends Component {
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}
                   key={index} to={`/directions/${item.id}`}>
               <span className="title">{item.title}</span>
-              {item.percents_result && <span className="percents-result"> {item.percents_result} </span>}
+              {item.percentsResult && <span className="percents-result"> {item.percentsResult} </span>}
             </Link>
           );
         })}

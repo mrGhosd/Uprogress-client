@@ -55,17 +55,17 @@ class DirectionsDetail extends Component {
   progressBar(direction) {
     let template;
 
-    if (!direction.steps.isEmpty && direction.percents_result > 0) {
+    if (!direction.steps.isEmpty && direction.percentsResult > 0) {
       template = (
         <div className="progress-bar">
-          <p className={CN(`progress_${direction.percents_result}`)}>{direction.percents_result}%</p>
+          <p className={CN(`progress_${direction.percentsResult}`)}>{direction.percentsResult}%</p>
         </div>
       );
     }
     else if (!direction.steps.isEmpty) {
       template = (
         <div className="progress-bar red">
-          <p className="percent_empty">{direction.percents_result}%</p>
+          <p className="percent_empty">{direction.percentsResult}%</p>
         </div>
       );
     }
@@ -80,7 +80,7 @@ class DirectionsDetail extends Component {
     const dispatch = this.props.dispatch;
     const stepsErrors = this.props.steps.errors;
     const editStep = this.props.steps.edit;
-    
+
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>

@@ -7,12 +7,13 @@ const axios = Axios.create({
   baseURL: `http://${host}:${port}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'X-Key-Inflection': 'camel'
   }
 });
 
-// axios.interceptors.request.use(config => {
-//   config.headers['uprogresstoken'] = localStorage.getItem('uprogresstoken');
+// axios.interceptors.request.use((config) => {
+//   config.headers['X-Key-Inflection'] = 'camel';
 // });
 
 /**
