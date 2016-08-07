@@ -1,0 +1,9 @@
+web:
+  build: .
+  ports:
+    - "9000:9000"
+  volumes:
+    - ./:/usr/src/app/:rw
+  environment:
+    - NODE_ENV=development
+  # command: 'npm install && npm run dev'
