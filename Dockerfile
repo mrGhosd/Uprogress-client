@@ -1,6 +1,7 @@
 FROM node:5.12.0
 
 RUN npm install webpack -g
+RUN npm install eslint -g
 
 WORKDIR /tmp
 COPY package.json /tmp/

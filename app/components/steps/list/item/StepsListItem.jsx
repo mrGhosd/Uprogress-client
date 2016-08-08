@@ -36,7 +36,7 @@ export default class StepsListItem extends Component {
     if (event.target.type === 'checkbox') {
       this.changeState(event);
       this.props.dispatch(updateStep(
-        this.state.step.direction_id,
+        this.state.step.directionId,
         this.state.step.id,
         this.state.step
       ));
@@ -101,8 +101,8 @@ export default class StepsListItem extends Component {
 
     return (
       <div className={CN(css.stepsListItem)}>
-        <CheckBox name="is_done"
-          checked={step.is_done}
+        <CheckBox name="isDone"
+          checked={step.isDone}
           onChange={ this::this.handleChanges }/>
         <div className="step-info">
           {title}
