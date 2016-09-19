@@ -12,6 +12,14 @@ import Button from 'Button/ElementButton';
 
 class SignIn extends Component {
 
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   static propTypes = {
     dispatch: PropTypes.func
   };
@@ -36,6 +44,12 @@ class SignIn extends Component {
 
     lastState[event.target.name] = event.target.value;
     this.setState({ user: lastState });
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.current) {
+      this.context.router.push('/');
+    }
   }
 
   submitForm() {
@@ -70,4 +84,13 @@ class SignIn extends Component {
   }
 }
 
-export default connect()(SignIn);
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return { current: state.users.current };
+}
+
+export default connect(mapStateToProps)(SignIn);

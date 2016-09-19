@@ -47,8 +47,7 @@ export function currentUser() {
   return (dispatch) => {
     get('/sessions/current')
       .then((response) => {
-        console.log(response);
-        dispatch({ type: 'CURRENT_USER', user: response.data.user });
+        dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });

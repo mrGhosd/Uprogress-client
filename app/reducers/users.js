@@ -18,6 +18,8 @@ export default function(state = initialState, action) {
     case 'SIGN_UP_USER':
       localStorage.setItem('uprogresstoken', action.token)
       return { ...state, signed: true }
+    case 'CURRENT_USER':
+      return { ...state, current: action.current }
     default:
       return state;
   }
