@@ -2,9 +2,10 @@ import css from './SignPage.styl';
 
 import React, { Component } from 'react';
 import CN from 'classnames';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+
+import { signUp } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
@@ -32,8 +33,10 @@ class SignUp extends Component {
     this.setState({ user: lastState });
   }
 
-  submitForm(event) {
-    console.log(event);
+  submitForm() {
+    const user = this.state.user;
+
+    this.props.dispatch(signUp(user));
   }
 
   render() {

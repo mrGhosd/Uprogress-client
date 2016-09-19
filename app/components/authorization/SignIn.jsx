@@ -30,7 +30,7 @@ class SignIn extends Component {
   }
 
   submitForm(event) {
-    console.log(event);
+    const user = this.state.user;
   }
 
   render() {
