@@ -13,7 +13,7 @@ export default class StepsListItem extends Component {
 
   state = {
     step: {
-      is_done: false,
+      isDone: false,
       showDescription: false
     }
   };
@@ -55,8 +55,8 @@ export default class StepsListItem extends Component {
 
   displayTitle(state) {
     let template;
-
-    if (state.is_done) {
+    
+    if (state.isDone) {
       template = (<strike>{state.title}</strike>);
     }
     else {
