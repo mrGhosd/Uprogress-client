@@ -52,9 +52,9 @@ class DirectionsForm extends Component {
       }
     }
 
-    if (props.directions.isUpdated) {
-      this.context.router.push('/');
-    }
+    // if (props.directions.isUpdated) {
+    //   this.context.router.push('/');
+    // }
   }
 
   handleChange(event) {

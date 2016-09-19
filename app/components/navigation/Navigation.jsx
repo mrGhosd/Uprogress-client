@@ -47,6 +47,7 @@ class Navigation extends Component {
 
   render() {
     const { directions } = this.props;
+    
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
         <Link to="/directions/new" className="create-button">Add</Link>
