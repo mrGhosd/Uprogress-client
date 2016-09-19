@@ -55,7 +55,7 @@ export default class StepsListItem extends Component {
 
   displayTitle(state) {
     let template;
-    
+
     if (state.isDone) {
       template = (<strike>{state.title}</strike>);
     }
@@ -89,7 +89,6 @@ export default class StepsListItem extends Component {
 
   editStep() {
     const scroll = Scroll.animateScroll;
-
     this.props.dispatch(editStep(this.state.step));
     scroll.scrollToTop();
   }

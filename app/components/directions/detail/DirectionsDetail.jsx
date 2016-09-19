@@ -19,7 +19,8 @@ class DirectionsDetail extends Component {
     params: PropTypes.object,
     dispatch: PropTypes.func,
     directions: PropTypes.object,
-    steps: PropTypes.array
+    steps: PropTypes.array,
+    editStep: PropTypes.object
   };
 
   static defaultProps = {
@@ -32,7 +33,8 @@ class DirectionsDetail extends Component {
         steps: []
       }
     },
-    steps: []
+    steps: [],
+    editStep: {}
   };
 
   componentWillMount() {
@@ -73,13 +75,17 @@ class DirectionsDetail extends Component {
     return template;
   }
 
+  onEnter() {
+    console.log(this.props);
+  }
+
   render() {
     const direction = this.props.direction;
     let steps = this.props.steps;
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
     const stepsErrors = this.props.steps.errors;
-    const editStep = this.props.steps.edit;
+    const editStep = this.props.editStep;
 
     return (
       <div className={CN(css.directionsDetail)}>
@@ -105,7 +111,8 @@ class DirectionsDetail extends Component {
 function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
-    steps: state.steps.list
+    steps: state.steps.list,
+    editStep: state.steps.edit
   };
 }
 

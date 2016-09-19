@@ -5,10 +5,7 @@ const initialState = {
   detail: {
     steps: []
   },
-  errors: {
-    title: [],
-    description: []
-  }
+  errors: {}
 };
 
 /**
