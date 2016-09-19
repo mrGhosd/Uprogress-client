@@ -73,10 +73,6 @@ class DirectionsDetail extends Component {
     return template;
   }
 
-  onEnter() {
-    console.log(this.props);
-  }
-
   render() {
     const direction = this.props.direction;
     let steps = this.props.steps;

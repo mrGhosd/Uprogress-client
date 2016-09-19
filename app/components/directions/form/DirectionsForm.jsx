@@ -44,6 +44,7 @@ class DirectionsForm extends Component {
   }
 
   componentWillReceiveProps(props) {
+    console.log(props);
     if (this.props.params.id) {
       const direction = props.directions.detail;
 
@@ -82,15 +83,21 @@ class DirectionsForm extends Component {
   }
 
   render() {
+    const { errors } = this.props;
+
     return (
       <div className={CN(css.directionsForm, 'Card')}>
         <form>
           <TextField ref="title"
            name="title"
-           onChange={(event) => this.handleChange(event)} value={this.state.title} />
+           onChange={(event) => this.handleChange(event)}
+           value={this.state.title}
+           error={errors.title} />
          <TextArea ref="description"
            name="description"
-           onChange={(event) => this.handleChange(event)} value={this.state.description} />
+           onChange={(event) => this.handleChange(event)}
+           value={this.state.description}
+           error={errors.description} />
          <Button onClick={this::this.submitForm} color="blue" >Save</Button>
         </form>
       </div>
@@ -98,4 +105,16 @@ class DirectionsForm extends Component {
   }
 }
 
-export default connect()(DirectionsForm);
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return {
+    direction: state.directions.detail,
+    errors: state.directions.errors
+  };
+}
+
+export default connect(mapStateToProps)(DirectionsForm);

@@ -22,6 +22,9 @@ export function createDirection(direction) {
     post('/directions', { direction })
       .then((response) => {
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
+      })
+      .catch((error) => {
+        dispatch({ type: 'DIRECTION_FAILED', errors: error.data.errors });
       });
   };
 }
