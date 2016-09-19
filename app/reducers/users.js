@@ -1,4 +1,5 @@
 const initialState = {
+  signed: false,
   current: {}
 };
 
@@ -12,9 +13,11 @@ const initialState = {
 export default function(state = initialState, action) {
   switch(action.type) {
     case 'SIGN_IN_USER':
-      return { ...state, current: action.user }
+      localStorage.setItem('uprogresstoken', action.token)
+      return { ...state, signed: true }
     case 'SIGN_UP_USER':
-      return { ...state, current: action.user }
+      localStorage.setItem('uprogresstoken', action.token)
+      return { ...state, signed: true }
     default:
       return state;
   }

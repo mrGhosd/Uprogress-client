@@ -11,7 +11,8 @@ import RootApp from 'components/root/app/RootApp.jsx';
 function mapStateToProps(state) {
   return {
     directions: state.directions,
-    steps: state.steps
+    steps: state.steps,
+    users: state.users
   };
 }
 

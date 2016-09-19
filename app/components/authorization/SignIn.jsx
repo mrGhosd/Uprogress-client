@@ -1,15 +1,24 @@
 import css from './SignPage.styl';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+
+import { signIn } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
 
 class SignIn extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func
+  };
+
+  static defaultProps = {
+    dispatch: () => {}
+  };
 
   state = {
     user: {
@@ -29,8 +38,10 @@ class SignIn extends Component {
     this.setState({ user: lastState });
   }
 
-  submitForm(event) {
+  submitForm() {
     const user = this.state.user;
+
+    this.props.dispatch(signIn(user));
   }
 
   render() {

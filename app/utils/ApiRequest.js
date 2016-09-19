@@ -12,9 +12,14 @@ const axios = Axios.create({
   }
 });
 
-// axios.interceptors.request.use((config) => {
-//   config.headers['X-Key-Inflection'] = 'camel';
-// });
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('uprogresstoken');
+
+  if (token) {
+    config.headers['uprogresstoken'] = token;
+  }
+  return config;
+});
 
 /**
  * Send GET request to project API

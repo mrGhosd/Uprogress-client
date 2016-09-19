@@ -1,6 +1,6 @@
 import css from './SignPage.styl';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -11,6 +11,15 @@ import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
 
 class SignUp extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func
+  };
+
+  static defaultProps = {
+    dispatch: () => {}
+  };
+
   state = {
     user: {
       email: '',
