@@ -48,7 +48,7 @@ export default class ElementTextArea extends Component {
     const error = this.getError();
 
     return (
-      <div className={CN(css.textField)}>
+      <div className={CN(css.textArea)}>
         <textarea name={name} ref="textarea" rows="3"
         placeholder={this.props.placeholder} value={value} onChange={listener}/>
       {error}

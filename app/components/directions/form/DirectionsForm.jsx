@@ -8,6 +8,7 @@ import { createDirection, getDirection, updateDirection } from 'actions/directio
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
+import Button from 'Button/ElementButton';
 
 class DirectionsForm extends Component {
 
@@ -90,7 +91,7 @@ class DirectionsForm extends Component {
          <TextArea ref="description"
            name="description"
            onChange={(event) => this.handleChange(event)} value={this.state.description} />
-          <input type="button" value="Save" onClick={() => this.submitForm()}/>
+         <Button type="submit" color="blue" >Save</Button>
         </form>
       </div>
     );

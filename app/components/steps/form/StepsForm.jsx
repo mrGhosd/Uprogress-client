@@ -7,6 +7,7 @@ import { createStep, updateStep } from 'actions/steps';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
+import Button from 'Button/ElementButton';
 
 export default class StepsForm extends Component {
 
@@ -85,7 +86,7 @@ export default class StepsForm extends Component {
            onChange={this::this.handleChange}
            error={descriptionErrors}
            value={step.description} />
-         <input type="button" value="Save" onClick={this::this.submitForm}/>
+         <Button type="submit" onClick={this::this.submitForm} color="blue">Save</Button>
         </form>
       </div>
     );
