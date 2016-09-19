@@ -1,4 +1,4 @@
-import { get, post } from 'utils/ApiRequest';
+import { get, post, destroy } from 'utils/ApiRequest';
 import { getAuthorizationParams } from 'utils/browser';
 
 /**
@@ -53,4 +53,12 @@ export function currentUser() {
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });
       });
   };
+}
+
+/**
+ * Sign out; Remove token from client
+ * @return {Dispatch} Dispatch function
+ */
+export function signOut() {
+  return { type: 'SIGN_OUT' };
 }

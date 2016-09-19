@@ -86,7 +86,7 @@ export default class StepsForm extends Component {
            onChange={this::this.handleChange}
            error={descriptionErrors}
            value={step.description} />
-         <Button type="submit" onClick={this::this.submitForm} color="blue">Save</Button>
+         <Button onClick={this::this.submitForm} color="blue">Save</Button>
         </form>
       </div>
     );

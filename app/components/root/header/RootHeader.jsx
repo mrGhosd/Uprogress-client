@@ -1,7 +1,13 @@
+import css from './RootHeader.styl';
+
 import CN from 'classnames';
 import { connect } from 'react-redux';
-import css from './RootHeader.styl';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+
+import { signOut } from 'actions/users';
+
+import Button from 'Button/ElementButton';
 
 /**
  * Mapping application state to properties
@@ -17,17 +23,67 @@ export default class RootHeader extends Component {
     currentUser: {}
   };
 
+  static propTypes = {
+    currentUser: PropTypes.object,
+    dispatch: PropTypes.func
+  };
+
+  static defaultProps = {
+    currentUser: {},
+    dispatch: () => {}
+  };
+
   componentWillReceiveProps(props) {
     if (props.currentUser) {
       this.setState({ currentUser: props.currentUser });
     }
   }
 
-  render() {
+  userInfo() {
     const nickName = this.state.currentUser.nick;
 
     return (
-      <div className={CN(css.rootHeader, 'Card')}>Header {nickName}</div>
+      <div className="user-info">
+        <div className="user-nick">{nickName}</div>
+        <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
+      </div>
+    );
+  }
+
+  signOut() {
+    this.props.dispatch(signOut());
+  }
+
+  unAuthorizedUser() {
+    return (
+      <div className="authorization">
+        <Link to="/sign_in">Sign in</Link>
+        <Link to="/sign_up">Sign up</Link>
+      </div>
+    );
+  }
+
+  rightHeaderPart() {
+    let template;
+
+    if (!this.state.currentUser.isEmpty) {
+      template = this.userInfo();
+    }
+    else {
+      template = this.unAuthorizedUser();
+    }
+
+    return template;
+  }
+
+  render() {
+    const template = this.rightHeaderPart();
+
+    return (
+      <div className={CN(css.rootHeader, 'Card')}>
+        <div className="left-part">Header</div>
+        <div className="right-part">{template}</div>
+      </div>
     );
   }
 }
