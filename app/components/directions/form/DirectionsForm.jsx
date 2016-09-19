@@ -91,7 +91,7 @@ class DirectionsForm extends Component {
          <TextArea ref="description"
            name="description"
            onChange={(event) => this.handleChange(event)} value={this.state.description} />
-         <Button type="submit" color="blue" >Save</Button>
+         <Button onClick={this::this.submitForm} color="blue" >Save</Button>
         </form>
       </div>
     );

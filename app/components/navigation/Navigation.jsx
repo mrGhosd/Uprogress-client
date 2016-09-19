@@ -47,7 +47,6 @@ class Navigation extends Component {
 
   render() {
     const { directions } = this.props;
-
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
         <Link to="/directions/new" className="create-button">Add</Link>
@@ -56,7 +55,7 @@ class Navigation extends Component {
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}
                   key={index} to={`/directions/${item.id}`}>
               <span className="title">{item.title}</span>
-              {item.percentsResult && <span className="percents-result"> {item.percentsResult} </span>}
+              {item.percentsResult !== null && <span className="percents-result"> {item.percentsResult}%</span>}
             </Link>
           );
         })}
