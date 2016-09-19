@@ -9,15 +9,25 @@ import React, { Component } from 'react';
  * @return {Object} Mapped properties
  */
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser };
+  return { currentUser: state.users.current };
 }
 
 export default class RootHeader extends Component {
+  state = {
+    currentUser: {}
+  };
+
+  componentWillReceiveProps(props) {
+    if (props.currentUser) {
+      this.setState({ currentUser: props.currentUser });
+    }
+  }
 
   render() {
+    const nickName = this.state.currentUser.nick;
 
     return (
-      <div className={CN(css.rootHeader, 'Card')}>Header</div>
+      <div className={CN(css.rootHeader, 'Card')}>Header {nickName}</div>
     );
   }
 }
