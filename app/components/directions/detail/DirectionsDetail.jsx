@@ -21,7 +21,8 @@ class DirectionsDetail extends Component {
     directions: PropTypes.object,
     steps: PropTypes.array,
     editStep: PropTypes.object,
-    user: PropTypes.object
+    user: PropTypes.object,
+    currentUser: PropTypes.object
   };
 
   static defaultProps = {
@@ -36,7 +37,8 @@ class DirectionsDetail extends Component {
     },
     steps: [],
     editStep: {},
-    user: {}
+    user: {},
+    currentUser: {}
   };
 
   componentWillMount() {
@@ -88,6 +90,7 @@ class DirectionsDetail extends Component {
     const dispatch = this.props.dispatch;
     const stepsErrors = this.props.steps.errors;
     const editStep = this.props.editStep;
+    const { currentUser } = this.props;
 
     return (
       <div className={CN(css.directionsDetail)}>
@@ -97,9 +100,10 @@ class DirectionsDetail extends Component {
         <StepsForm direction={direction}
                    edit={editStep}
                    errors={stepsErrors}
+                   user={currentUser}
                    dispatch={this.props.dispatch}
         />
-        {!steps.isEmpty && <StepsList steps={steps} dispatch={dispatch} />}
+        {!steps.isEmpty && <StepsList user={currentUser} steps={steps} dispatch={dispatch} />}
       </div>
     );
   }
@@ -115,7 +119,8 @@ function mapStateToProps(state) {
     direction: state.directions.detail,
     steps: state.steps.list,
     editStep: state.steps.edit,
-    user: state.users.show
+    user: state.users.show,
+    currentUser: state.users.current
   };
 }
 

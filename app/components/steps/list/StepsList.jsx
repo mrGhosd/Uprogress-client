@@ -10,23 +10,25 @@ export default class StepsList extends Component {
 
   static propTypes = {
     steps: PropTypes.array,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    user: PropTypes.object
   };
 
   static defaultProps = {
     steps: [],
-    dispatch: () => {}
+    dispatch: () => {},
+    user: {}
   };
 
   render() {
-    const { steps } = this.props;
+    const { steps, user } = this.props;
 
     return (
       <div className="steps-list">
         <h3>Steps List</h3>
         <div className="list">
           {steps.map((item) => {
-            return (<StepsListItem step={item} key={item.id} dispatch={this.props.dispatch} />);
+            return (<StepsListItem step={item} user={user} key={item.id} dispatch={this.props.dispatch} />);
           })}
         </div>
       </div>

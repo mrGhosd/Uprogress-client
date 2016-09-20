@@ -20,12 +20,14 @@ export default class StepsListItem extends Component {
 
   static propTypes = {
     step: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    user: PropTypes.object
   };
 
   static defaultProps = {
     step: {},
-    dispatch: () => {}
+    dispatch: () => {},
+    user: {}
   };
 
   componentWillMount() {
@@ -36,6 +38,7 @@ export default class StepsListItem extends Component {
     if (event.target.type === 'checkbox') {
       this.changeState(event);
       this.props.dispatch(updateStep(
+        this.props.user.nick,
         this.state.step.directionId,
         this.state.step.id,
         this.state.step

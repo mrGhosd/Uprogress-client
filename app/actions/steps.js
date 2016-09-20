@@ -37,9 +37,9 @@ export function editStep(step) {
  * @param  {Object} step Step parameters
  * @return {Dispatch} Dispatch function
  */
-export function updateStep(direction_id, id, step) {
+export function updateStep(user, direction_id, id, step) {
   return (dispatch) => {
-    put(`/directions/${direction_id}/steps/${id}`, { step })
+    put(`/users/${user}/directions/${direction_id}/steps/${id}`, { step })
       .then((response) => {
         dispatch({ type: 'UPDATE_STEP', step: response.data.step });
       })
