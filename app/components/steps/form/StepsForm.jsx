@@ -15,14 +15,16 @@ export default class StepsForm extends Component {
     dispatch: PropTypes.func,
     direction: PropTypes.object,
     errors: PropTypes.object,
-    edit: PropTypes.object
+    edit: PropTypes.object,
+    user: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     direction: {},
     errors: {},
-    edit: {}
+    edit: {},
+    user: {}
   };
 
   state = {
@@ -62,12 +64,16 @@ export default class StepsForm extends Component {
   }
 
   submitForm() {
+    let func;
+    const { user } = this.props;
+
     if (this.state.isEdit) {
-      this.props.dispatch(updateStep(this.props.direction.id, this.state.step.id, this.state.step));
+      func = updateStep(user.nick, this.props.direction.id, this.state.step.id, this.state.step);
     }
     else {
-      this.props.dispatch(createStep(this.props.direction.id, this.state.step));
+      func = createStep(user.nick, this.props.direction.id, this.state.step);
     }
+    this.props.dispatch(func);
   }
 
   render() {

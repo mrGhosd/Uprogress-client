@@ -22,7 +22,8 @@ class DirectionsDetail extends Component {
     steps: PropTypes.array,
     editStep: PropTypes.object,
     user: PropTypes.object,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    stepErrors: PropTypes.object
   };
 
   static defaultProps = {
@@ -38,7 +39,8 @@ class DirectionsDetail extends Component {
     steps: [],
     editStep: {},
     user: {},
-    currentUser: {}
+    currentUser: {},
+    stepErrors: {}
   };
 
   componentWillMount() {
@@ -88,7 +90,7 @@ class DirectionsDetail extends Component {
     let steps = this.props.steps;
     const progressBar = this.progressBar(direction);
     const dispatch = this.props.dispatch;
-    const stepsErrors = this.props.steps.errors;
+    const { stepErrors } = this.props;
     const editStep = this.props.editStep;
     const { currentUser } = this.props;
 
@@ -99,7 +101,7 @@ class DirectionsDetail extends Component {
         {progressBar}
         <StepsForm direction={direction}
                    edit={editStep}
-                   errors={stepsErrors}
+                   errors={stepErrors}
                    user={currentUser}
                    dispatch={this.props.dispatch}
         />
@@ -120,6 +122,7 @@ function mapStateToProps(state) {
     steps: state.steps.list,
     editStep: state.steps.edit,
     user: state.users.show,
+    stepErrors: state.steps.errors,
     currentUser: state.users.current
   };
 }

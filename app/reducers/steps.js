@@ -37,7 +37,6 @@ export default function(state = initialState, action) {
       const index = ids.indexOf(action.step.id);
       return update(state, {list: {$splice: [[index, 1]]}});
     case 'FAILED_OPERATION':
-      console.log(action);
       return { ...state, errors: action.errors };
     default:
       return state;
