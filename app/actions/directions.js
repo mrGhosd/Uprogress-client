@@ -35,13 +35,14 @@ export function createDirection(user, direction) {
  * @param  {Object} direction Direction parameters
  * @return {Dispatch} Dispatch function
  */
-export function updateDirection(id, direction) {
+export function updateDirection(user, id, direction) {
   return (dispatch) => {
-    put(`/directions/${id}`, { direction })
+    put(`/users/${user}/directions/${id}`, { direction })
       .then((response) => {
         dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction, updated: true });
       })
       .catch((errors) => {
+        console.log(errors);
         dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
       });
   };

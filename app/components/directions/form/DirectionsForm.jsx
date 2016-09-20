@@ -41,13 +41,15 @@ class DirectionsForm extends Component {
 
   componentWillMount() {
     if (this.props.params && this.props.params.id) {
-      const userName = this.props.user.nick;
+      const userName = this.props.user.nick || this.props.params.user;
 
       this.props.dispatch(getDirection(userName, this.props.params.id));
     }
   }
 
   componentWillReceiveProps(props) {
+    const { user } = this.props;
+
     if (this.props.params.id) {
       const direction = props.direction;
 
@@ -57,7 +59,7 @@ class DirectionsForm extends Component {
     }
 
     if (props.isUpdated) {
-      this.context.router.push(`/directions/${props.direction.id}`);
+      this.context.router.push(`/${user.nick}/directions/${props.direction.id}`);
     }
   }
 
@@ -78,7 +80,7 @@ class DirectionsForm extends Component {
     let func;
 
     if (this.props.params && this.props.params.id) {
-      func = updateDirection(this.props.params.id, params);
+      func = updateDirection(user.nick, this.props.params.id, params);
     }
     else {
       func = createDirection(user.nick, params);

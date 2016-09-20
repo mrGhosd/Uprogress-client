@@ -27,7 +27,13 @@ export default function(state = initialState, action) {
     case 'NEW_DIRECTION':
       return update(state, { list: { $push: [action.direction] } });
     case 'UPDATE_DIRECTION':
-      return { ...state, detail: action.direction, isUpdated: action.updated };
+      const directionListIndex = directionIndex(state, action.direction);
+      
+      return update(state, {
+        list: { $splice: [[directionListIndex, 1, action.direction]] },
+        detail: { $set: action.direction },
+        isUpdated: { $set: action.updated }
+      });
     case 'UPDATE_STEP':
       const updateIndex = directionIndex(state, action.step.direction);
       return update(state, {
