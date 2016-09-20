@@ -15,8 +15,9 @@ import { getList } from 'actions/directions';
 function mapStateToProps(state) {
   return {
     directions: state.directions.list,
-    user: state.users.show
-   };
+    user: state.users.show,
+    currentUser: state.users.current
+  };
 }
 
 class Navigation extends Component {
@@ -51,11 +52,11 @@ class Navigation extends Component {
   }
 
   render() {
-    const { directions, user } = this.props;
+    const { directions, user, currentUser } = this.props;
 
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
-        <Link to={`/${user.nick}/directions/new`} className="create-button">Add</Link>
+        {currentUser.id === user.id && <Link to={`/${user.nick}/directions/new`} className="create-button">Add</Link>}
         {directions.map((item, index) => {
           return (
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}
