@@ -1,5 +1,6 @@
 const initialState = {
-  current: {}
+  current: {},
+  show: {}
 };
 
 /**
@@ -19,6 +20,8 @@ export default function(state = initialState, action) {
       return { ...state }
     case 'CURRENT_USER':
       return { ...state, current: action.current };
+    case 'USER_INFO':
+      return { ...state, show: action.user };
     case 'SIGN_OUT':
       localStorage.removeItem('uprogresstoken');
       return { ...state, current: {} }

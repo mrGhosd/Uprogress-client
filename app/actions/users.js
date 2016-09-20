@@ -56,6 +56,24 @@ export function currentUser() {
 }
 
 /**
+ * Get user info
+ * @param {String} user identifier
+ * @return {Dispatch} Dispatch function
+ */
+export function getUser(user) {
+  return (dispatch) => {
+    get(`/users/${user}`)
+      .then((response) => {
+        console.log(response)
+        dispatch({ type: 'USER_INFO', user: response.data.user });
+      })
+      .catch((error) => {;
+        dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });
+      });
+  };
+}
+
+/**
  * Sign out; Remove token from client
  * @return {Dispatch} Dispatch function
  */

@@ -13,13 +13,17 @@ import { getList } from 'actions/directions';
  * @return {Object} Mapped properties
  */
 function mapStateToProps(state) {
-  return { directions: state.directions.list };
+  return {
+    directions: state.directions.list,
+    user: state.users.show
+   };
 }
 
 class Navigation extends Component {
 
   static propTypes = {
     directions: PropTypes.array,
+    user: PropTypes.object,
     dispatch: PropTypes.func,
     params: PropTypes.object,
     context: PropTypes.object
@@ -29,11 +33,12 @@ class Navigation extends Component {
     directions: [],
     dispatch: () => {},
     params: {},
-    context: {}
+    context: {},
+    user: {}
   };
 
   componentWillMount() {
-    this.props.dispatch(getList());
+    // this.props.dispatch(getList());
   }
 
   itemSelected(item) {
@@ -46,15 +51,15 @@ class Navigation extends Component {
   }
 
   render() {
-    const { directions } = this.props;
-    
+    const { directions, user } = this.props;
+
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
         <Link to="/directions/new" className="create-button">Add</Link>
         {directions.map((item, index) => {
           return (
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}
-                  key={index} to={`/directions/${item.id}`}>
+                  key={index} to={`/${user.nick}/directions/${item.id}`}>
               <span className="title">{item.title}</span>
               {item.percentsResult !== null && <span className="percents-result"> {item.percentsResult}%</span>}
             </Link>

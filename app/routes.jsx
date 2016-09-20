@@ -19,11 +19,11 @@ export default (
       <Route path="/sign_up" component={SignUp} />
       <Route component={App}>
 
-        <Route path="/" component={RootIndex}>
+        <Route path="/:user" component={RootIndex}>
           <IndexRoute component={Dashboard} />
           {Directions}
         </Route>
-        
+
       </Route>
     </Router>
   </Provider>

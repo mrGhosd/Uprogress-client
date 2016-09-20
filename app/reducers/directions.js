@@ -47,6 +47,8 @@ export default function(state = initialState, action) {
         list: {$splice: [[deletedIndex, 1, action.step.direction]]},
         detail: { $set: action.step.direction}
       });
+    case 'USER_INFO':
+      return { ...state, list: action.user.directions };
     default:
       return state;
   }

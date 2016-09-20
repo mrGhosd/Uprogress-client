@@ -4,9 +4,9 @@ import { get, post, put } from 'utils/ApiRequest';
  * Get directions list
  * @return {Dispatch} Dispatch function
  */
-export function getList() {
+export function getList(user) {
   return (dispatch) => {
-    get('/directions').then((response) => {
+    get(`/users/${user}/directions`).then((response) => {
       dispatch({ type: 'GET_DIRECTIONS_LIST', directions: response.data.directions });
     });
   };

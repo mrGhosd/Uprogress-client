@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getList } from 'actions/directions';
+import { getUser } from 'actions/users';
 
 import DirectionsList from 'directions/list/DirectionsList';
 
@@ -9,16 +9,20 @@ class Dashboard extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    directions: PropTypes.object
+    directions: PropTypes.object,
+    params: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
-    directions: {}
+    directions: {},
+    params: {}
   };
 
   componentWillMount() {
-    this.props.dispatch(getList());
+    const { params } = this.props;
+
+    this.props.dispatch(getUser(params.user));
   }
 
   render() {

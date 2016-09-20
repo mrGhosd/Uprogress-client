@@ -21,10 +21,6 @@ class RootIndex extends Component {
     children: {}
   }
 
-  static onEnter() {
-
-  }
-
   render() {
     return (
       <div className={CN(css.rootIndex)}>
