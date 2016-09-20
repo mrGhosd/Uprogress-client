@@ -52,9 +52,9 @@ export function updateDirection(id, direction) {
  * @param  {Integer} id Direction id
  * @return {Dispatch} Dispatch function
  */
-export function getDirection(id) {
+export function getDirection(user, id) {
   return (dispatch) => {
-    get(`/directions/${id}`)
+    get(`/users/${user}/directions/${id}`)
       .then((response) => {
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
       });

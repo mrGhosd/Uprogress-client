@@ -4,6 +4,8 @@ import CN from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { getUser } from 'actions/users';
+
 import RootHeader from 'root/header/RootHeader';
 import Navigation from 'navigation/Navigation';
 
@@ -14,11 +16,21 @@ import utilsPolyfill from 'utils/polifyll';
 class RootIndex extends Component {
 
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.object,
+    params: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
-    children: {}
+    children: {},
+    params: {},
+    dispatch: () => {}
+  }
+
+  componentWillMount() {
+    const { params } = this.props;
+
+    this.props.dispatch(getUser(params.user));
   }
 
   render() {

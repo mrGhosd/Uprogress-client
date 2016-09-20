@@ -21,7 +21,8 @@ class DirectionsDetail extends Component {
     dispatch: PropTypes.func,
     directions: PropTypes.object,
     steps: PropTypes.array,
-    editStep: PropTypes.object
+    editStep: PropTypes.object,
+    user: PropTypes.object
   };
 
   static defaultProps = {
@@ -35,7 +36,8 @@ class DirectionsDetail extends Component {
       }
     },
     steps: [],
-    editStep: {}
+    editStep: {},
+    user: {}
   };
 
   componentWillMount() {
@@ -52,7 +54,9 @@ class DirectionsDetail extends Component {
 
   loadDirection(props) {
     this.setState({ directionLoad: false });
-    this.props.dispatch(getDirection(props.params.id));
+    const nickName = props.user.nick || props.params.user;
+
+    this.props.dispatch(getDirection(nickName, props.params.id));
   }
 
   progressBar(direction) {
@@ -111,7 +115,8 @@ function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
     steps: state.steps.list,
-    editStep: state.steps.edit
+    editStep: state.steps.edit,
+    user: state.users.show
   };
 }
 

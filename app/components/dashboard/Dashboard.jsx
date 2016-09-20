@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getUser } from 'actions/users';
-
 import DirectionsList from 'directions/list/DirectionsList';
 
 class Dashboard extends Component {
@@ -18,12 +16,6 @@ class Dashboard extends Component {
     directions: {},
     params: {}
   };
-
-  componentWillMount() {
-    const { params } = this.props;
-
-    this.props.dispatch(getUser(params.user));
-  }
 
   render() {
     const { directions } = this.props;
