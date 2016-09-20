@@ -55,7 +55,7 @@ class Navigation extends Component {
 
     return (
       <div className={CN(css.navigation, 'Card', 'divine')}>
-        <Link to="/directions/new" className="create-button">Add</Link>
+        <Link to={`/${user.nick}/directions/new`} className="create-button">Add</Link>
         {directions.map((item, index) => {
           return (
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}

@@ -3,7 +3,6 @@ import css from './directionsDetail.styl';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CN from 'classnames';
-import store from 'store';
 
 import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
