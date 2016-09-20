@@ -87,11 +87,15 @@ export default class StepsListItem extends Component {
   }
 
   deleteStep() {
-    this.props.dispatch(deleteStep(this.state.step.direction_id, this.state.step.id));
+    this.props.dispatch(deleteStep(
+      this.props.user.nick,
+      this.state.step.direction_id,
+      this.state.step.id));
   }
 
   editStep() {
     const scroll = Scroll.animateScroll;
+    
     this.props.dispatch(editStep(this.state.step));
     scroll.scrollToTop();
   }

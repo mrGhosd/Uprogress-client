@@ -6,9 +6,9 @@ import { post, put, destroy } from 'utils/ApiRequest';
  * @param  {Object} step Step parameters
  * @return {Dispatch} Dispatch function
  */
-export function createStep(id, step) {
+export function createStep(user, id, step) {
   return (dispatch) => {
-    post(`/directions/${id}/steps`, { step })
+    post(`/users/${user}/directions/${id}/steps`, { step })
       .then((response) => {
         dispatch({ type: 'CREATE_STEP', step: response.data.step });
       })
@@ -56,10 +56,10 @@ export function updateStep(user, direction_id, id, step) {
  * @param  {Object} step Step parameters
  * @return {Dispatch} Dispatch function
  */
-export function deleteStep(direction_id, id) {
+export function deleteStep(user, direction_id, id) {
   // dispatch({ type: 'DELETE_STEP', step: response.data.step });
   return (dispatch) => {
-    destroy(`/directions/${direction_id}/steps/${id}`)
+    destroy(`/users/${user}/directions/${direction_id}/steps/${id}`)
       .then((response) => {
         dispatch({ type: 'DELETE_STEP', step: response.data.step });
       });
