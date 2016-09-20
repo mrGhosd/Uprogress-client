@@ -15,13 +15,15 @@ export default (
   <Provider store={store}>
     <Router history={browserHistory}>
 
-        <Route path="/sign_in" component={SignIn} />
-        <Route path="/sign_up" component={SignUp} />
+      <Route path="/sign_in" component={SignIn} />
+      <Route path="/sign_up" component={SignUp} />
       <Route component={App}>
+
         <Route path="/" component={RootIndex}>
           <IndexRoute component={Dashboard} />
           {Directions}
         </Route>
+        
       </Route>
     </Router>
   </Provider>

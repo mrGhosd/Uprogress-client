@@ -76,7 +76,7 @@ class DirectionsDetail extends Component {
     return template;
   }
 
-  
+
 
   render() {
     const direction = this.props.direction;
