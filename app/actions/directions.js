@@ -17,9 +17,9 @@ export function getList(user) {
  * @param {Object} direction Direction parameters
  * @return {Dispatch} Dispatch function
  */
-export function createDirection(direction) {
+export function createDirection(user, direction) {
   return (dispatch) => {
-    post('/directions', { direction })
+    post(`/users/${user}/directions`, { direction })
       .then((response) => {
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
       })

@@ -19,7 +19,8 @@ class DirectionsForm extends Component {
   static propTypes = {
     direction: PropTypes.object,
     dispatch: PropTypes.func,
-    params: PropTypes.object
+    params: PropTypes.object,
+    user: PropTypes.object
   };
 
   static contextTypes = {
@@ -29,16 +30,9 @@ class DirectionsForm extends Component {
   static defaultProps = {
     direction: {},
     dispatch: () => {},
-    params: {}
+    params: {},
+    user: {}
   };
-
-  static onEnter(nextState, replace) {
-    const token = localStorage.getItem('uprogresstoken');
-
-    if (!token) {
-      console.log(nextState);
-    }
-  }
 
   state = {
     title: '',
@@ -47,7 +41,9 @@ class DirectionsForm extends Component {
 
   componentWillMount() {
     if (this.props.params && this.props.params.id) {
-      this.props.dispatch(getDirection(this.props.params.id));
+      const userName = this.props.user.nick;
+
+      this.props.dispatch(getDirection(userName, this.props.params.id));
     }
   }
 
@@ -77,13 +73,15 @@ class DirectionsForm extends Component {
       title: this.state.title,
       description: this.state.description
     };
+    const { user } = this.props;
+
     let func;
 
     if (this.props.params && this.props.params.id) {
       func = updateDirection(this.props.params.id, params);
     }
     else {
-      func = createDirection(params);
+      func = createDirection(user.nick, params);
     }
 
     this.props.dispatch(func);
@@ -121,7 +119,8 @@ function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
     errors: state.directions.errors,
-    isUpdated: state.directions.isUpdated
+    isUpdated: state.directions.isUpdated,
+    user: state.users.current
   };
 }
 

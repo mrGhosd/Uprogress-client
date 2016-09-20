@@ -48,7 +48,7 @@ class SignIn extends Component {
 
   componentWillReceiveProps(props) {
     if (props.current) {
-      this.context.router.push('/');
+      this.context.router.push(`/${props.current.nick}`);
     }
   }
 
