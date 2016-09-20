@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from 'App.js';
 import RootIndex from 'root/index/RootIndex';
 import Dashboard from 'dashboard/Dashboard';
+import RootDashboard from 'root/dashboard/RootDashboard';
 import Directions from 'routes/Directions';
 import SignIn from 'authorization/SignIn';
 import SignUp from 'authorization/SignUp';
@@ -18,7 +19,7 @@ export default (
       <Route path="/sign_in" component={SignIn} />
       <Route path="/sign_up" component={SignUp} />
       <Route component={App}>
-
+        <Route path="/" component={RootDashboard} />
         <Route path="/:user" component={RootIndex}>
           <IndexRoute component={Dashboard} />
           {Directions}
