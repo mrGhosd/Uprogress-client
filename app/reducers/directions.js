@@ -5,7 +5,8 @@ const initialState = {
   detail: {
     steps: []
   },
-  errors: {}
+  errors: {},
+  isUpdated: null
 };
 
 /**

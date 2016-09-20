@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import store from 'store';
 
+
 import { currentUser } from 'actions/users';
 
 /*eslint-disable */

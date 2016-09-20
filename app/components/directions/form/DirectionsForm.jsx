@@ -32,6 +32,14 @@ class DirectionsForm extends Component {
     params: {}
   };
 
+  static onEnter(nextState, replace) {
+    const token = localStorage.getItem('uprogresstoken');
+
+    if (!token) {
+      console.log(nextState);
+    }
+  }
+
   state = {
     title: '',
     description: ''
@@ -44,18 +52,17 @@ class DirectionsForm extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props);
     if (this.props.params.id) {
-      const direction = props.directions.detail;
+      const direction = props.direction;
 
       if (direction) {
         this.setState({ title: direction.title, description: direction.description });
       }
     }
 
-    // if (props.directions.isUpdated) {
-    //   this.context.router.push('/');
-    // }
+    if (props.isUpdated) {
+      this.context.router.push(`/directions/${props.direction.id}`);
+    }
   }
 
   handleChange(event) {
@@ -113,7 +120,8 @@ class DirectionsForm extends Component {
 function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
-    errors: state.directions.errors
+    errors: state.directions.errors,
+    isUpdated: state.directions.isUpdated
   };
 }
 

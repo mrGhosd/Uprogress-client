@@ -2,6 +2,7 @@ import css from './RootIndex.styl';
 
 import CN from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import RootHeader from 'root/header/RootHeader';
 import Navigation from 'navigation/Navigation';
@@ -10,7 +11,7 @@ import Navigation from 'navigation/Navigation';
 import utilsPolyfill from 'utils/polifyll';
 /*eslint-enable */
 
-export default class RootApp extends Component {
+class RootIndex extends Component {
 
   static propTypes = {
     children: PropTypes.object
@@ -20,6 +21,10 @@ export default class RootApp extends Component {
     children: {}
   }
 
+  static onEnter() {
+
+  }
+
   render() {
     return (
       <div className={CN(css.rootIndex)}>
@@ -27,10 +32,12 @@ export default class RootApp extends Component {
         <div className="main-content">
           <Navigation {...this.props} />
           <div className={CN('content', 'Card')}>
-            {React.cloneElement(this.props.children, this.props)}
+            {this.props.children}
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default connect()(RootIndex);

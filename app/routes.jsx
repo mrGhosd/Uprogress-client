@@ -14,10 +14,10 @@ import store from './store';
 export default (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={App}>
+
         <Route path="/sign_in" component={SignIn} />
         <Route path="/sign_up" component={SignUp} />
-        
+      <Route component={App}>
         <Route path="/" component={RootIndex}>
           <IndexRoute component={Dashboard} />
           {Directions}
