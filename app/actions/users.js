@@ -34,7 +34,7 @@ export function signUp(user) {
         dispatch(currentUser());
       })
       .catch((error) => {
-        dispatch({ type: 'SIGN_UP_FAILED', user: error.data.errors });
+        dispatch({ type: 'SIGN_UP_FAILED', errors: error.data.errors });
       });
   };
 }

@@ -18,11 +18,12 @@ export default function(state = initialState, action) {
       localStorage.setItem('uprogresstoken', action.token)
       return { ...state, signInErrors: {} }
     case 'SIGN_IN_FAILED':
-      console.log(action.errors);
       return { ...state, signInErrors: action.errors }
     case 'SIGN_UP_USER':
       localStorage.setItem('uprogresstoken', action.token)
       return { ...state, signUpErrors: {} }
+    case 'SIGN_UP_FAILED':
+      return { ...state, signUpErrors: action.errors }
     case 'CURRENT_USER':
       return { ...state, current: action.current };
     case 'USER_INFO':

@@ -21,11 +21,13 @@ class SignIn extends Component {
   };
 
   static propTypes = {
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    signInErrors: PropTypes.object
   };
 
   static defaultProps = {
-    dispatch: () => {}
+    dispatch: () => {},
+    signInErrors: {}
   };
 
   state = {

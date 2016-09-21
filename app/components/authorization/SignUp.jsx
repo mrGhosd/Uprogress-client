@@ -12,12 +12,22 @@ import Button from 'Button/ElementButton';
 
 class SignUp extends Component {
 
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   static propTypes = {
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    signUpErrors: PropTypes.object
   };
 
   static defaultProps = {
-    dispatch: () => {}
+    dispatch: () => {},
+    signUpErrors: {}
   };
 
   state = {
@@ -42,6 +52,12 @@ class SignUp extends Component {
     this.setState({ user: lastState });
   }
 
+  componentWillReceiveProps(props) {
+    if (!props.current.isEmpty) {
+      this.context.router.push(`/${props.current.nick}`);
+    }
+  }
+
   submitForm() {
     const user = this.state.user;
 
@@ -50,7 +66,7 @@ class SignUp extends Component {
 
   render() {
     const user = this.state.user;
-    const errors = this.state.errors;
+    const errors = this.props.signUpErrors;
 
     return (
       <div className={CN(css.signPage, 'Card')}>
@@ -65,7 +81,7 @@ class SignUp extends Component {
             type="password"
             placeholder="Password"
             value={user.password}
-            onChange={this::this.handleChange} error={errors.passwordConfirmation} />
+            onChange={this::this.handleChange} error={errors.password} />
           <TextField ref="passwordConfirmation"
             name="passwordConfirmation"
             type="password"
@@ -85,4 +101,16 @@ class SignUp extends Component {
   }
 }
 
-export default connect()(SignUp);
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return {
+    current: state.users.current,
+    signUpErrors: state.users.signUpErrors
+  };
+}
+
+export default connect(mapStateToProps)(SignUp);
