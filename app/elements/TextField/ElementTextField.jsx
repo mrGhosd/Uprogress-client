@@ -42,7 +42,14 @@ export default class ElementTextField extends Component {
     const error = this.props.error;
 
     if (error) {
-      return <span className="error">{error === true ? comment : error}</span>;
+      return (
+        <div className="errors-list">
+          {error.map((err, index) => {
+            return <p key={index} className="error">{err === true ? comment : err}</p>;
+          })
+        }
+        </div>
+      );
     }
   }
 

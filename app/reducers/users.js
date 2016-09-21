@@ -1,6 +1,8 @@
 const initialState = {
   current: {},
-  show: {}
+  show: {},
+  signInErrors: {},
+  signUpErrors: {}
 };
 
 /**
@@ -14,10 +16,13 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case 'SIGN_IN_USER':
       localStorage.setItem('uprogresstoken', action.token)
-      return { ...state }
+      return { ...state, signInErrors: {} }
+    case 'SIGN_IN_FAILED':
+      console.log(action.errors);
+      return { ...state, signInErrors: action.errors }
     case 'SIGN_UP_USER':
       localStorage.setItem('uprogresstoken', action.token)
-      return { ...state }
+      return { ...state, signUpErrors: {} }
     case 'CURRENT_USER':
       return { ...state, current: action.current };
     case 'USER_INFO':

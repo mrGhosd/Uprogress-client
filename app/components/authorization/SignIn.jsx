@@ -60,7 +60,7 @@ class SignIn extends Component {
 
   render() {
     const user = this.state.user;
-    const errors = this.state.errors;
+    const errors = this.props.signInErrors;
 
     return (
       <div className={CN(css.signPage, 'Card')}>
@@ -90,7 +90,10 @@ class SignIn extends Component {
  * @return {Object} Mapped properties
  */
 function mapStateToProps(state) {
-  return { current: state.users.current };
+  return {
+    current: state.users.current,
+    signInErrors: state.users.signInErrors
+  };
 }
 
 export default connect(mapStateToProps)(SignIn);

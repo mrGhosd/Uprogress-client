@@ -15,7 +15,7 @@ export function signIn(user) {
         dispatch(currentUser());
       })
       .catch((error) => {
-        dispatch({ type: 'SIGN_IN_FAILED', user: error.data.errors });
+        dispatch({ type: 'SIGN_IN_FAILED', errors: error.data.errors });
       });
   };
 }
