@@ -12,18 +12,33 @@ import SignUp from 'authorization/SignUp';
 import { Provider } from 'react-redux';
 import store from './store';
 
+/**
+ * Redirect from root path if user not signed in
+ * @param  {Object} nextState state of the router
+ * @param  {Function} replace helps to replace the route path
+ * @param  {Function} callback make a callback after onEnter hook
+ * @return {Dispatch} Dispatch function
+ */
+function redirectFromRoot(nextState, replace, callback) {
+  const storeContent = store.getState();
+
+  if (storeContent.users.current.isEmpty) {
+    replace('/sign_in');
+  }
+  callback();
+}
+
 export default (
   <Provider store={store}>
     <Router history={browserHistory}>
-
-      <Route path="/sign_in" component={SignIn} />
-      <Route path="/sign_up" component={SignUp} />
       <Route component={App}>
-        <Route path="/" component={RootDashboard} />
-        <Route path="/:user" component={RootIndex}>
-          <IndexRoute component={Dashboard} />
-          {Directions}
-        </Route>
+        <Route path="/sign_in" component={SignIn} />
+        <Route path="/sign_up" component={SignUp} />
+          <Route path="/" component={RootDashboard} onEnter={redirectFromRoot} />
+          <Route path="/:user" component={RootIndex}>
+            <IndexRoute component={Dashboard} />
+            {Directions}
+          </Route>
 
       </Route>
     </Router>
