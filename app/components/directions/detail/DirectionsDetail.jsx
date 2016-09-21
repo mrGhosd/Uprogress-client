@@ -7,7 +7,8 @@ import CN from 'classnames';
 import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
 
-import  { getDirection } from 'actions/directions';
+import { getDirection } from 'actions/directions';
+import { isCurrentUser } from 'utils/currentUser';
 
 class DirectionsDetail extends Component {
 
@@ -18,7 +19,7 @@ class DirectionsDetail extends Component {
   static propTypes = {
     params: PropTypes.object,
     dispatch: PropTypes.func,
-    directions: PropTypes.object,
+    direction: PropTypes.object,
     steps: PropTypes.array,
     editStep: PropTypes.object,
     user: PropTypes.object,
@@ -31,11 +32,7 @@ class DirectionsDetail extends Component {
       id: ''
     },
     dispatch: () => {},
-    directions: {
-      detail: {
-        steps: []
-      }
-    },
+    direction: {},
     steps: [],
     editStep: {},
     user: {},
@@ -83,28 +80,21 @@ class DirectionsDetail extends Component {
     return template;
   }
 
-
-
   render() {
-    const direction = this.props.direction;
-    let steps = this.props.steps;
+    const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
     const progressBar = this.progressBar(direction);
-    const dispatch = this.props.dispatch;
-    const { stepErrors } = this.props;
-    const editStep = this.props.editStep;
-    const { currentUser } = this.props;
 
     return (
       <div className={CN(css.directionsDetail)}>
         <h1>{direction.title}</h1>
         <p>{direction.description}</p>
         {progressBar}
-        <StepsForm direction={direction}
+        {isCurrentUser(currentUser, user) && <StepsForm direction={direction}
                    edit={editStep}
                    errors={stepErrors}
                    user={currentUser}
                    dispatch={this.props.dispatch}
-        />
+        />}
         {!steps.isEmpty && <StepsList user={currentUser} steps={steps} dispatch={dispatch} />}
       </div>
     );
