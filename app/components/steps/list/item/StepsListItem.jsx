@@ -116,7 +116,7 @@ export default class StepsListItem extends Component {
     return template;
   }
 
-  displayCheckbox(currentUser, user) {
+  displayCheckbox(step, currentUser, user) {
     let template;
 
     if (isCurrentUser(currentUser, user)) {
@@ -149,8 +149,7 @@ export default class StepsListItem extends Component {
   render() {
     let { step } = this.state;
     const { currentUser, user } = this.props;
-
-    const checkbox = this.displayCheckbox(currentUser, user);
+    const checkbox = this.displayCheckbox(step, currentUser, user);
     const title = this.displayTitle(step);
     const description = this.displayDescription(step);
     const icons = this.displayIcons(currentUser, user);

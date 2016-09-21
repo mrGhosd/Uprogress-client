@@ -24,7 +24,7 @@ export default class StepsList extends Component {
 
   render() {
     const { steps, user, currentUser } = this.props;
-
+    
     return (
       <div className="steps-list">
         <h3>Steps List</h3>

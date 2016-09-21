@@ -96,7 +96,7 @@ class DirectionsDetail extends Component {
                    currentUser={currentUser}
                    dispatch={this.props.dispatch}
         />}
-        {!steps.isEmpty && <StepsList user={currentUser} steps={steps} dispatch={dispatch} />}
+        {!steps.isEmpty && <StepsList currentUser={currentUser} user={user} steps={steps} dispatch={dispatch} />}
       </div>
     );
   }
