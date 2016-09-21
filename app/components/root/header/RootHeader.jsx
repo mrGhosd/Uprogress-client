@@ -33,7 +33,15 @@ export default class RootHeader extends Component {
     dispatch: () => {}
   };
 
+  componentWillMount() {
+    this.setCurrentUserState(this.props);
+  }
+
   componentWillReceiveProps(props) {
+    this.setCurrentUserState(props);
+  }
+
+  setCurrentUserState(props) {
     if (props.currentUser) {
       this.setState({ currentUser: props.currentUser });
     }
