@@ -92,7 +92,8 @@ class DirectionsDetail extends Component {
         {isCurrentUser(currentUser, user) && <StepsForm direction={direction}
                    edit={editStep}
                    errors={stepErrors}
-                   user={currentUser}
+                   user={user}
+                   currentUser={currentUser}
                    dispatch={this.props.dispatch}
         />}
         {!steps.isEmpty && <StepsList user={currentUser} steps={steps} dispatch={dispatch} />}

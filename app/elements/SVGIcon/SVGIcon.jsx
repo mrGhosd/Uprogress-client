@@ -9,7 +9,7 @@ export default class ElementSvgIcon extends Component {
 
   render() {
     let icon = `<use xlink:href="/images/sprite.svg#${this.props.icon}" />`;
-    
+
     return (<svg dangerouslySetInnerHTML={{ __html: icon }} />);
   }
 }

@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import Scroll from 'react-scroll';
 
 import { updateStep, deleteStep, editStep } from 'actions/steps';
+import { isCurrentUser } from 'utils/currentUser';
 
 import CheckBox from 'CheckBox/ElementCheckBox';
 import SvgIcon from 'SVGIcon/SVGIcon';
@@ -21,12 +22,14 @@ export default class StepsListItem extends Component {
   static propTypes = {
     step: PropTypes.object,
     dispatch: PropTypes.func,
+    currentUser: PropTypes.object,
     user: PropTypes.object
   };
 
   static defaultProps = {
     step: {},
     dispatch: () => {},
+    currentUser: {},
     user: {}
   };
 
@@ -38,7 +41,7 @@ export default class StepsListItem extends Component {
     if (event.target.type === 'checkbox') {
       this.changeState(event);
       this.props.dispatch(updateStep(
-        this.props.user.nick,
+        this.props.currentUser.nick,
         this.state.step.directionId,
         this.state.step.id,
         this.state.step
@@ -88,38 +91,78 @@ export default class StepsListItem extends Component {
 
   deleteStep() {
     this.props.dispatch(deleteStep(
-      this.props.user.nick,
+      this.props.currentUser.nick,
       this.state.step.direction_id,
       this.state.step.id));
   }
 
   editStep() {
     const scroll = Scroll.animateScroll;
-    
+
     this.props.dispatch(editStep(this.state.step));
     scroll.scrollToTop();
   }
 
+  displayItemStatusIcon() {
+    const { step } = this.state;
+    let template;
+
+    if (step.isDone) {
+      template = <SvgIcon icon="icon-success" />;
+    }
+    else {
+      template = <SvgIcon icon="icon-failure" />;
+    }
+    return template;
+  }
+
+  displayCheckbox(currentUser, user) {
+    let template;
+
+    if (isCurrentUser(currentUser, user)) {
+      template = (<CheckBox name="isDone"
+        checked={step.isDone}
+        onChange={ this::this.handleChanges }/>);
+    }
+    else {
+      template = this.displayItemStatusIcon();
+    }
+
+    return template;
+  }
+
+  displayIcons(currentUser, user) {
+    if (isCurrentUser(currentUser, user)) {
+      return (
+        <div className="icons">
+          <a className="edit-icon" onClick={this::this.editStep}>
+            <SvgIcon icon="edit-step" />
+          </a>
+          <a className="delete-icon" onClick={this::this.deleteStep}>
+            <SvgIcon icon="delete-step" />
+          </a>
+        </div>
+      );
+    }
+  }
+
   render() {
     let { step } = this.state;
+    const { currentUser, user } = this.props;
+
+    const checkbox = this.displayCheckbox(currentUser, user);
     const title = this.displayTitle(step);
     const description = this.displayDescription(step);
+    const icons = this.displayIcons(currentUser, user);
 
     return (
       <div className={CN(css.stepsListItem)}>
-        <CheckBox name="isDone"
-          checked={step.isDone}
-          onChange={ this::this.handleChanges }/>
+        {checkbox}
         <div className="step-info">
           {title}
           {step.showDescription && description}
         </div>
-        <a className="edit-icon" onClick={this::this.editStep}>
-          <SvgIcon icon="edit-step" />
-        </a>
-        <a className="delete-icon" onClick={this::this.deleteStep}>
-          <SvgIcon icon="delete-step" />
-        </a>
+        {icons}
       </div>
     );
   }

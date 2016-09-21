@@ -5,5 +5,5 @@
  * @return {Dispatch} Dispatch function
  */
  export function isCurrentUser(currentUser, user) {
-   return currentUser.id === user.id;
+   return (!currentUser.isEmpty && !user.isEmpty) && (currentUser.id === user.id);
  }
