@@ -99,19 +99,17 @@ export function uploadImage(attachment) {
  * @param {Object} user user attributes
  * @return {Dispatch} Dispatch function
  */
- export function updateUser(id, user) {
-   return (dispatch) => {
-     put(`/users/${id}`, { user })
+export function updateUser(id, user) {
+  return (dispatch) => {
+    put(`/users/${id}`, { user })
        .then((response) => {
          dispatch({ type: 'USER_UPDATE_SUCCESS', current: response.data.currentUser });
        })
        .catch((error) => {
          dispatch({ type: 'USER_UPDATE_FAILED', errors: error.data.errors });
        });
-   };
- }
-
-
+  };
+}
 
 /**
  * Sign out; Remove token from client
