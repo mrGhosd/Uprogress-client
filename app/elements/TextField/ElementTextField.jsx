@@ -3,6 +3,9 @@ import css from './ElementTextField.styl';
 import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 
+import Label from 'Label/ElementLabel';
+import { StripSpecialSymbols } from 'utils/CommonUtils';
+
 export default class ElementTextField extends Component {
 
   state = {
@@ -15,6 +18,7 @@ export default class ElementTextField extends Component {
     type: React.PropTypes.string,
     error: React.PropTypes.any,
     value: React.PropTypes.string,
+    label: PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.string]),
     placeholder: React.PropTypes.string
   }
 
@@ -24,7 +28,8 @@ export default class ElementTextField extends Component {
     type: 'text',
     error: false,
     value: '',
-    placeholder: ''
+    placeholder: '',
+    label: '',
   }
 
   componentDidMount() {
@@ -55,6 +60,7 @@ export default class ElementTextField extends Component {
 
   render() {
     const name = this.props.name;
+    const id = StripSpecialSymbols(name);
     const listener = this.props.onChange;
     const type = this.props.type;
     const placeholder = this.props.placeholder;
@@ -63,6 +69,7 @@ export default class ElementTextField extends Component {
 
     return (
       <div className={CN(css.textField)}>
+        <Label htmlFor={id}>{this.props.label}</Label>
         <input name={name} ref="input" type={type}
           placeholder={placeholder} onChange={listener} value={value}/>
         {error}
