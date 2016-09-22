@@ -1,9 +1,10 @@
 import css from './UserForm.styl';
 
 import React, { Component, PropTypes } from 'react';
-
 import Dropzone from 'react-dropzone';
 import CN from 'classnames';
+
+import { uploadImage, updateUser } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
@@ -15,7 +16,8 @@ export default class UserForm extends Component {
     user: {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      attachment: {}
     }
   }
 
@@ -30,7 +32,13 @@ export default class UserForm extends Component {
   };
 
   componentWillReceiveProps(props) {
-    this.setState({ user: props.user });
+    if (this.props.user.attachment !== null) {
+      this.setState({ user: { attachment: this.props.user.attachment } });
+    }
+
+    if (props.user) {
+      this.setState({ user: props.user });
+    }
   }
 
   handleChange(event) {
@@ -41,20 +49,26 @@ export default class UserForm extends Component {
   }
 
   onDrop(files) {
-    console.log(files);
+    const params = {
+      attachableType: 'User',
+      file: files.first
+    };
+
+    this.props.dispatch(uploadImage(params));
   }
 
   submitForm() {
-
+    this.props.dispatch(updateUser(this.state.user.id, this.state.user));
   }
 
   render() {
     let { user } = this.state;
+    // console.log(user, this.props.user);
 
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
-          <Dropzone onDrop={this.onDrop}>
+          <Dropzone onDrop={this::this.onDrop}>
             <div>Try dropping some files here, or click to select files to upload.</div>
           </Dropzone>
         </div>

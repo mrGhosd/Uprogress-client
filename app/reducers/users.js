@@ -1,3 +1,5 @@
+import update from 'react/lib/update';
+
 const initialState = {
   current: {},
   show: {},
@@ -27,6 +29,10 @@ export default function(state = initialState, action) {
       return { ...state, signUpErrors: action.errors }
     case 'CURRENT_USER':
       return { ...state, current: action.current };
+    case 'USER_UPLOAD_AVATAR':
+      return update(state, {
+        current: { attachment: { $set: action.attachment } }
+      });
     case 'USER_INFO':
       return { ...state, show: action.user };
     case 'SIGN_OUT':

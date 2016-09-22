@@ -7,19 +7,21 @@ import { connect } from 'react-redux';
 class UserProfile extends Component {
 
   static propTypes = {
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
-    currentUser: {}
+    currentUser: {},
+    dispatch: () => {}
   };
 
   render() {
-    const { currentUser } = this.props;
-    
+    const { currentUser, dispatch } = this.props;
+
     return (
       <div>
-        <UserForm user={currentUser} />
+        <UserForm user={currentUser} dispatch={dispatch} />
       </div>
     );
   }
