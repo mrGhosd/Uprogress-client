@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import DirectionsList from 'directions/list/DirectionsList';
+import UserPanel from 'user/panel/UserPanel';
 import WidgetTab from 'Widget/Tab/WidgetTab';
 
 class Dashboard extends Component {
@@ -30,6 +30,9 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard">
+        <div className="base-info">
+          <UserPanel />
+        </div>
         <WidgetTab tabs={tabs} className="horizontal-bottom" />
         {this.props.children}
       </div>
