@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 import CN from 'classnames';
 
 import { uploadImage, updateUser } from 'actions/users';
+import { setByExistedParams } from 'utils/CommonUtils';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
@@ -43,16 +44,7 @@ export default class UserForm extends Component {
 
   parseUserData(props) {
     if (props.user) {
-      let newState = {};
-
-      for (let key in props.user) {
-        const item = props.user[key];
-
-        if (item) {
-          newState[key] = item;
-        }
-      }
-      this.setState({ user: newState });
+      this.setState({ user: setByExistedParams(props.user) });
     }
   }
 
@@ -92,7 +84,7 @@ export default class UserForm extends Component {
   render() {
     let { user } = this.state;
     const image = this.showImage(user);
-    
+
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
