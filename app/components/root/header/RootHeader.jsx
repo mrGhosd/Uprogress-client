@@ -52,7 +52,9 @@ export default class RootHeader extends Component {
 
     return (
       <div className="user-info">
-        <div className="user-nick">{nickName}</div>
+        <div className="user-nick">
+          <span className="nick">{nickName}</span>
+        </div>
         <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
       </div>
     );
@@ -89,7 +91,7 @@ export default class RootHeader extends Component {
 
     return (
       <div className={CN(css.rootHeader, 'Card')}>
-        <div className="left-part">Header</div>
+        <div className="left-part">UProgress</div>
         <div className="right-part">{template}</div>
       </div>
     );
