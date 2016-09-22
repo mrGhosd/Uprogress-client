@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import { signOut } from 'actions/users';
-
-import Button from 'Button/ElementButton';
+import UserHeader from 'user/header/UserHeader';
 
 /**
  * Mapping application state to properties
@@ -48,22 +46,9 @@ export default class RootHeader extends Component {
   }
 
   userInfo() {
-    const nickName = this.state.currentUser.nick;
-
     return (
-      <div className="user-info">
-        <div className="user-nick">
-          <span className="nick">
-            <Link to={`/${nickName}`}>{nickName}</Link>
-          </span>
-        </div>
-        <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
-      </div>
+      <UserHeader user={this.state.currentUser} dispatch={this.props.dispatch} />
     );
-  }
-
-  signOut() {
-    this.props.dispatch(signOut());
   }
 
   unAuthorizedUser() {

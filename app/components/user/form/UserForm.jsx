@@ -66,7 +66,7 @@ export default class UserForm extends Component {
     let template;
 
     if (user.attachment) {
-      template = <Image height={200} width={200} className="avatar-image" src={user.attachment.url} />;
+      template = <Image size={200} className="avatar-image" src={user.attachment.url} />;
     }
     else {
       template = <div>Try dropping some files here, or click to select files to upload.</div>;

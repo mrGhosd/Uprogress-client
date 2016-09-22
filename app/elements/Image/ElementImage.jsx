@@ -1,9 +1,13 @@
+import css from './ElementImage.styl';
+
+import CN from 'classnames';
 import React, { Component } from 'react';
 
 export default class ElementImage extends Component {
   static defaultProps = {
     height: 50,
     width: 50,
+    size: 50,
     className: '',
     src: ''
   }
@@ -11,16 +15,17 @@ export default class ElementImage extends Component {
   static propTypes = {
     height: React.PropTypes.number,
     width: React.PropTypes.number,
+    size: React.PropTypes.number,
     className: React.PropTypes.string,
     src: React.PropTypes.string
   }
 
   render() {
-    const { height, width, className, src } = this.props;
+    const { size, className, src } = this.props;
 
     return (
-      <div>
-        <img src={src} height={height} width={width} className={className} />
+      <div className={CN(css.elementImage)}>
+        <img src={src} height={size} width={size} className={className} />
       </div>
     );
   }
