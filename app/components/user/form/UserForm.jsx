@@ -8,6 +8,7 @@ import { uploadImage, updateUser } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
+import Image from 'Image/ElementImage';
 import Button from 'Button/ElementButton';
 
 export default class UserForm extends Component {
@@ -61,15 +62,28 @@ export default class UserForm extends Component {
     this.props.dispatch(updateUser(this.state.user.id, this.state.user));
   }
 
+  showImage(user) {
+    let template;
+
+    if (user.attachment) {
+      template = <Image height={200} width={200} className="avatar-image" src={user.attachment.url} />;
+    }
+    else {
+      template = <div>Try dropping some files here, or click to select files to upload.</div>;
+    }
+
+    return template;
+  }
+
   render() {
     let { user } = this.state;
-    // console.log(user, this.props.user);
+    const image = this.showImage(user);
 
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
           <Dropzone onDrop={this::this.onDrop}>
-            <div>Try dropping some files here, or click to select files to upload.</div>
+            {image}
           </Dropzone>
         </div>
         <div className="user-fields">
