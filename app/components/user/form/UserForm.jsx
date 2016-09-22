@@ -18,6 +18,7 @@ export default class UserForm extends Component {
       firstName: '',
       lastName: '',
       email: '',
+      description: '',
       attachment: {}
     }
   }
@@ -37,8 +38,21 @@ export default class UserForm extends Component {
       this.setState({ user: { attachment: this.props.user.attachment } });
     }
 
+    this.parseUserData(props);
+  }
+
+  parseUserData(props) {
     if (props.user) {
-      this.setState({ user: props.user });
+      let newState = {};
+
+      for (let key in props.user) {
+        const item = props.user[key];
+
+        if (item) {
+          newState[key] = item;
+        }
+      }
+      this.setState({ user: newState });
     }
   }
 
@@ -78,7 +92,7 @@ export default class UserForm extends Component {
   render() {
     let { user } = this.state;
     const image = this.showImage(user);
-
+    
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
@@ -88,21 +102,28 @@ export default class UserForm extends Component {
         </div>
         <div className="user-fields">
           <TextField ref="firstName"
-           name="firstName"
-           label="First name"
-           onChange={(event) => this.handleChange(event)}
-           value={user.firstName} />
-         <TextField ref="lastName"
-            name="lastName"
-            label="Last name"
-            onChange={(event) => this.handleChange(event)}
-            value={user.lastName} />
-          <TextField ref="email"
+             name="firstName"
+             label="First name"
+             onChange={(event) => this.handleChange(event)}
+             value={user.firstName} />
+          <TextField ref="lastName"
+             name="lastName"
+             label="Last name"
+             onChange={(event) => this.handleChange(event)}
+             value={user.lastName} />
+          <TextField
+            ref="email"
              name="email"
              label="Email"
              onChange={(event) => this.handleChange(event)}
-              value={user.email} />
-            <Button color="blue" onClick={this::this.submitForm}>Save</Button>
+             value={user.email} />
+          <TextArea
+             ref="description"
+             name="description"
+             label="Description"
+             onChange={(event) => this.handleChange(event)}
+             value={user.description} />
+          <Button color="blue" onClick={this::this.submitForm}>Save</Button>
         </div>
       </div>
     );
