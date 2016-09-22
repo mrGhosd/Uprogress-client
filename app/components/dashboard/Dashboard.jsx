@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import DirectionsList from 'directions/list/DirectionsList';
-import WidgetTab from 'widget/tab/WidgetTab';
+import WidgetTab from 'Widget/Tab/WidgetTab';
 
 class Dashboard extends Component {
 

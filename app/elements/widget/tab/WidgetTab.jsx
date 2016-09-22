@@ -3,7 +3,7 @@ import css from './WidgetTab.styl';
 import CN from 'classnames';
 import React, { Component } from 'react';
 
-import WidgetTab from 'widget/tab/item/WidgetTabItem';
+import WidgetTab from 'Widget/Tab/Item/WidgetTabItem';
 
 export default class WidgetTabs extends Component { // eslint-disable-line react/no-multi-comp
 
@@ -34,7 +34,7 @@ export default class WidgetTabs extends Component { // eslint-disable-line react
     const linkParams = this.props.linkParams;
     const className = this.props.className;
     const route = this.props.route;
-  
+
     return (
       <div className={CN(css.widgetTabs, className)}>
         <ul className="nav-bar">
