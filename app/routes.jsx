@@ -1,13 +1,11 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-router';
 
 import { redirectFromRoot } from 'routes/redirects';
 
 import App from 'App.js';
-import RootIndex from 'root/index/RootIndex';
-import Dashboard from 'dashboard/Dashboard';
 import RootDashboard from 'root/dashboard/RootDashboard';
-import Directions from 'routes/Directions';
+import Users from 'routes/Users';
 import SignIn from 'authorization/SignIn';
 import SignUp from 'authorization/SignUp';
 import UserLayout from 'user/layout/UserLayout';
@@ -30,12 +28,7 @@ export default (
           <IndexRoute component={UserProfile} />
         </Route>
 
-        <Route path="/:user" component={RootIndex}>
-          <IndexRoute component={Dashboard} />
-          {Directions}
-        </Route>
-
-
+        {Users}
       </Route>
     </Router>
   </Provider>

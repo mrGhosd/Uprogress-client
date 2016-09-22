@@ -1,0 +1,89 @@
+@import 'toolkit'
+
+:local(.widgetTabs)
+
+  &.horizontal-bottom
+
+  ul.nav-bar
+    width: 100%
+    display: flex
+
+    li
+      cursor: pointer
+      box-sizing: border-box
+
+      a
+        position: relative
+        padding: 16px 22px 12px
+        display: block
+        border-radius: 8px 8px 0 0
+        text-decoration: none
+        text-transform: uppercase
+        font-size: fontMiddleSize - 1
+        letter-spacing: 1px
+        margin-right: 4px
+
+        &.active
+          tabBackgroundColor = uprogress-lightblue-color
+          background-color: tabBackgroundColor
+          color: white
+          span
+            background: none
+          svg
+            display: block
+
+            svg
+              opacity: 1
+
+        &:hover
+          background-color: uprogress-blue-color
+          color: white
+          svg
+            opacity: .45
+
+      svg
+        display: none
+        width: 4px
+        height: 4px
+
+        &.left
+          position: absolute
+          left: -4px
+          bottom: 0px
+
+        &.right
+          position: absolute
+          right: -4px
+          bottom: 0px
+
+      &:first-child
+        margin-left: 0
+
+  &.vertical-menu
+    display: block
+    padding-bottom: 100px // Monkey-patch
+
+    .nav-bar
+      display: block
+
+      li
+        display: block
+        border-bottom: 1px solid uprogress-grey-border-color
+
+        a
+          padding: 10px 16px
+          border-radius: 0
+          color: uprogress-blue-color
+          font-weight: bold
+          margin: 0
+          &:hover
+            background-color: #eee
+          &.active
+            background-color: uprogress-blue-color
+            color: white
+
+        &:last-child
+          border-bottom: 0
+
+      svg
+        display: none !important
