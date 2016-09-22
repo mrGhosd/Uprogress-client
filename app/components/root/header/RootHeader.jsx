@@ -54,7 +54,7 @@ export default class RootHeader extends Component {
       <div className="user-info">
         <div className="user-nick">
           <span className="nick">
-            <Link to="/profile">{nickName}</Link>
+            <Link to={`/${nickName}`}>{nickName}</Link>
           </span>
         </div>
         <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>

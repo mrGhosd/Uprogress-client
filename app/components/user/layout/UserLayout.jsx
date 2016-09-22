@@ -1,3 +1,5 @@
+import css from './UserLayout.styl';
+
 import React, { Component, PropTypes } from 'react';
 
 import CN from 'classnames';
@@ -5,6 +7,7 @@ import CN from 'classnames';
 import { connect } from 'react-redux';
 
 import RootHeader from 'root/header/RootHeader';
+import ProfileNavigation from 'navigation/profile/ProfileNavigation';
 
 class UserLayout extends Component {
 
@@ -20,9 +23,14 @@ class UserLayout extends Component {
 
   render() {
     return (
-      <div>
+      <div className={CN(css.userLayout)}>
         <RootHeader />
-        {this.props.children}
+        <div className="main-content">
+          <ProfileNavigation {...this.props} />
+          <div className={CN('content', 'Card')}>
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }
