@@ -10,6 +10,8 @@ import RootDashboard from 'root/dashboard/RootDashboard';
 import Directions from 'routes/Directions';
 import SignIn from 'authorization/SignIn';
 import SignUp from 'authorization/SignUp';
+import UserLayout from 'user/layout/UserLayout';
+import UserProfile from 'user/profile/UserProfile';
 
 import { Provider } from 'react-redux';
 
@@ -21,11 +23,19 @@ export default (
       <Route component={App}>
         <Route path="/sign_in" component={SignIn} />
         <Route path="/sign_up" component={SignUp} />
-          <Route path="/" component={RootDashboard} onEnter={redirectFromRoot} />
-          <Route path="/:user" component={RootIndex}>
-            <IndexRoute component={Dashboard} />
-            {Directions}
-          </Route>
+
+        <Route path="/" component={RootDashboard} onEnter={redirectFromRoot} />
+
+        <Route path="/profile" component={UserLayout}>
+          <IndexRoute component={UserProfile} />
+        </Route>
+
+        <Route path="/:user" component={RootIndex}>
+          <IndexRoute component={Dashboard} />
+          {Directions}
+        </Route>
+
+
       </Route>
     </Router>
   </Provider>
