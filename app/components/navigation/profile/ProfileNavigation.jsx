@@ -42,7 +42,7 @@ class ProfileNavigation extends Component {
   render() {
     const tabs = [
       { name: 'Profile settings', path: '/profile' },
-      { name: 'Notification', path: '/profile/notifications' }
+      { name: 'Authorizations', path: '/profile/authorizations' }
     ];
 
     return (
