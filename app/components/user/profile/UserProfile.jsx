@@ -16,7 +16,7 @@ class UserProfile extends Component {
 
   render() {
     const { currentUser } = this.props;
-
+    
     return (
       <div>
         <UserForm user={currentUser} />

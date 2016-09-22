@@ -2,7 +2,8 @@ const initialState = {
   current: {},
   show: {},
   signInErrors: {},
-  signUpErrors: {}
+  signUpErrors: {},
+  userFormErrors: {}
 };
 
 /**
