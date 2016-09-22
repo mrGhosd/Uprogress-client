@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import UserForm from 'user/form/UserForm';
+
 import { connect } from 'react-redux';
 
 class UserProfile extends Component {
@@ -13,8 +15,12 @@ class UserProfile extends Component {
   };
 
   render() {
+    const { currentUser } = this.props;
+
     return (
-      <div>UserProfile</div>
+      <div>
+        <UserForm user={currentUser} />
+      </div>
     );
   }
 }
