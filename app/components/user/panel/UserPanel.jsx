@@ -86,7 +86,7 @@ export default class UserPanel extends Component {
     const connectInfo = this.displayConnectInfo(user);
 
     return (
-      <div className={CN(css.userPanel)}>
+      <div className={CN(css.userPanel, 'Card')}>
         <div className="avatar">
           {image}
         </div>
