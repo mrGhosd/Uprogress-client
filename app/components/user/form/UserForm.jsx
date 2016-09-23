@@ -20,6 +20,7 @@ export default class UserForm extends Component {
       lastName: '',
       email: '',
       description: '',
+      location: '',
       attachment: {}
     }
   }
@@ -115,6 +116,12 @@ export default class UserForm extends Component {
              label="Description"
              onChange={(event) => this.handleChange(event)}
              value={user.description} />
+          <TextField
+             ref="location"
+             name="location"
+             label="Location"
+             onChange={(event) => this.handleChange(event)}
+             value={user.location} />
           <Button color="blue" onClick={this::this.submitForm}>Save</Button>
         </div>
       </div>
