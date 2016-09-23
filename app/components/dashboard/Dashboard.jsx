@@ -1,3 +1,7 @@
+import css from './Dashboard.styl';
+
+import CN from 'classnames';
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
@@ -21,7 +25,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, dispatch } = this.props;
     let tabs = {};
 
     tabs[`/${user.nick}/info`] = 'Progress';
@@ -29,11 +33,11 @@ class Dashboard extends Component {
     tabs[`/${user.nick}/statistic`] = 'Statisitc';
 
     return (
-      <div className="dashboard">
+      <div className={CN(css.dashboard)}>
         <div className="base-info">
-          <UserPanel />
+          <UserPanel user={user} dispatch={dispatch} />
         </div>
-        <WidgetTab tabs={tabs} className="horizontal-bottom" />
+        <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
         {this.props.children}
       </div>
     );
