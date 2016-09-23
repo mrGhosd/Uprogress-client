@@ -33,7 +33,7 @@ class Dashboard extends Component {
 
     tabs[`/${user.nick}/info`] = 'Progress';
     tabs[`/${user.nick}/shared`] = 'Shared';
-    tabs[`/${user.nick}/statistic`] = 'Statisitc';
+    tabs[`/${user.nick}/statistic`] = 'Statistics';
 
     return (
       <div className={CN(css.dashboard)}>
