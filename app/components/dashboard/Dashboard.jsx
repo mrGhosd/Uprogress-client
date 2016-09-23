@@ -51,7 +51,9 @@ class Dashboard extends Component {
             directions={user.newDirections} />
         </div>
         <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
-        {this.props.children}
+        <div className="Card">
+          {this.props.children}
+        </div>
       </div>
     );
   }
