@@ -39,8 +39,16 @@ class Dashboard extends Component {
       <div className={CN(css.dashboard)}>
         <div className="base-info">
           <UserPanel user={user} dispatch={dispatch} />
-          <UserPanelDirections title="Completed directions" icon="finished-icon" />
-          <UserPanelDirections title="New directions" icon="new-icon" />
+          <UserPanelDirections
+            user={user}
+            title="Completed directions"
+            icon="finished-icon"
+            directions={user.finishedDirections} />
+          <UserPanelDirections
+            user={user}
+            title="New directions"
+            icon="new-icon"
+            directions={user.newDirections} />
         </div>
         <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
         {this.props.children}

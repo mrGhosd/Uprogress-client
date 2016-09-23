@@ -1,6 +1,7 @@
 :local(.userPanelDirections)
   display: flex
   width: 16em
+  flex-direction: column
 
   .title-panel
     display: flex
@@ -14,6 +15,16 @@
     p
       margin: 0
       margin-left: 10px
+
+  .panel-items
+    display: flex
+    flex-direction: column
+
+    .panel-item
+      padding: 10px
+
+    .empty-list
+      text-align: center
 
   svg
     width: 30px
