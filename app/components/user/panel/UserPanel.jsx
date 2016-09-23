@@ -54,11 +54,36 @@ export default class UserPanel extends Component {
     }
   }
 
+  displayConnectInfo(user) {
+    let location;
+
+    if (!user.isEmpty) {
+      if (user.location) {
+        location = this.displayLocation(user.location);
+      }
+    }
+    return (
+      <div className="connect-info">
+        {location}
+      </div>
+    );
+  }
+
+  displayLocation(location) {
+    return (
+      <div className="location">
+        <SvgIcon icon="location-icon" />
+        <p className="title">{location}</p>
+      </div>
+    );
+  }
+
   render() {
     let { user } = this.props;
     const image = this.displayImage(user);
     const name = this.displayFullName(user);
     const nick = this.displayNick(user);
+    const connectInfo = this.displayConnectInfo(user);
 
     return (
       <div className={CN(css.userPanel)}>
@@ -67,6 +92,7 @@ export default class UserPanel extends Component {
         </div>
         {name}
         {nick}
+        {connectInfo}
       </div>
     );
   }
