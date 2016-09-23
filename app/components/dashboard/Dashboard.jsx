@@ -6,6 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import UserPanel from 'user/panel/UserPanel';
+import UserPanelDirections from 'user/panel/directions/UserPanelDirections';
 import WidgetTab from 'Widget/Tab/WidgetTab';
 
 class Dashboard extends Component {
@@ -38,6 +39,8 @@ class Dashboard extends Component {
       <div className={CN(css.dashboard)}>
         <div className="base-info">
           <UserPanel user={user} dispatch={dispatch} />
+          <UserPanelDirections title="Completed directions" icon="finished-icon" />
+          <UserPanelDirections title="New directions" icon="new-icon" />
         </div>
         <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
         {this.props.children}
