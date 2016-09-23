@@ -32,13 +32,41 @@ export default class UserPanel extends Component {
     return image;
   }
 
+  displayFullName(user) {
+    if (!user.isEmpty && user.firstName && user.lastName) {
+      const fullName = `${user.firstName} ${user.lastName}`;
+
+      return (
+        <div className="fullName">
+          <h1>{fullName}</h1>
+        </div>
+      );
+    }
+  }
+
+  displayNick(user) {
+    if (!user.isEmpty) {
+      return (
+        <div className="nickname">
+          <h3>{user.nick}</h3>
+        </div>
+      );
+    }
+  }
+
   render() {
     let { user } = this.props;
     const image = this.displayImage(user);
+    const name = this.displayFullName(user);
+    const nick = this.displayNick(user);
 
     return (
       <div className={CN(css.userPanel)}>
-        {image}
+        <div className="avatar">
+          {image}
+        </div>
+        {name}
+        {nick}
       </div>
     );
   }

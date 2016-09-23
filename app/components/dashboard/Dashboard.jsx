@@ -14,14 +14,16 @@ class Dashboard extends Component {
     dispatch: PropTypes.func,
     directions: PropTypes.object,
     params: PropTypes.object,
-    children: PropTypes.object
+    children: PropTypes.object,
+    user: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     directions: {},
     params: {},
-    children: {}
+    children: {},
+    user: {}
   };
 
   render() {
