@@ -31,7 +31,7 @@ class Dashboard extends Component {
     const { user, dispatch } = this.props;
     let tabs = {};
 
-    tabs[`/${user.nick}/updates`] = 'Progress';
+    tabs[`/${user.nick}/info`] = 'Progress';
     tabs[`/${user.nick}/shared`] = 'Shared';
     tabs[`/${user.nick}/statistic`] = 'Statistics';
 

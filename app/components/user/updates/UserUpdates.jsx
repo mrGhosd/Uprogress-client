@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
 
+import UserUpdatesBlock from 'user/updates/block/UserUpdatesBlock';
+
 class UserUpdates extends Component {
 
   static propTypes = {
@@ -12,22 +14,29 @@ class UserUpdates extends Component {
     user: {}
   };
 
-  displayTitle(updates) {
+  displayItemBlocks(updates) {
     if (updates) {
       console.log(Object.keys(updates));
-      return Object.keys(updates);
-    }
+      const keys = Object.keys(updates);
 
+      return (
+        <div className="updatesList">
+          {keys.map((item, index) => {
+            return <UserUpdatesBlock key={index} title={item} />;
+          })}
+        </div>
+      );
+    }
   }
 
   render() {
     const { user } = this.props;
     const recentActions = user.recentActions;
-    const title = this.displayTitle(recentActions);
+    const list = this.displayItemBlocks(recentActions);
 
     return (
       <div>
-        UserInfo
+        {list}
       </div>
     );
   }
