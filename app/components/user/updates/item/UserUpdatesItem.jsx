@@ -128,20 +128,77 @@ export default class UserUpdatesItem extends Component {
     return <SvgIcon icon={iconName} />;
   }
 
+  isItUpdatingStepStatus(update) {
+    if (update.operation === 'update' &&
+        update.data.klass === 'Step' &&
+        update.data.attributesDifference.hasOwnProperty('isDone')) {
+      return true;
+    }
+  }
+
+  displayStepIcon(update) {
+    let icon;
+
+    if (update.data.attributesDifference.isDone) {
+      icon = <SvgIcon icon="icon-success" />;
+    }
+    else {
+      icon = <SvgIcon icon="icon-failure" />;
+    }
+
+    return icon;
+  }
+
+  showStepStatus(update) {
+    let status;
+
+    if (update.data.attributesDifference.isDone) {
+      status = (<i>done</i>);
+    }
+    else {
+      status = (<i>in progress</i>);
+    }
+    return status;
+  }
+
+  displayStepUpdateAction(action, object, link, update) {
+    const icon = this.displayStepIcon(update);
+    const status = this.showStepStatus(update);
+
+    return (
+      <div className={css.userUpdatesItem}>
+        {icon}
+        <span>{action}</span>
+        <span>{object}</span>
+        <span>{link}</span>
+        <span>to</span>
+        <span>{status}</span>
+      </div>
+    );
+  }
+
   displayAction(user, update) {
+    let template;
     const actionName = this.actionName(update);
     const objectName = this.objectName(update);
     const link = this.operationObjectName(user, update);
     const icon = this.getIconForAction(update);
 
-    return (
-      <div className={css.userUpdatesItem}>
-        {icon}
-        <span>{actionName}</span>
-        <span>{objectName}</span>
-        {link}
-      </div>
-    );
+    if (this.isItUpdatingStepStatus(update)) {
+      template = this.displayStepUpdateAction(actionName, objectName, link, update);
+    }
+    else {
+      template = (
+        <div className={css.userUpdatesItem}>
+          {icon}
+          <span>{actionName}</span>
+          <span>{objectName}</span>
+          {link}
+        </div>
+      );
+    }
+
+    return template;
   }
 
   render() {
