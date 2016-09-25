@@ -1,8 +1,9 @@
 import css from './UserUpdatesItem.styl';
 
 import React, { Component, PropTypes } from 'react';
-
 import { Link } from 'react-router';
+
+import SvgIcon from 'SVGIcon/SVGIcon';
 
 export default class UserUpdatesItem extends Component {
 
@@ -31,7 +32,7 @@ export default class UserUpdatesItem extends Component {
   operationObjectName(user, update) {
     let objectAttributes = this.getObjectAttributes(update);
 
-    return this.createLinkToObject(user, objectAttributes);
+    return this.createLinkToObject(user, objectAttributes, update);
   }
 
   getObjectAttributes(update) {
@@ -42,7 +43,7 @@ export default class UserUpdatesItem extends Component {
         objectAttributes = update.data.attributes;
         break;
       case 'update':
-        objectAttributes = update.data.new_attributes;
+        objectAttributes = update.data.newAttributes;
         break;
       case 'destroy':
         objectAttributes = update.data.attributes;
@@ -54,21 +55,88 @@ export default class UserUpdatesItem extends Component {
     return objectAttributes;
   }
 
-  createLinkToObject(user, attributes) {
+  getIconName(update) {
+    let iconName;
+
+    switch (update.operation) {
+      case 'create':
+        iconName = 'new-updates-icon';
+        break;
+      case 'update':
+        iconName = 'edit-updates-icon';
+        break;
+      case 'destroy':
+        break;
+      default:
+        break;
+    }
+
+    return iconName;
+  }
+
+  getCorrectLinkUrl(attributes, update) {
+    let url;
+
+    if (update.data.klass === 'Step') {
+      url = this.stepID(update.operation, attributes);
+    }
+    else {
+      url = this.directionID(update.operation, attributes);
+    }
+
+    return url;
+  }
+
+  directionID(operation, attributes) {
+    let id;
+
+    if (operation === 'create') {
+      id = attributes.slug || attributes.id;
+    }
+    else {
+      id = attributes.slug || attributes.id;
+    }
+
+    return id;
+  }
+
+  stepID(operation, attributes) {
+    let id;
+
+    if (operation === 'create') {
+      id = attributes.directionId;
+    }
+    else {
+      id = attributes.directionId;
+    }
+    return id;
+  }
+
+  createLinkToObject(user, attributes, update) {
     if (!user.isEmpty) {
+      const url = this.getCorrectLinkUrl(attributes, update);
+
       return (
-        <Link to={`/${user.nick}/directions/${attributes.slug || attributes.id}`}>{attributes.title}</Link>
+        <Link to={`/${user.nick}/directions/${url}`}>{attributes.title}</Link>
       );
     }
+  }
+
+  getIconForAction(update) {
+    const iconName = this.getIconName(update);
+
+    return <SvgIcon icon={iconName} />;
   }
 
   displayAction(user, update) {
     const actionName = this.actionName(update);
     const objectName = this.objectName(update);
     const link = this.operationObjectName(user, update);
+    const icon = this.getIconForAction(update);
 
     return (
       <div className={css.userUpdatesItem}>
+        {icon}
         <span>{actionName}</span>
         <span>{objectName}</span>
         {link}

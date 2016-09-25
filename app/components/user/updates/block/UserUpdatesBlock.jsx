@@ -24,7 +24,7 @@ export default class UserUpdatesBlock extends Component {
   render() {
     const { title, updates, user } = this.props;
     const humanizedDate = moment(title).format('LL');
-
+    
     return (
       <div className={CN(css.userUpdatesBlock)}>
         <div className="title">
