@@ -14,14 +14,14 @@ class UserUpdates extends Component {
     user: {}
   };
 
-  displayItemBlocks(updates) {
+  displayItemBlocks(user, updates) {
     if (updates) {
       const keys = Object.keys(updates);
 
       return (
         <div className="updatesList">
           {keys.map((item, index) => {
-            return <UserUpdatesBlock key={index} title={item} updates={updates[item]} />;
+            return <UserUpdatesBlock key={index} title={item} user={user} updates={updates[item]} />;
           })}
         </div>
       );
@@ -31,7 +31,7 @@ class UserUpdates extends Component {
   render() {
     const { user } = this.props;
     const recentActions = user.recentActions;
-    const list = this.displayItemBlocks(recentActions);
+    const list = this.displayItemBlocks(user, recentActions);
 
     return (
       <div>

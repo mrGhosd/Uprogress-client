@@ -11,16 +11,18 @@ export default class UserUpdatesBlock extends Component {
 
   static propTypes = {
     title: PropTypes.string,
-    updates: PropTypes.array
+    updates: PropTypes.array,
+    user: PropTypes.object
   };
 
   static defaultProps = {
     title: '',
-    updates: []
+    updates: [],
+    user: {}
   };
 
   render() {
-    const { title, updates } = this.props;
+    const { title, updates, user } = this.props;
     const humanizedDate = moment(title).format('LL');
 
     return (
@@ -29,9 +31,11 @@ export default class UserUpdatesBlock extends Component {
           <SvgIcon icon="date-icon" />
           <p>{humanizedDate}</p>
         </div>
-        {updates.map((item) => {
-          return <UserUpdatesItem key={item.id} update={item} />;
-        })}
+        <div className="updates-list">
+          {updates.map((item) => {
+            return <UserUpdatesItem key={item.id} user={user} update={item} />;
+          })}
+        </div>
       </div>
     );
   }
