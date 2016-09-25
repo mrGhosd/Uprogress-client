@@ -8,7 +8,7 @@ import { post, put, destroy } from 'utils/ApiRequest';
  */
 export function createStep(user, id, step) {
   return (dispatch) => {
-    post(`/users/${user}/directions/${id}/steps`, { step })
+    return post(`/users/${user}/directions/${id}/steps`, { step })
       .then((response) => {
         dispatch({ type: 'CREATE_STEP', step: response.data.step });
       })
@@ -25,7 +25,9 @@ export function createStep(user, id, step) {
  */
 export function editStep(step) {
   return (dispatch) => {
-    dispatch({ type: 'EDIT_STEP', step });
+    return new Promise((resolve) => {
+      resolve(dispatch({ type: 'EDIT_STEP', step }));
+    });
   };
 }
 
@@ -39,7 +41,7 @@ export function editStep(step) {
  */
 export function updateStep(user, direction_id, id, step) {
   return (dispatch) => {
-    put(`/users/${user}/directions/${direction_id}/steps/${id}`, { step })
+    return put(`/users/${user}/directions/${direction_id}/steps/${id}`, { step })
       .then((response) => {
         dispatch({ type: 'UPDATE_STEP', step: response.data.step });
       })
@@ -59,7 +61,7 @@ export function updateStep(user, direction_id, id, step) {
 export function deleteStep(user, direction_id, id) {
   // dispatch({ type: 'DELETE_STEP', step: response.data.step });
   return (dispatch) => {
-    destroy(`/users/${user}/directions/${direction_id}/steps/${id}`)
+    return destroy(`/users/${user}/directions/${direction_id}/steps/${id}`)
       .then((response) => {
         dispatch({ type: 'DELETE_STEP', step: response.data.step });
       });

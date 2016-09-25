@@ -6,7 +6,7 @@ import { get, post, put } from 'utils/ApiRequest';
  */
 export function getList(user) {
   return (dispatch) => {
-    get(`/users/${user}/directions`).then((response) => {
+    return get(`/users/${user}/directions`).then((response) => {
       dispatch({ type: 'GET_DIRECTIONS_LIST', directions: response.data.directions });
     });
   };
@@ -19,7 +19,7 @@ export function getList(user) {
  */
 export function createDirection(user, direction) {
   return (dispatch) => {
-    post(`/users/${user}/directions`, { direction })
+    return post(`/users/${user}/directions`, { direction })
       .then((response) => {
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
       })
@@ -37,13 +37,12 @@ export function createDirection(user, direction) {
  */
 export function updateDirection(user, id, direction) {
   return (dispatch) => {
-    put(`/users/${user}/directions/${id}`, { direction })
+    return put(`/users/${user}/directions/${id}`, { direction })
       .then((response) => {
         dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction, updated: true });
       })
       .catch((errors) => {
-        console.log(errors);
-        dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
+        dispatch({ type: 'DIRECTION_FAILED', errors: errors.data.errors });
       });
   };
 }
@@ -55,7 +54,7 @@ export function updateDirection(user, id, direction) {
  */
 export function getDirection(user, id) {
   return (dispatch) => {
-    get(`/users/${user}/directions/${id}`)
+    return get(`/users/${user}/directions/${id}`)
       .then((response) => {
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
       });

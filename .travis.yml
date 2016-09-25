@@ -1,0 +1,11 @@
+language: node_js
+node_js: 4
+cache:
+  directiories:
+    - node_modules
+before_install:
+  - npm install -g eslint mocha
+  - npm install
+
+script:
+  - npm run test

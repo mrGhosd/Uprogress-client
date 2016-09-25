@@ -5,8 +5,6 @@ import CN from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { getList } from 'actions/directions';
-
 /**
  * Mapping application state to properties
  * @param  {Object} state Application state
@@ -20,14 +18,15 @@ function mapStateToProps(state) {
   };
 }
 
-class Navigation extends Component {
+export class Navigation extends Component {
 
   static propTypes = {
     directions: PropTypes.array,
     user: PropTypes.object,
     dispatch: PropTypes.func,
     params: PropTypes.object,
-    context: PropTypes.object
+    context: PropTypes.object,
+    currentUser: PropTypes.object
   };
 
   static defaultProps = {
@@ -35,12 +34,9 @@ class Navigation extends Component {
     dispatch: () => {},
     params: {},
     context: {},
-    user: {}
+    user: {},
+    currentUser: {}
   };
-
-  componentWillMount() {
-    // this.props.dispatch(getList());
-  }
 
   itemSelected(item) {
     let result;

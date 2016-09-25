@@ -1,4 +1,4 @@
-import { get, post, put, destroy } from 'utils/ApiRequest';
+import { get, post, put } from 'utils/ApiRequest';
 import { getAuthorizationParams } from 'utils/browser';
 
 /**
@@ -9,7 +9,7 @@ import { getAuthorizationParams } from 'utils/browser';
 export function signIn(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
-    post('/sessions', { user })
+    return post('/sessions', { user })
       .then((response) => {
         dispatch({ type: 'SIGN_IN_USER', token: response.data.token });
         dispatch(currentUser());
@@ -28,7 +28,7 @@ export function signIn(user) {
 export function signUp(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
-    post('/registrations', { user })
+    return post('/registrations', { user })
       .then((response) => {
         dispatch({ type: 'SIGN_UP_USER', token: response.data.token });
         dispatch(currentUser());
@@ -45,12 +45,12 @@ export function signUp(user) {
  */
 export function currentUser() {
   return (dispatch) => {
-    get('/sessions/current')
+    return get('/sessions/current')
       .then((response) => {
         dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
-        dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });
+        dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.user });
       });
   };
 }
@@ -62,13 +62,12 @@ export function currentUser() {
  */
 export function getUser(user) {
   return (dispatch) => {
-    get(`/users/${user}`)
+    return get(`/users/${user}`)
       .then((response) => {
         dispatch({ type: 'USER_INFO', user: response.data.user });
       })
       .catch((error) => {
-        console.log(error);
-        dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });
+        dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };
 }
@@ -84,12 +83,12 @@ export function uploadImage(attachment) {
   formData.append('file', attachment.file);
   formData.append('attachable_type', attachment.attachableType);
   return (dispatch) => {
-    post('/attachments', formData)
+    return post('/attachments', formData)
       .then((response) => {
         dispatch({ type: 'USER_UPLOAD_AVATAR', attachment: response.data.attachment });
       })
       .catch((error) => {
-        dispatch({ type: 'USER_UPLOAD_AVATAR', user: error.data.errors });
+        dispatch({ type: 'USER_UPLOAD_FAILED', error: error.data.errors });
       });
   };
 }
@@ -102,7 +101,7 @@ export function uploadImage(attachment) {
  */
 export function updateUser(id, user) {
   return (dispatch) => {
-    put(`/users/${id}`, { user })
+    return put(`/users/${id}`, { user })
        .then((response) => {
          dispatch({ type: 'USER_UPDATE_SUCCESS', current: response.data.currentUser });
        })
