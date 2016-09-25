@@ -20,7 +20,7 @@ export default class UserUpdatesBlock extends Component {
   };
 
   render() {
-    const { title } = this.props;
+    const { title, updates } = this.props;
     const humanizedDate = moment(title).format('LL');
 
     return (
@@ -29,7 +29,9 @@ export default class UserUpdatesBlock extends Component {
           <SvgIcon icon="date-icon" />
           <p>{humanizedDate}</p>
         </div>
-        UserUpdatesBlock
+        {updates.map((item) => {
+          return <UserUpdatesItem key={item.id} update={item} />;
+        })}
       </div>
     );
   }

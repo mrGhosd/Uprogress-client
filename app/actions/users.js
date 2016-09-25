@@ -67,6 +67,7 @@ export function getUser(user) {
         dispatch({ type: 'USER_INFO', user: response.data.user });
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.errors });
       });
   };

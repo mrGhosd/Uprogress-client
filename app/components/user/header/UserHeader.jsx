@@ -8,6 +8,7 @@ import { signOut } from 'actions/users';
 
 import Button from 'Button/ElementButton';
 import Image from 'Image/ElementImage';
+import SvgIcon from 'SVGIcon/SVGIcon';
 
 export default class UserHeader extends Component {
 
@@ -25,13 +26,23 @@ export default class UserHeader extends Component {
     this.props.dispatch(signOut());
   }
 
+  displayImage(user) {
+    if (user.attachment) {
+      return <Image size={40} className="circle" src={user.attachment.url} />;
+    }
+    else {
+      return <SvgIcon icon="empty-user" />;
+    }
+  }
+
   render() {
     const { user } = this.props;
+    const image = this.displayImage(user);
 
     return (
       <div className={CN(css.userHeader)}>
         <div className="user-nick">
-          <Image size={40} className="circle" src={user.attachment.url} />
+          {image}
           <span className="nick">
             <Link to={`/${user.nick}`}>{user.nick}</Link>
           </span>

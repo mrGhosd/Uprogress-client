@@ -22,11 +22,11 @@ export default class UserPanel extends Component {
   displayImage(user) {
     let image;
 
-    if (user.isEmpty) {
-      image = <SvgIcon icon="empty-user" />;
+    if (user.attachment) {
+      image = <Image size={200} className="avatar-image" src={user.attachment.url} />;
     }
     else {
-      image = <Image size={200} className="avatar-image" src={user.attachment.url} />;
+      image = <SvgIcon icon="empty-user" />;
     }
 
     return image;

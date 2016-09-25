@@ -16,13 +16,12 @@ class UserUpdates extends Component {
 
   displayItemBlocks(updates) {
     if (updates) {
-      console.log(Object.keys(updates));
       const keys = Object.keys(updates);
 
       return (
         <div className="updatesList">
           {keys.map((item, index) => {
-            return <UserUpdatesBlock key={index} title={item} />;
+            return <UserUpdatesBlock key={index} title={item} updates={updates[item]} />;
           })}
         </div>
       );
