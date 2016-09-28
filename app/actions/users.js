@@ -15,6 +15,7 @@ export function signIn(user) {
         dispatch(currentUser());
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: 'SIGN_IN_FAILED', errors: error.data.errors });
       });
   };
@@ -34,6 +35,7 @@ export function signUp(user) {
         dispatch(currentUser());
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: 'SIGN_UP_FAILED', errors: error.data.errors });
       });
   };
