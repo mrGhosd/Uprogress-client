@@ -4,6 +4,7 @@ import nock from 'nock';
 import expect from 'expect';
 import { signIn, signUp, signOut, currentUser, getUser, updateUser } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
+import { getAuthorizationParams } from 'utils/browser';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -20,13 +21,7 @@ describe('Users actions', () => {
 
   describe('#signIn', () => {
 
-    const authorization = {
-      platform: 'Darwin',
-      platform_version: null,
-      app_name: 'Node.js',
-      app_version: '6.4.0',
-      provider: 'UProgress'
-    };
+    const authorization = getAuthorizationParams();
 
     context('with valid attributes', () => {
       it('fires SIGN_IN_USER action', () => {
