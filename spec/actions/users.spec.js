@@ -73,13 +73,7 @@ describe('Users actions', () => {
 
   describe('#signUp', () => {
 
-    const authorization = {
-      platform: 'Darwin',
-      platform_version: null,
-      app_name: 'Node.js',
-      app_version: '6.4.0',
-      provider: 'UProgress'
-    };
+    const authorization = getAuthorizationParams();
 
     context('with valid attributes', () => {
       it('fires SIGN_UP_USER', () => {
