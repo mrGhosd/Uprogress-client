@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-console.log("NODE ENV IS " + process.env.NODE_ENV);
+
 module.exports = {
   devtool: 'source-map',
   entry: {
