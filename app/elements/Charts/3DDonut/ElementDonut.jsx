@@ -2,7 +2,7 @@ import css from './ElementDonut.styl';
 
 import CN from 'classnames';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as d3 from 'd3';
 import Donut3D from './3DDonut.js';
 
@@ -15,15 +15,18 @@ const salesData=[
 ];
 
 export default class ElementDonut extends Component {
+  static propTypes = {
+    data: PropTypes.array
+  };
 
-  randomData() {
-  	return salesData.map(function(d){
-  		return {label:d.label, value:1000*Math.random(), color:d.color};
-    });
-  }
+  static defaultProps = {
+    data: []
+  };
 
   componentDidMount() {
-    Donut3D.draw("salesDonut", this.randomData(), 150, 150, 130, 100, 30, 0.4);
+    const { data } = this.props;
+
+    Donut3D.draw('salesDonut', data, 150, 150, 130, 100, 30, 0.4);
     // Donut3D.draw("quotesDonut", this.randomData(), 450, 150, 130, 100, 30, 0);
   }
 

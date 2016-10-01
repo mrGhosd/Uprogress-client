@@ -112,6 +112,24 @@ export function updateUser(id, user) {
 }
 
 /**
+ * Get user statistics information
+ * @param {Number} id user id
+ * @return {Dispatch} Dispatch function
+ */
+export function getUserStatistics(id) {
+  return (dispatch) => {
+    return get(`/users/${id}/statistics`)
+       .then((response) => {
+         dispatch({ type: 'USER_STATISTICS_SUCCESS', statistics: response.data.statistics });
+       })
+       .catch((error) => {
+         console.log(error);
+         dispatch({ type: 'USER_STATISTICS_FAILED', errors: error.data.errors });
+       });
+  };
+}
+
+/**
  * Sign out; Remove token from client
  * @return {Dispatch} Dispatch function
  */
