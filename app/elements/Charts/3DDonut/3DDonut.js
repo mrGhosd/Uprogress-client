@@ -110,11 +110,20 @@ Donut3D.draw = function(id,
 
   var slices = d3.select("#"+id).append("g").attr("transform", "translate(" + x + "," + y + ")")
     .attr("class", "slices");
-  slices.selectAll(".innerSlice").data(_data).enter().append("path").attr("class", "innerSlice")
-    .style("fill", function(d) { return d3.hsl(d.data.color).darker(0.7); })
-    .attr("d",function(d){ return pieInner(d, rx+0.5,ry+0.5, h, ir);})
-    .each(function(d){this._current=d;});
 
+  // Inner part slices of donut
+  slices.selectAll(".innerSlice").data(_data).enter().append("path").attr("class", "innerSlice")
+    .style("fill", function(d) {
+      return d3.hsl(d.data.color).darker(0.7);
+    })
+    .attr("d",function(d) {
+      return pieInner(d, rx+0.5,ry+0.5, h, ir);
+    })
+    .each(function(d) {
+      this._current=d;
+    });
+
+  // Top visible part of donut (all slices)
   slices.selectAll(".topSlice").data(_data).enter().append("path").attr("class", "topSlice")
     .style("fill", function(d) {
       return d.data.color;
@@ -129,23 +138,25 @@ Donut3D.draw = function(id,
       this._current=d;
     });
 
+  // Front part of slice
   slices.selectAll(".outerSlice").data(_data).enter().append("path").attr("class", "outerSlice")
     .style('fill', function(d) {
-  return d3.hsl(d.data.color).darker(0.7);
+      return d3.hsl(d.data.color).darker(0.7);
     })
     .attr("d",function(d) {
-      return pieOuter(d, rx-.5,ry-.5, h);
+      return pieOuter(d, rx - .5,ry - .5, h);
     })
     .each(function(d) {
       this._current = d;
     });
 
+  // Slices value (in percents)
   slices.selectAll(".percent").data(_data).enter().append("text").attr("class", "percent")
     .attr("x",function(d) {
-      return 0.6*rx*Math.cos(0.5*(d.startAngle+d.endAngle));
+      return 0.6 * rx * Math.cos(0.5 * (d.startAngle + d.endAngle));
     })
     .attr("y",function(d) {
-      return 0.6*ry*Math.sin(0.5*(d.startAngle+d.endAngle));
+      return 0.6 * ry * Math.sin(0.5 * (d.startAngle + d.endAngle));
     })
     .text(getPercent).each(function(d) {
       this._current=d;

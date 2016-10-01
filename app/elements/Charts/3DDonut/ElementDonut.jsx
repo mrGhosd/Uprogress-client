@@ -26,21 +26,16 @@ export default class ElementDonut extends Component {
   componentDidMount() {
     const { data } = this.props;
 
-    Donut3D.draw('salesDonut', data, 150, 150, 130, 100, 30, 0.4);
-    // Donut3D.draw("quotesDonut", this.randomData(), 450, 150, 130, 100, 30, 0);
+    Donut3D.draw('donut', data, 150, 150, 130, 100, 30, 0.4);
   }
 
   render() {
-    // let svg = d3.select(css.elementDonut).append("svg").attr("width",700).attr("height",300);
-    // svg.append("g").attr("id","salesDonut");
-    // svg.append("g").attr("id","quotesDonut");
 
     return (
       <div className={CN(css.elementDonut)}>
         ChartComponent
         <svg width="700" height="300">
-          <g id="salesDonut"></g>
-          <g id="quotesDonut"></g>
+          <g id="donut"></g>
         </svg>
       </div>
     );

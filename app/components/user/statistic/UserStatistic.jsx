@@ -39,6 +39,10 @@ export class UserStatistic extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState({ loaded: false });
+  }
+
   render() {
     const { user } = this.props;
     const donut = this.renderDonut(user);
