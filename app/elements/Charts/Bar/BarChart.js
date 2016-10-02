@@ -1,51 +1,53 @@
 import * as d3 from 'd3';
 
+/*eslint-disable*/
 export default class BarChart {
   static draw(id, data) {
-    var svg = d3.select("#" + id),
-        margin = { top: 20, right: 20, bottom: 30, left: 40 },
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom;
+  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-      y = d3.scaleLinear().rangeRound([height, 0]);
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
 
-    var g = svg.append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var y = d3.scale.linear()
+    .range([height, 0]);
 
-    let mappedData = data.map((item) => {
-      item.frequency = item.value;
-      delete item.value;
-    });
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
-    d3.data(mappedData);
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
 
-    x.domain(data.map(function(d) { return d.letter; }));
-    y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+var chart = d3.select("#" + id)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+  x.domain(data.map(function(d) { return d.label; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10, "%"))
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .text("Frequency");
+chart.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
-    g.selectAll(".bar")
-      .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.letter); })
-        .attr("y", function(d) { return y(d.frequency); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return height - y(d.frequency); });
-    });
+chart.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+
+chart.selectAll("#" + id)
+  .data(data)
+  .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d.label); })
+    .attr("y", function(d) { return y(d.value); })
+    .attr("height", function(d) { return height - y(d.value); })
+    .attr("width", x.rangeBand());
+
   }
 }
+/*eslint-enable*/
