@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getUserStatistics } from 'actions/users';
 
 import Donut from 'Charts/3DDonut/ElementDonut';
+import BarChart from 'Charts/Bar/ElementBarChart';
 
 export class UserStatistic extends Component {
 
@@ -39,6 +40,14 @@ export class UserStatistic extends Component {
     }
   }
 
+  renderBar(user) {
+    if (user.statistics) {
+      return (
+        <BarChart data={user.statistics.directions} />
+      );
+    }
+  }
+
   componentWillUnmount() {
     this.setState({ loaded: false });
   }
@@ -46,11 +55,13 @@ export class UserStatistic extends Component {
   render() {
     const { user } = this.props;
     const donut = this.renderDonut(user);
+    const bar = this.renderBar(user);
 
     return (
       <div>
         UserStatistic
         {donut}
+        {bar}
       </div>
     );
   }
