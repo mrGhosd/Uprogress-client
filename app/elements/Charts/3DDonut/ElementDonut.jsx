@@ -3,16 +3,7 @@ import css from './ElementDonut.styl';
 import CN from 'classnames';
 
 import React, { Component, PropTypes } from 'react';
-import * as d3 from 'd3';
 import Donut3D from './3DDonut.js';
-
-const salesData=[
-  { label:"Basic", color:"#3366CC" },
-  { label:"Plus", color:"#DC3912" },
-  { label:"Lite", color:"#FF9900" },
-  { label:"Elite", color:"#109618" },
-  { label:"Delux", color:"#990099" }
-];
 
 export default class ElementDonut extends Component {
   static propTypes = {

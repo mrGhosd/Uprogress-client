@@ -23,9 +23,19 @@ export class UserStatistic extends Component {
     dispatch: () => {}
   };
 
+  componentWillMount() {
+    const user = this.props.user;
+
+    this.loadStatistics(user);
+  }
+
   componentWillReceiveProps(props) {
     const user = props.user;
 
+    this.loadStatistics(user);
+  }
+
+  loadStatistics(user) {
     if (!user.isEmpty && !this.state.loaded) {
       this.props.dispatch(getUserStatistics(user.nick));
       this.setState({ loaded: true });
