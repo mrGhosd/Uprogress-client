@@ -1,3 +1,6 @@
+import css from './UserStatistics.styl';
+
+import CN from 'classnames';
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
@@ -7,10 +10,13 @@ import { getUserStatistics } from 'actions/users';
 import Donut from 'Charts/3DDonut/ElementDonut';
 import BarChart from 'Charts/Bar/ElementBarChart';
 
+import SvgIcon from 'SVGIcon/SVGIcon';
+
 export class UserStatistic extends Component {
 
   state = {
-    loaded: false
+    loaded: false,
+    currentChart: 'pie'
   };
 
   static propTypes = {
@@ -50,12 +56,28 @@ export class UserStatistic extends Component {
     }
   }
 
+  changeChart(id) {
+    this.setState({ currentChart: id });
+  }
+
   renderBar(user) {
     if (user.statistics) {
       return (
         <BarChart data={user.statistics.directions} />
       );
     }
+  }
+
+  activeButton(name) {
+    return this.state.currentChart === name;
+  }
+
+  renderSwitcher(icon, id) {
+    return (
+      <a onClick={() => this.changeChart(id)}>
+        <SvgIcon className={CN('button-icon', { active: this.activeButton(id) })} icon={icon} />
+      </a>
+    );
   }
 
   componentWillUnmount() {
@@ -66,10 +88,14 @@ export class UserStatistic extends Component {
     const { user } = this.props;
     const donut = this.renderDonut(user);
     const bar = this.renderBar(user);
+    const pieChartButton = this.renderSwitcher('pie_chart_icon', 'pie');
+    const barChartButton = this.renderSwitcher('bar_chart_icon', 'bar');
 
     return (
-      <div>
+      <div className={CN(css.userStatistics)}>
         UserStatistic
+        {pieChartButton}
+        {barChartButton}
         {donut}
         {bar}
       </div>
