@@ -20,13 +20,36 @@ export default function drawPie(id, data, height, width) {
     return dataValue.value;
   })(data);
 
-  svg.selectAll('path')
+  var tooltip = d3.select(`#${id}`)
+          .append('div')
+          .attr('class', 'tooltip');
+
+  tooltip.append('div')
+    .attr('class', 'label');
+
+  tooltip.append('div')
+    .attr('class', 'count');
+
+  tooltip.append('div')
+    .attr('class', 'percent');
+
+  let path = svg.selectAll('path')
                 .data(dataSet)
                 .enter().append('path')
                 .attr('fill', (info) => {
                   return info.data.color;
                 })
                 .attr('d', arc);
+
+  path.on('mouseover', (info) => {
+    tooltip.select('.label').html(info.data.label);
+    tooltip.select('.percent').html(`${info.data.value}%`);
+    tooltip.style('display', 'block');
+  });
+
+  path.on('mouseout', () => {
+    tooltip.style('display', 'none');
+  });
 
   let legend = svg.selectAll('.legend')
           .data(dataSet)
