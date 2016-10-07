@@ -9,6 +9,7 @@ import { getUserStatistics } from 'actions/users';
 
 import Donut from 'Charts/3DDonut/ElementDonut';
 import BarChart from 'Charts/Bar/ElementBarChart';
+import Select from 'Select/ElementSelect';
 
 import SvgIcon from 'SVGIcon/SVGIcon';
 
@@ -107,12 +108,17 @@ export class UserStatistic extends Component {
     const chart = this.renderChart(user);
     const pieChartButton = this.renderSwitcher('pie_chart_icon', 'pie');
     const barChartButton = this.renderSwitcher('bar_chart_icon', 'bar');
+    const selectData = [
+      { title: 'Title 1', value: 'Value 1' },
+      { title: 'Title 2', value: 'Value 2' }
+    ];
 
     return (
       <div className={CN(css.userStatistics)}>
         <div className="switchers">
           {pieChartButton}
           {barChartButton}
+          <Select ref="scope" name="scope" values={selectData} />
         </div>
         {chart}
       </div>
