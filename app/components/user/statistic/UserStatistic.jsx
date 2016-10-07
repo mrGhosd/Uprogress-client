@@ -80,24 +80,41 @@ export class UserStatistic extends Component {
     );
   }
 
+  renderChart(user) {
+    const { currentChart } = this.state;
+    let template;
+
+    switch (currentChart) {
+      case 'bar':
+        template = this.renderBar(user);
+        break;
+      case 'pie':
+        template = this.renderDonut(user);
+        break;
+      default: break;
+    }
+
+    return template;
+  }
+
   componentWillUnmount() {
     this.setState({ loaded: false });
   }
 
   render() {
     const { user } = this.props;
-    const donut = this.renderDonut(user);
-    const bar = this.renderBar(user);
+
+    const chart = this.renderChart(user);
     const pieChartButton = this.renderSwitcher('pie_chart_icon', 'pie');
     const barChartButton = this.renderSwitcher('bar_chart_icon', 'bar');
 
     return (
       <div className={CN(css.userStatistics)}>
-        UserStatistic
-        {pieChartButton}
-        {barChartButton}
-        {donut}
-        {bar}
+        <div className="switchers">
+          {pieChartButton}
+          {barChartButton}
+        </div>
+        {chart}
       </div>
     );
   }

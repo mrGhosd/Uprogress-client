@@ -17,6 +17,7 @@ export default class ElementDonut extends Component {
 
   componentDidMount() {
     const { data } = this.props;
+    
     drawPie('donut', data, 370, 520);
     // Donut3D.draw('donut', data, 200, 200, 130, 100, 30, 0.4);
   }
@@ -25,7 +26,6 @@ export default class ElementDonut extends Component {
 
     return (
       <div className={CN(css.elementDonut)}>
-        ChartComponent
         <svg id="donut">
         </svg>
       </div>
