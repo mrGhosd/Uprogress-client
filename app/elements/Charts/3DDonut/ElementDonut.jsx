@@ -8,7 +8,8 @@ import drawPie from './Pie.js';
 
 export default class ElementDonut extends Component {
   static propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    id: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -16,17 +17,25 @@ export default class ElementDonut extends Component {
   };
 
   componentDidMount() {
-    const { data } = this.props;
-    
-    drawPie('donut', data, 370, 520);
-    // Donut3D.draw('donut', data, 200, 200, 130, 100, 30, 0.4);
+    this.renderPie();
+  }
+
+  componentWillReceiveProps() {
+    this.renderPie();
+  }
+
+  renderPie() {
+    const { data, id } = this.props;
+
+    drawPie(id, data, 370, 520);
   }
 
   render() {
+    const { id } = this.props;
 
     return (
       <div className={CN(css.elementDonut)}>
-        <svg id="donut">
+        <svg id={id} >
         </svg>
       </div>
     );

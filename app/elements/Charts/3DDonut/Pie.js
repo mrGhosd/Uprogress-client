@@ -3,18 +3,22 @@ import * as d3 from 'd3';
 export default function drawPie(id, data, height, width) {
   let radius = Math.min(width, height) / 2;
 
-  var legendRectSize = 18;
-  var legendSpacing = 4;
+  if (!d3.select(`#${id}`).selectAll('*').empty()) {
+    d3.select(`#${id}`).selectAll('*').remove();
+  }
+
+  const legendRectSize = 18;
+  const legendSpacing = 4;
+
 
   let arc = d3.svg.arc()
               .innerRadius(radius - 100)
               .outerRadius(radius - 50);
-
   let svg = d3.select(`#${id}`)
               .attr('width', width)
-              .attr('height', height)
-              .append('g')
-              .attr('transform', `translate(${width / 2}, ${height / 2})`);
+               .attr('height', height)
+               .append('g')
+               .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
   var dataSet = d3.layout.pie().sort(null).value((dataValue) => {
     return dataValue.value;

@@ -13,7 +13,8 @@ export default class ElementSelect extends Component {
   static defaultProps = {
     name: '',
     size: 1,
-    values: []
+    values: [],
+    onChange: (() => {})
   };
 
   static propTypes = {
@@ -24,7 +25,8 @@ export default class ElementSelect extends Component {
     values: React.PropTypes.array,
     label: React.PropTypes.string,
     required: React.PropTypes.bool,
-    disabled: React.PropTypes.bool
+    disabled: React.PropTypes.bool,
+    onChange: React.PropTypes.func
   };
 
   /**
@@ -77,13 +79,14 @@ export default class ElementSelect extends Component {
     let required = this.props.required;
     let disabled = this.props.disabled;
     let values = this.props.values;
+    const onChange = this.props.onChange;
 
     values = this.addPlaceholder(values);
 
     return (
       <div className={css.Select}>
         <Label htmlFor={id}>{this.props.label}</Label>
-        <select name={name} {...{ id, size, required, disabled }}>
+        <select name={name} {...{ id, size, required, disabled, onChange }}>
           {values.map((item) => {
             if (item.value) {
               return this.renderValue(item);

@@ -17,7 +17,8 @@ export class UserStatistic extends Component {
 
   state = {
     loaded: false,
-    currentChart: 'pie'
+    currentChart: 'pie',
+    currentScope: 'directions'
   };
 
   static propTypes = {
@@ -49,10 +50,12 @@ export class UserStatistic extends Component {
     }
   }
 
-  renderDonut(user) {
+  renderDonut(user, scope) {
     if (user.statistics) {
+      const id = `${scope}_pie`;
+
       return (
-        <Donut data={user.statistics.directions} />
+        <Donut data={user.statistics[scope]} id={id} />
       );
     }
   }
@@ -61,10 +64,10 @@ export class UserStatistic extends Component {
     this.setState({ currentChart: id });
   }
 
-  renderBar(user) {
+  renderBar(user, scope) {
     if (user.statistics) {
       return (
-        <BarChart data={user.statistics.directions} />
+        <BarChart data={user.statistics[scope]} />
       );
     }
   }
@@ -82,15 +85,15 @@ export class UserStatistic extends Component {
   }
 
   renderChart(user) {
-    const { currentChart } = this.state;
+    const { currentChart, currentScope } = this.state;
     let template;
 
     switch (currentChart) {
       case 'bar':
-        template = this.renderBar(user);
+        template = this.renderBar(user, currentScope);
         break;
       case 'pie':
-        template = this.renderDonut(user);
+        template = this.renderDonut(user, currentScope);
         break;
       default: break;
     }
@@ -102,23 +105,37 @@ export class UserStatistic extends Component {
     this.setState({ loaded: false });
   }
 
+  changeSelect(event) {
+    this.setState({ currentScope: event.target.value });
+    console.log(this.state);
+  }
+
+  selectData(user) {
+    if (user.statistics) {
+      return Object.keys(user.statistics).map((item) => {
+        return { title: item.toUpperCase(), value: item.toLowerCase() };
+      });
+    }
+  }
+
   render() {
     const { user } = this.props;
 
     const chart = this.renderChart(user);
     const pieChartButton = this.renderSwitcher('pie_chart_icon', 'pie');
     const barChartButton = this.renderSwitcher('bar_chart_icon', 'bar');
-    const selectData = [
-      { title: 'Title 1', value: 'Value 1' },
-      { title: 'Title 2', value: 'Value 2' }
-    ];
+    const selectData = this.selectData(user);
 
     return (
       <div className={CN(css.userStatistics)}>
         <div className="switchers">
           {pieChartButton}
           {barChartButton}
-          <Select ref="scope" name="scope" values={selectData} />
+          <Select
+            ref="scope"
+            name="scope"
+            values={selectData}
+            onChange={this::this.changeSelect} />
         </div>
         {chart}
       </div>
