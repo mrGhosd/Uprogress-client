@@ -53,7 +53,7 @@ export class UserStatistic extends Component {
   renderDonut(user, scope) {
     if (user.statistics) {
       const id = `${scope}_pie`;
-
+      console.log(id, scope);
       return (
         <Donut data={user.statistics[scope]} id={id} />
       );
@@ -106,8 +106,10 @@ export class UserStatistic extends Component {
   }
 
   changeSelect(event) {
-    this.setState({ currentScope: event.target.value });
-    console.log(this.state);
+    let lastState = this.state;
+
+    lastState.currentScope = event.target.value;
+    this.setState(lastState);
   }
 
   selectData(user) {

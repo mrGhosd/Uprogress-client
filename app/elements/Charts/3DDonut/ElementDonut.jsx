@@ -9,25 +9,26 @@ import drawPie from './Pie.js';
 export default class ElementDonut extends Component {
   static propTypes = {
     data: PropTypes.array,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string
   };
 
   static defaultProps = {
-    data: []
+    data: [],
+    id: ''
   };
 
   componentDidMount() {
-    this.renderPie();
+    this.renderPie(this.props);
   }
 
-  componentWillReceiveProps() {
-    this.renderPie();
+  componentWillReceiveProps(props) {
+    this.renderPie(props);
   }
 
-  renderPie() {
-    const { data, id } = this.props;
+  renderPie(props) {
+    const { data, id } = props;
 
-    drawPie(id, data, 370, 520);
+    drawPie(css.elementDonut, id, data, 370, 520);
   }
 
   render() {

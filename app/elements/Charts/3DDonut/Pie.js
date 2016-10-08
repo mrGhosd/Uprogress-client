@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 
-export default function drawPie(id, data, height, width) {
+export default function drawPie(className, id, data, height, width) {
   let radius = Math.min(width, height) / 2;
 
-  if (!d3.select(`#${id}`).selectAll('*').empty()) {
-    d3.select(`#${id}`).selectAll('*').remove();
+  // d3.select(`#${id}`).selectAll('*').remove();
+  if (!d3.select(`.${className}`).selectAll('*').empty()) {
+    d3.select(`.${className}`).selectAll('*').remove();
   }
 
   const legendRectSize = 18;
@@ -14,7 +15,9 @@ export default function drawPie(id, data, height, width) {
   let arc = d3.svg.arc()
               .innerRadius(radius - 100)
               .outerRadius(radius - 50);
-  let svg = d3.select(`#${id}`)
+  let svg = d3.select(`.${className}`)
+              .append('svg')
+              .attr('id', id)
               .attr('width', width)
                .attr('height', height)
                .append('g')
