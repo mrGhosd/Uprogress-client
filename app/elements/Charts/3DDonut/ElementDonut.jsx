@@ -27,7 +27,7 @@ export default class ElementDonut extends Component {
 
   renderPie(props) {
     const { data, id } = props;
-
+    
     drawPie(css.elementDonut, id, data, 370, 520);
   }
 
