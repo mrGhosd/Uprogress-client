@@ -38,6 +38,8 @@ export default function(state = initialState, action) {
     case 'SIGN_OUT':
       localStorage.removeItem('uprogresstoken');
       return { ...state, current: {} }
+    case 'USER_STATISTICS_SUCCESS':
+      return update(state, { show: { statistics: { $set: action.statistics } } });
     default:
       return state;
   }
