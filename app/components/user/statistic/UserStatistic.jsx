@@ -53,7 +53,7 @@ export class UserStatistic extends Component {
   renderDonut(user, scope) {
     if (user.statistics) {
       const id = `${scope}_pie`;
-      console.log(id, scope);
+
       return (
         <Donut data={user.statistics[scope]} id={id} />
       );
@@ -66,8 +66,10 @@ export class UserStatistic extends Component {
 
   renderBar(user, scope) {
     if (user.statistics) {
+      const id = `${scope}_bar`;
+
       return (
-        <BarChart data={user.statistics[scope]} />
+        <BarChart data={user.statistics[scope]} id={id} />
       );
     }
   }

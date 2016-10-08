@@ -2,7 +2,11 @@ import * as d3 from 'd3';
 
 /*eslint-disable*/
 export default class BarChart {
-  static draw(id, data) {
+  static draw(className, id, data) {
+
+    if (!d3.select(`.${className}`).selectAll('*').empty()) {
+      d3.select(`.${className}`).selectAll('*').remove();
+    }
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -21,7 +25,9 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-var chart = d3.select("#" + id)
+var chart = d3.select(`.${className}`)
+    .append('svg')
+    .attr('id', id)
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")

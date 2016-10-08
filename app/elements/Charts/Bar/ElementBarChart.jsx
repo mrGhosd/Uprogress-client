@@ -7,17 +7,27 @@ import React, { Component, PropTypes } from 'react';
 
 export default class ElementBarChart extends Component {
   static propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    id: PropTypes.string
   };
 
   static defaultProps = {
-    data: []
+    data: [],
+    id: ''
   };
 
-  componentDidMount() {
-    const { data } = this.props;
+  componentWillReceiveProps(props) {
+    this.renderBar(props);
+  }
 
-    BarChart.draw('barChart', data);
+  componentDidMount() {
+    this.renderBar(this.props);
+  }
+
+  renderBar(props) {
+    const { data, id } = props;
+
+    BarChart.draw(css.barChart, id, data);
   }
 
   render() {
