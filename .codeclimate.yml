@@ -5,3 +5,6 @@ engines:
 ratings:
    paths:
    - "app/**/*"
+exclude_paths:
+  - "config/**/*"
+  - "spec/**/*"
