@@ -1,18 +1,7 @@
 engines:
-  brakeman:
-    enabled: true
   eslint:
     enabled: true
-    config:
-      config: .eslintrc
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - javascript
+
 ratings:
-  paths:
-  - app/**
-exclude_paths:
-- config/**/*
-- "spec/**/*"
+   paths:
+   - "app/**/*"
