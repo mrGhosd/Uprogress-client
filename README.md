@@ -4,7 +4,7 @@
 Web-client of Uprogress app, builded on React.js
 
 ## Setup and run
-For installing `docker` environment use command `docker-compose build`
+Run `npm install` and then `npm run dev`
 
-After that, you can run webpack server with
-`docker-compose up`
+## Spec
+For running specs install `mocha` and run `npm run test`
