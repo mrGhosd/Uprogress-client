@@ -6,7 +6,8 @@ const initialState = {
     steps: []
   },
   errors: {},
-  isUpdated: null
+  isUpdated: null,
+  isCreated: null
 };
 
 /**
@@ -25,7 +26,11 @@ export default function(state = initialState, action) {
     case 'DIRECTION_FAILED':
       return { ...state, errors: action.errors };
     case 'NEW_DIRECTION':
-      return update(state, { list: { $push: [action.direction] } });
+      return update(state, {
+        list: { $push: [action.direction] },
+        detail: { $set: action.direction },
+        isCreated: { $set: action.created }
+      });
     case 'UPDATE_DIRECTION':
       const directionListIndex = directionIndex(state, action.direction);
 

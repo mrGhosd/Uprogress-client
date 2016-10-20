@@ -21,7 +21,7 @@ export function createDirection(user, direction) {
   return (dispatch) => {
     return post(`/users/${user}/directions`, { direction })
       .then((response) => {
-        dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction });
+        dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction, created: true });
       })
       .catch((error) => {
         dispatch({ type: 'DIRECTION_FAILED', errors: error.data.errors });

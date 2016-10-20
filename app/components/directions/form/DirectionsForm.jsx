@@ -57,8 +57,8 @@ class DirectionsForm extends Component {
         this.setState({ title: direction.title, description: direction.description });
       }
     }
-
-    if (props.isUpdated) {
+    
+    if (props.isUpdated || props.isCreated) {
       this.context.router.push(`/${user.nick}/directions/${props.direction.id}`);
     }
   }
@@ -122,6 +122,7 @@ function mapStateToProps(state) {
     direction: state.directions.detail,
     errors: state.directions.errors,
     isUpdated: state.directions.isUpdated,
+    isCreated: state.directions.isCreated,
     user: state.users.current
   };
 }
