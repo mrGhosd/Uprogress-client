@@ -60,3 +60,11 @@ export function getDirection(user, id) {
       });
   };
 }
+
+/**
+ * Remove errors from form
+ * @return {Object} object for reducer
+ */
+export function removeFormErrors() {
+  return { type: 'REMOVE_FORM_ERRORS' };
+}

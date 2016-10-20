@@ -1,6 +1,7 @@
 import store from 'store';
 
 import { getUser } from 'actions/users';
+import { removeFormErrors } from 'actions/directions';
 
 /**
  * Redirect from root path if user not signed in
@@ -28,10 +29,19 @@ export function redirectFromRoot(nextState, replace, callback) {
  */
 export function updateUserInfo(nextState, replace, callback) {
   const storeContent = store.getState();
-  
+
   if (!storeContent.users.show.isEmpty) {
     store.dispatch(getUser(nextState.params.user));
   }
 
   callback();
+}
+
+/**
+ * Remove errors from form after leaving it
+ * @param  {Object} nextState state of the router
+ * @return {Dispatch} Dispatch function
+ */
+export function removeErrorsFromForm() {
+  store.dispatch(removeFormErrors());
 }

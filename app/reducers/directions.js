@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
       return update(state, { list: { $push: [action.direction] } });
     case 'UPDATE_DIRECTION':
       const directionListIndex = directionIndex(state, action.direction);
-      
+
       return update(state, {
         list: { $splice: [[directionListIndex, 1, action.direction]] },
         detail: { $set: action.direction },
@@ -55,6 +55,10 @@ export default function(state = initialState, action) {
       });
     case 'USER_INFO':
       return { ...state, list: action.user.directions };
+    case 'REMOVE_FORM_ERRORS':
+      return update(state, {
+        errors: { $set: {} }
+      });
     default:
       return state;
   }
