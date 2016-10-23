@@ -24,7 +24,11 @@ export default function(state = initialState, action) {
     case 'DIRECTION':
       return { ...state, detail: action.direction };
     case 'DIRECTION_FAILED':
-      return { ...state, errors: action.errors };
+      return update(state, {
+        errors: { $set: action.errors },
+        isCreated: { $set: false },
+        isUpdated: { $set: false }
+      });
     case 'NEW_DIRECTION':
       return update(state, {
         list: { $push: [action.direction] },
