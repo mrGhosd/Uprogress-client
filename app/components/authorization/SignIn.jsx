@@ -50,7 +50,7 @@ class SignIn extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (!props.current.isEmpty) {
+    if (props.current && !props.current.isEmpty) {
       this.context.router.push(`/${props.current.nick}`);
     }
   }
