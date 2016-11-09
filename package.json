@@ -9,7 +9,10 @@
     "lint:js": "eslint --ext .js --ext .jsx ./app",
     "lint:js:file": "eslint --ext .js --ext .jsx ",
     "lint:js:fix": "eslint --ext .js --ext .jsx --fix ./app ",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "NODE_ENV=production $(npm bin)/webpack --colors --progress --config ./config/webpack.config",
+    "aws:upload": "aws s3 cp production s3://uprogress-client/public --recursive --region=us-east-1 --acl public-read",
+    "deploy": "npm run build && npm run aws:upload"
   },
   "author": "",
   "license": "ISC",

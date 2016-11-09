@@ -9,7 +9,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'production'),
     filename: 'bundle.js',
     publicPath: '/'
   },
@@ -46,9 +46,13 @@ module.exports = {
       },
       {
         test: /\.html?$/,
-        loader: 'file-loader'
+        loader: 'file-loader?name=[name].[ext]'
       },
-      { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file', exclude: /bootstrap/ }
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        loader: 'file-loader?name=[name].[ext]',
+        exclude: /bootstrap/
+      }
     ]
   },
   resolve: {
