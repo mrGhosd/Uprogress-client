@@ -4,7 +4,7 @@ const host = envConfig[process.env.NODE_ENV].host;
 const port = envConfig[process.env.NODE_ENV].port;
 
 const axios = Axios.create({
-  baseURL: `http://${host}:${port}/api/v1`,
+  baseURL: `http://${host}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
