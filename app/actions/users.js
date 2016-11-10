@@ -62,8 +62,10 @@ export function currentUser() {
  */
 export function getUser(user) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return get(`/users/${user}`)
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'USER_INFO', user: response.data.user });
       })
       .catch((error) => {

@@ -35,6 +35,9 @@ class RootIndex extends Component {
   }
 
   render() {
+
+    const isLoading = this.props.loaders.main;
+
     const options = {
       lines: 13,
       length: 20,
@@ -56,7 +59,7 @@ class RootIndex extends Component {
 
     return (
       <div className={CN(css.rootIndex)}>
-        <Loader loaded={false} />
+        <Loader loaded={isLoading} />
         <RootHeader />
         <div className="main-content">
           <Navigation {...this.props} />
@@ -69,4 +72,13 @@ class RootIndex extends Component {
   }
 }
 
-export default connect()(RootIndex);
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return { loaders: state.loaders };
+}
+
+export default connect(mapStateToProps)(RootIndex);
