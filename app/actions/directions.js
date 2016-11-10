@@ -54,8 +54,10 @@ export function updateDirection(user, id, direction) {
  */
 export function getDirection(user, id) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return get(`/users/${user}/directions/${id}`)
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
       });
   };
