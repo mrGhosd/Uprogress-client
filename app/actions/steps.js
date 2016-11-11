@@ -8,11 +8,14 @@ import { post, put, destroy } from 'utils/ApiRequest';
  */
 export function createStep(user, id, step) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post(`/users/${user}/directions/${id}/steps`, { step })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CREATE_STEP', step: response.data.step });
       })
       .catch((errors) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
       });
   };
@@ -41,11 +44,14 @@ export function editStep(step) {
  */
 export function updateStep(user, direction_id, id, step) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return put(`/users/${user}/directions/${direction_id}/steps/${id}`, { step })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'UPDATE_STEP', step: response.data.step });
       })
       .catch((errors) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'FAILED_OPERATION', errors: errors.data.errors });
       });
   };
@@ -61,8 +67,10 @@ export function updateStep(user, direction_id, id, step) {
 export function deleteStep(user, direction_id, id) {
   // dispatch({ type: 'DELETE_STEP', step: response.data.step });
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return destroy(`/users/${user}/directions/${direction_id}/steps/${id}`)
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DELETE_STEP', step: response.data.step });
       });
   };

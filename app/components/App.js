@@ -12,7 +12,8 @@ function mapStateToProps(state) {
   return {
     directions: state.directions,
     steps: state.steps,
-    users: state.users
+    users: state.users,
+    loaders: state.loaders
   };
 }
 

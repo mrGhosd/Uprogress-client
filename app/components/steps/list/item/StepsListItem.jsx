@@ -92,7 +92,7 @@ export default class StepsListItem extends Component {
   deleteStep() {
     this.props.dispatch(deleteStep(
       this.props.currentUser.nick,
-      this.state.step.direction_id,
+      this.state.step.directionId,
       this.state.step.id));
   }
 
