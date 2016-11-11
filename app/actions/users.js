@@ -120,12 +120,14 @@ export function updateUser(id, user) {
  */
 export function getUserStatistics(id) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return get(`/users/${id}/statistics`)
        .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_STATISTICS_SUCCESS', statistics: response.data.statistics });
        })
        .catch((error) => {
-         console.log(error);
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_STATISTICS_FAILED', errors: error.data.errors });
        });
   };
