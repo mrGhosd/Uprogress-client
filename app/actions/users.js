@@ -50,6 +50,7 @@ export function currentUser() {
         dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.user });
       });
   };

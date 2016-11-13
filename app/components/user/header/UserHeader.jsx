@@ -59,14 +59,26 @@ export default class UserHeader extends Component {
   render() {
     const { user } = this.props;
     const image = this.displayImage(user);
+    const dropDownItems = [
+      {
+        value: '1'
+      },
+      {
+        value: '2'
+      },
+      {
+        value: '3'
+      }
+    ];
 
     return (
       <div className={CN(css.userHeader)}>
         <div className="user-nick">
           {image}
           <span className="nick">
-            <Link to={`/${user.nick}`}>{user.nick}</Link>
-            <Dropdown />
+            <Dropdown items={dropDownItems}>
+              <Link to={`/${user.nick}`}>{user.nick}</Link>
+            </Dropdown>
           </span>
         </div>
         <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
