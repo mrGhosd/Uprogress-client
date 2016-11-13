@@ -3,6 +3,7 @@ import css from './UserHeader.styl';
 import CN from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import Dropdown from 'Dropdown/ElementDropdown';
 
 import { signOut } from 'actions/users';
 
@@ -35,6 +36,26 @@ export default class UserHeader extends Component {
     }
   }
 
+  displayDropdown(user) {
+    const userNick = user.nick;
+    const items = [
+      {
+        text: 'Profile',
+        value: 'profile'
+      },
+      {
+        text: 'Settings',
+        value: 'settings'
+      }
+    ];
+
+    return (
+      <Dropdown
+        title={userNick}
+        items={items} />
+    );
+  }
+
   render() {
     const { user } = this.props;
     const image = this.displayImage(user);
@@ -45,6 +66,7 @@ export default class UserHeader extends Component {
           {image}
           <span className="nick">
             <Link to={`/${user.nick}`}>{user.nick}</Link>
+            <Dropdown />
           </span>
         </div>
         <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
