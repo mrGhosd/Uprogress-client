@@ -72,11 +72,12 @@ export default class UserHeader extends Component {
       <div className={CN(css.userHeader)}>
         <div className="user-nick">
           <Dropdown titleElement={titleElement}>
-            <li><a href="#">Example 1</a></li>
-            <li><button type="button">Example 2</button></li>
+            <li><Link to={`/${user.nick}`} >Profile</Link></li>
+            <li><Link to="/profile">Settings</Link></li>
+            <li><Link onClick={this.signOut.bind(this)} className="sign-out-button">Sign out</Link></li>
           </Dropdown>
         </div>
-        <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
+
       </div>
     );
   }

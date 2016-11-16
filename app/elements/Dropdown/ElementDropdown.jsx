@@ -33,10 +33,6 @@ export default class ElementDropdown extends Component {
     this.setState(prevState);
   }
 
-  click() {
-    console.log('You clicked an item');
-  }
-
   render() {
     let { children, titleElement } = this.props;
 
@@ -49,16 +45,10 @@ export default class ElementDropdown extends Component {
       close: this.close.bind(this),
       toggle: titleElement
     };
-    let data = (
-      <div>
-        <li><a href="#">Example 1</a></li>
-        <li><button type="button">Example 2</button></li>
-      </div>
-    );
 
     return (
       <div className={CN(css.elementDropdown)}>
-        <DropdownMenu isOpen={this.state.active} close={menuOptions.close} toggle={menuOptions.toggle}>
+        <DropdownMenu isOpen={this.state.active} align="left" close={menuOptions.close} toggle={menuOptions.toggle}>
           {children}
         </DropdownMenu>
       </div>
