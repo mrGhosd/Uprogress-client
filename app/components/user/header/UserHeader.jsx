@@ -3,7 +3,7 @@ import css from './UserHeader.styl';
 import CN from 'classnames';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import DropdownMenu from 'react-dd-menu';
+import Dropdown from 'Dropdown/ElementDropdown';
 
 import { signOut } from 'actions/users';
 
@@ -12,10 +12,6 @@ import Image from 'Image/ElementImage';
 import SvgIcon from 'SVGIcon/SVGIcon';
 
 export default class UserHeader extends Component {
-
-  state = {
-    isOpen: false
-  };
 
   static propTypes = {
     user: PropTypes.object,
@@ -60,45 +56,9 @@ export default class UserHeader extends Component {
     );
   }
 
-  close() {
-    this.setState({ isMenuOpen: false });
-  }
-
-  toggle() {
-    let prevState = this.state;
-
-    prevState.isOpen = !prevState.isOpen
-    this.setState(prevState);
-  }
-
-  click() {
-    console.log('You clicked an item');
-  }
-
   render() {
     const { user } = this.props;
     const image = this.displayImage(user);
-    // const dropDownItems = [
-    //   {
-    //     text: '111',
-    //     value: '1'
-    //   },
-    //   {
-    //     text: '222',
-    //     value: '2'
-    //   },
-    //   {
-    //     text: '333',
-    //     value: '3'
-    //   }
-    // ];
-    const menuOptions = {
-      isOpen: this.state.isOpen,
-      close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
-      align: 'right',
-    };
-    console.log(menuOptions);
 
     return (
       <div className={CN(css.userHeader)}>
@@ -107,10 +67,10 @@ export default class UserHeader extends Component {
             {image}
             <span >{user.nick}</span>
           </span>
-          <DropdownMenu isOpen={this.state.isOpen} close={menuOptions.close} toggle={menuOptions.toggle}>
+          <Dropdown>
             <li><a href="#">Example 1</a></li>
-            <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
-          </DropdownMenu>
+            <li><button type="button">Example 2</button></li>
+          </Dropdown>
         </div>
         <Button size="auto" color="red" onClick={this::this.signOut} className="sign-out-button">Sign out</Button>
       </div>
