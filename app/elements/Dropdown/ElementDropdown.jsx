@@ -12,12 +12,14 @@ export default class ElementDropdown extends Component {
 
   static propTypes = {
     items: PropTypes.array,
-    children: PropTypes.array
+    children: PropTypes.array,
+    titleElement: PropTypes.object
   };
 
   static defaultProps = {
     items: [],
-    children: []
+    children: [],
+    titleElement: {}
   }
 
   close() {
@@ -36,11 +38,16 @@ export default class ElementDropdown extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    let { children, titleElement } = this.props;
+
+    if (titleElement) {
+      titleElement = React.cloneElement(titleElement, { onClick: this.toggle.bind(this) });
+    }
+
     const menuOptions = {
       isOpen: this.state.active,
       close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>
+      toggle: titleElement
     };
     let data = (
       <div>

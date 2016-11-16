@@ -59,15 +59,19 @@ export default class UserHeader extends Component {
   render() {
     const { user } = this.props;
     const image = this.displayImage(user);
+    const titleElement = (
+      <div>
+        <span className="nick">
+          {image}
+          <span >{user.nick}</span>
+        </span>
+      </div>
+    );
 
     return (
       <div className={CN(css.userHeader)}>
         <div className="user-nick">
-          <span className="nick">
-            {image}
-            <span >{user.nick}</span>
-          </span>
-          <Dropdown>
+          <Dropdown titleElement={titleElement}>
             <li><a href="#">Example 1</a></li>
             <li><button type="button">Example 2</button></li>
           </Dropdown>
