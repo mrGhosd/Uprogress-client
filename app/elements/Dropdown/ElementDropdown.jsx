@@ -26,7 +26,7 @@ export default class ElementDropdown extends Component {
 
     if (items.length > 0) {
       list = (
-        <ul className={CN('list', { active })}>
+        <ul className={CN('list', { active })} onMouseLeave={this::this.leaveMouseEvent}>
           {items.map((item, index) => {
             return <li key={index}>{item.value}</li>;
           })}
@@ -37,7 +37,15 @@ export default class ElementDropdown extends Component {
     return list;
   }
 
+  leaveMouseEvent(event) {
+    this.toggleActive();
+  }
+
   dropdownClick() {
+    this.toggleActive();
+  }
+
+  toggleActive() {
     let prevState = this.state;
 
     prevState.active = !prevState.active;
