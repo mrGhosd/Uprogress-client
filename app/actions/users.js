@@ -45,8 +45,10 @@ export function signUp(user) {
  */
 export function currentUser() {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return get('/sessions/current')
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
