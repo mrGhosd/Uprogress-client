@@ -53,6 +53,7 @@ export function currentUser() {
       })
       .catch((error) => {
         console.log(error);
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.user });
       });
   };
@@ -88,11 +89,14 @@ export function uploadImage(attachment) {
   formData.append('file', attachment.file);
   formData.append('attachable_type', attachment.attachableType);
   return (dispatch) => {
+    dispatch({ type: 'START_FILE_LOADER' });
     return post('/attachments', formData)
       .then((response) => {
+        dispatch({ type: 'STOP_FILE_LOADER' });
         dispatch({ type: 'USER_UPLOAD_AVATAR', attachment: response.data.attachment });
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_FILE_LOADER' });
         dispatch({ type: 'USER_UPLOAD_FAILED', error: error.data.errors });
       });
   };

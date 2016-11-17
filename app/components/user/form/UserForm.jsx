@@ -1,7 +1,6 @@
 import css from './UserForm.styl';
 
 import React, { Component, PropTypes } from 'react';
-import Dropzone from 'react-dropzone';
 import CN from 'classnames';
 
 import { uploadImage, updateUser } from 'actions/users';
@@ -11,6 +10,7 @@ import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
 import Image from 'Image/ElementImage';
 import Button from 'Button/ElementButton';
+import FileUploader from 'FileUploader/ElementFileUploader';
 
 export default class UserForm extends Component {
 
@@ -66,7 +66,7 @@ export default class UserForm extends Component {
       attachableType: 'User',
       file: files.first
     };
-
+    
     this.props.dispatch(uploadImage(params));
   }
 
@@ -94,9 +94,9 @@ export default class UserForm extends Component {
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
-          <Dropzone onDrop={this::this.onDrop}>
+          <FileUploader onDrop={this::this.onDrop}>
             {image}
-          </Dropzone>
+          </FileUploader>
         </div>
         <div className="user-fields">
           <TextField ref="firstName"
