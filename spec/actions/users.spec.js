@@ -29,13 +29,22 @@ describe('Users actions', () => {
         const userParams = { user: { email: 'example@text.com', authorization } };
         const tokenParams = { token: '123456' };
 
+        const currentUserParams = { currentUser: { email: 'example@test.com' } };
+
+        localStorage.setItem('uprogresstoken', '12345');
+        nock('http://localhost:3000', { reqheaders: { uprogresstoken: '12345' } })
+            .get('/api/v1/sessions/current')
+            .reply(200, currentUserParams);
 
         nock('http://localhost:3000')
             .post('/api/v1/sessions', userParams)
             .reply(200, tokenParams);
 
         const expectedActions = [
-          { type: 'SIGN_IN_USER', token: '123456' }
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'SIGN_IN_USER', token: '123456' },
+          { type: 'START_MAIN_LOADER' }
         ];
 
         const store = mockStore({});
@@ -58,6 +67,8 @@ describe('Users actions', () => {
             .reply(403, errorParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'SIGN_IN_FAILED', errors: { email: [] } }
         ];
 
@@ -79,13 +90,22 @@ describe('Users actions', () => {
       it('fires SIGN_UP_USER', () => {
         const userParams = { user: { email: 'example@text.com', authorization } };
         const tokenParams = { token: '123456' };
+        const currentUserParams = { currentUser: { email: 'example@test.com' } };
+
+        localStorage.setItem('uprogresstoken', '12345');
+        nock('http://localhost:3000', { reqheaders: { uprogresstoken: '12345' } })
+            .get('/api/v1/sessions/current')
+            .reply(200, currentUserParams);
 
         nock('http://localhost:3000')
             .post('/api/v1/registrations', userParams)
             .reply(200, tokenParams);
 
         const expectedActions = [
-          { type: 'SIGN_UP_USER', token: '123456' }
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'SIGN_UP_USER', token: '123456' },
+          { type: 'START_MAIN_LOADER' }
         ];
 
         const store = mockStore({});
@@ -107,6 +127,8 @@ describe('Users actions', () => {
             .reply(403, errorParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'SIGN_UP_FAILED', errors: { email: [] } }
         ];
 
@@ -139,6 +161,8 @@ describe('Users actions', () => {
             .reply(200, userParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'CURRENT_USER', current: { email: 'example@test.com' } }
         ];
 
@@ -160,6 +184,8 @@ describe('Users actions', () => {
             .reply(403, userParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'CURRENT_USER_FAILED', user: null }
         ];
 
@@ -183,6 +209,8 @@ describe('Users actions', () => {
             .reply(200, userParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'USER_INFO', user: { nick: 'example' } }
         ];
 
@@ -204,6 +232,8 @@ describe('Users actions', () => {
             .reply(404, errorParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'USER_INFO_FAILED', errors: 'User not found' }
         ];
 
@@ -227,6 +257,8 @@ describe('Users actions', () => {
             .reply(200, userParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'USER_UPDATE_SUCCESS', current: { nick: 'example' } }
         ];
 
@@ -248,6 +280,8 @@ describe('Users actions', () => {
             .reply(403, userParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'USER_UPDATE_FAILED', errors: userParams.errors }
         ];
 
