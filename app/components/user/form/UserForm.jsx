@@ -15,15 +15,8 @@ import Button from 'Button/ElementButton';
 export default class UserForm extends Component {
 
   state = {
-    user: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      description: '',
-      location: '',
-      attachment: {}
-    }
-  }
+    user: {}
+  };
 
   static propTypes = {
     user: PropTypes.object,
@@ -35,9 +28,17 @@ export default class UserForm extends Component {
     dispatch: () => {}
   };
 
+  componentWillMount() {
+    this.handleUserInfo(this.props);
+  }
+
   componentWillReceiveProps(props) {
-    if (this.props.user.attachment !== null) {
-      this.setState({ user: { attachment: this.props.user.attachment } });
+    this.handleUserInfo(props);
+  }
+
+  handleUserInfo(props) {
+    if (props.user.attachment !== null) {
+      this.setState({ user: { attachment: props.user.attachment } });
     }
 
     this.parseUserData(props);
@@ -45,7 +46,11 @@ export default class UserForm extends Component {
 
   parseUserData(props) {
     if (props.user) {
-      this.setState({ user: setByExistedParams(props.user) });
+      const prevState = this.state;
+      const user = setByExistedParams(props.user);
+
+      prevState.user = user;
+      this.setState(prevState);
     }
   }
 

@@ -24,7 +24,7 @@ class UserLayout extends Component {
 
   render() {
     const isLoading = this.props.loaders.main;
-
+    
     return (
       <div className={CN(css.userLayout)}>
         <RootHeader />
