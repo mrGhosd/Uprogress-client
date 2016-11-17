@@ -19,11 +19,14 @@ export function getList(user) {
  */
 export function createDirection(user, direction) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post(`/users/${user}/directions`, { direction })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction, created: true });
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION_FAILED', errors: error.data.errors });
       });
   };

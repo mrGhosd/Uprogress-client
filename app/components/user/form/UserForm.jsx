@@ -1,7 +1,6 @@
 import css from './UserForm.styl';
 
 import React, { Component, PropTypes } from 'react';
-import Dropzone from 'react-dropzone';
 import CN from 'classnames';
 
 import { uploadImage, updateUser } from 'actions/users';
@@ -11,19 +10,13 @@ import TextField from 'TextField/ElementTextField';
 import TextArea from 'TextArea/ElementTextArea';
 import Image from 'Image/ElementImage';
 import Button from 'Button/ElementButton';
+import FileUploader from 'FileUploader/ElementFileUploader';
 
 export default class UserForm extends Component {
 
   state = {
-    user: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      description: '',
-      location: '',
-      attachment: {}
-    }
-  }
+    user: {}
+  };
 
   static propTypes = {
     user: PropTypes.object,
@@ -35,9 +28,17 @@ export default class UserForm extends Component {
     dispatch: () => {}
   };
 
+  componentWillMount() {
+    this.handleUserInfo(this.props);
+  }
+
   componentWillReceiveProps(props) {
-    if (this.props.user.attachment !== null) {
-      this.setState({ user: { attachment: this.props.user.attachment } });
+    this.handleUserInfo(props);
+  }
+
+  handleUserInfo(props) {
+    if (props.user.attachment !== null) {
+      this.setState({ user: { attachment: props.user.attachment } });
     }
 
     this.parseUserData(props);
@@ -45,7 +46,11 @@ export default class UserForm extends Component {
 
   parseUserData(props) {
     if (props.user) {
-      this.setState({ user: setByExistedParams(props.user) });
+      const prevState = this.state;
+      const user = setByExistedParams(props.user);
+
+      prevState.user = user;
+      this.setState(prevState);
     }
   }
 
@@ -61,7 +66,7 @@ export default class UserForm extends Component {
       attachableType: 'User',
       file: files.first
     };
-
+    
     this.props.dispatch(uploadImage(params));
   }
 
@@ -89,15 +94,15 @@ export default class UserForm extends Component {
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
-          <Dropzone onDrop={this::this.onDrop}>
+          <FileUploader onDrop={this::this.onDrop}>
             {image}
-          </Dropzone>
+          </FileUploader>
         </div>
         <div className="user-fields">
           <TextField ref="firstName"
              name="firstName"
              label="First name"
-             onChange={(event) => this.handleChange(event)}
+             onChange={this::this.handleChange}
              value={user.firstName} />
           <TextField ref="lastName"
              name="lastName"

@@ -1,8 +1,9 @@
 import update from 'react/lib/update';
 
 const initialState = {
-  main: false
-}
+  main: true,
+  file: true
+};
 
 /**
  * Select action due to action.type parameter
@@ -20,6 +21,14 @@ export default function(state = initialState, action) {
     case 'STOP_MAIN_LOADER':
       return update(state, {
         main: { $set: true }
+      });
+    case 'START_FILE_LOADER':
+      return update(state, {
+        file: { $set: false }
+      });
+    case 'STOP_FILE_LOADER':
+      return update(state, {
+        file: { $set: true }
       });
     default:
       return state;

@@ -1,6 +1,7 @@
 import css from './UserLayout.styl';
 
 import React, { Component, PropTypes } from 'react';
+import Loader from 'react-loader';
 
 import CN from 'classnames';
 
@@ -22,9 +23,12 @@ class UserLayout extends Component {
   };
 
   render() {
+    const isLoading = this.props.loaders.main;
+    
     return (
       <div className={CN(css.userLayout)}>
         <RootHeader />
+        <Loader loaded={isLoading} />
         <div className="main-content">
           <ProfileNavigation {...this.props} />
           <div className={CN('content', 'Card')}>
@@ -36,5 +40,13 @@ class UserLayout extends Component {
   }
 }
 
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return { loaders: state.loaders, currentUser: state.users.current };
+}
 
-export default connect()(UserLayout);
+export default connect(mapStateToProps)(UserLayout);

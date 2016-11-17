@@ -7,7 +7,8 @@ const initialState = {
     steps: []
   },
   errors: {},
-  isUpdated: null
+  isUpdated: null,
+  isCreated: null
 };
 
 describe('Directions reducer', () => {

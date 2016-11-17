@@ -9,12 +9,15 @@ import { getAuthorizationParams } from 'utils/browser';
 export function signIn(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post('/sessions', { user })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_IN_USER', token: response.data.token });
         dispatch(currentUser());
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_IN_FAILED', errors: error.data.errors });
       });
   };
@@ -28,12 +31,15 @@ export function signIn(user) {
 export function signUp(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post('/registrations', { user })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_UP_USER', token: response.data.token });
         dispatch(currentUser());
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_UP_FAILED', errors: error.data.errors });
       });
   };
@@ -45,11 +51,15 @@ export function signUp(user) {
  */
 export function currentUser() {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return get('/sessions/current')
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
+        console.log(error);
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.user });
       });
   };
@@ -69,6 +79,7 @@ export function getUser(user) {
         dispatch({ type: 'USER_INFO', user: response.data.user });
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };
@@ -85,11 +96,14 @@ export function uploadImage(attachment) {
   formData.append('file', attachment.file);
   formData.append('attachable_type', attachment.attachableType);
   return (dispatch) => {
+    dispatch({ type: 'START_FILE_LOADER' });
     return post('/attachments', formData)
       .then((response) => {
+        dispatch({ type: 'STOP_FILE_LOADER' });
         dispatch({ type: 'USER_UPLOAD_AVATAR', attachment: response.data.attachment });
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_FILE_LOADER' });
         dispatch({ type: 'USER_UPLOAD_FAILED', error: error.data.errors });
       });
   };
@@ -103,11 +117,14 @@ export function uploadImage(attachment) {
  */
 export function updateUser(id, user) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return put(`/users/${id}`, { user })
        .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_UPDATE_SUCCESS', current: response.data.currentUser });
        })
        .catch((error) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_UPDATE_FAILED', errors: error.data.errors });
        });
   };
