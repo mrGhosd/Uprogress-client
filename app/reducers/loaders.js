@@ -1,7 +1,7 @@
 import update from 'react/lib/update';
 
 const initialState = {
-  main: false,
+  main: true,
   file: true
 };
 

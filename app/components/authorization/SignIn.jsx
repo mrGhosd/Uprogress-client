@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Loader from 'react-loader';
 
 import { signIn } from 'actions/users';
 
@@ -23,12 +24,14 @@ class SignIn extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    signInErrors: PropTypes.object
+    signInErrors: PropTypes.object,
+    loader: PropTypes.bool
   };
 
   static defaultProps = {
     dispatch: () => {},
-    signInErrors: {}
+    signInErrors: {},
+    loader: true
   };
 
   state = {
@@ -64,9 +67,11 @@ class SignIn extends Component {
   render() {
     const user = this.state.user;
     const errors = this.props.signInErrors;
+    const { loader } = this.props;
 
     return (
       <div className={CN(css.signPage, 'Card')}>
+        <Loader loaded={loader} />
         <form>
           <TextField ref="email"
             name="email"
@@ -95,7 +100,8 @@ class SignIn extends Component {
 function mapStateToProps(state) {
   return {
     current: state.users.current,
-    signInErrors: state.users.signInErrors
+    signInErrors: state.users.signInErrors,
+    loader: state.loaders.main
   };
 }
 

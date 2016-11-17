@@ -9,12 +9,15 @@ import { getAuthorizationParams } from 'utils/browser';
 export function signIn(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post('/sessions', { user })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_IN_USER', token: response.data.token });
         dispatch(currentUser());
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_IN_FAILED', errors: error.data.errors });
       });
   };
