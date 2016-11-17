@@ -21,6 +21,10 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
+axios.interceptors.response.use((response) => {
+  return response;
+});
+
 /**
  * Send GET request to project API
  * @param  {String} url       Relative path
