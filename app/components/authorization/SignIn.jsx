@@ -10,7 +10,6 @@ import { signIn } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
-import SvgIcon from 'SVGIcon/SVGIcon';
 
 class SignIn extends Component {
 

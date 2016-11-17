@@ -31,12 +31,15 @@ export function signIn(user) {
 export function signUp(user) {
   user.authorization = getAuthorizationParams();
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return post('/registrations', { user })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_UP_USER', token: response.data.token });
         dispatch(currentUser());
       })
       .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'SIGN_UP_FAILED', errors: error.data.errors });
       });
   };
