@@ -23,6 +23,8 @@ describe('Steps actions', () => {
             .reply(200, stepsParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'CREATE_STEP', step: { id: 1 } }
         ];
 
@@ -45,6 +47,8 @@ describe('Steps actions', () => {
             .reply(403, stepsParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'FAILED_OPERATION', errors: { title: [] } }
         ];
 
@@ -85,6 +89,8 @@ describe('Steps actions', () => {
             .reply(200, stepsParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'UPDATE_STEP', step: { id: 1 } }
         ];
 
@@ -106,6 +112,8 @@ describe('Steps actions', () => {
             .reply(403, stepsParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'FAILED_OPERATION', errors: { title: [] } }
         ];
 
@@ -128,6 +136,8 @@ describe('Steps actions', () => {
           .reply(200, stepsParams);
 
       const expectedActions = [
+        { type: 'START_MAIN_LOADER' },
+        { type: 'STOP_MAIN_LOADER' },
         { type: 'DELETE_STEP', step: { id: 1 } }
       ];
 
