@@ -40,6 +40,8 @@ describe('Directions actions', () => {
           .reply(200, { direction: { id: 1 } });
 
       const expectedActions = [
+        { type: 'START_MAIN_LOADER' },
+        { type: 'STOP_MAIN_LOADER' },
         { type: 'DIRECTION', direction: { id: 1 } }
       ];
 
@@ -62,7 +64,9 @@ describe('Directions actions', () => {
             .reply(200, directionParams);
 
         const expectedActions = [
-          { type: 'NEW_DIRECTION', direction: { id: 1 } }
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'NEW_DIRECTION', direction: { id: 1 }, created: true }
         ];
 
         const store = mockStore({});
@@ -83,6 +87,8 @@ describe('Directions actions', () => {
             .reply(403, directionParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'DIRECTION_FAILED', errors: { email: [] } }
         ];
 
