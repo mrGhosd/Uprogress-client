@@ -106,11 +106,14 @@ export function uploadImage(attachment) {
  */
 export function updateUser(id, user) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return put(`/users/${id}`, { user })
        .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_UPDATE_SUCCESS', current: response.data.currentUser });
        })
        .catch((error) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'USER_UPDATE_FAILED', errors: error.data.errors });
        });
   };

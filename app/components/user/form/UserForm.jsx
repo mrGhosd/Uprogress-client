@@ -102,7 +102,7 @@ export default class UserForm extends Component {
           <TextField ref="firstName"
              name="firstName"
              label="First name"
-             onChange={(event) => this.handleChange(event)}
+             onChange={this::this.handleChange}
              value={user.firstName} />
           <TextField ref="lastName"
              name="lastName"
