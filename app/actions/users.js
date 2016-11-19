@@ -103,10 +103,12 @@ export function uploadImage(attachment) {
     return post('/attachments', formData)
       .then((response) => {
         dispatch({ type: 'STOP_FILE_LOADER' });
+        Info('imageSuccessUpload');
         dispatch({ type: 'USER_UPLOAD_AVATAR', attachment: response.data.attachment });
       })
       .catch((error) => {
         dispatch({ type: 'STOP_FILE_LOADER' });
+        Alert('imageFailureUpload');
         dispatch({ type: 'USER_UPLOAD_FAILED', error: error.data.errors });
       });
   };
@@ -124,10 +126,12 @@ export function updateUser(id, user) {
     return put(`/users/${id}`, { user })
        .then((response) => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
+         Info('userSuccessUpdate');
          dispatch({ type: 'USER_UPDATE_SUCCESS', current: response.data.currentUser });
        })
        .catch((error) => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
+         Alert('userFailureUpdate');
          dispatch({ type: 'USER_UPDATE_FAILED', errors: error.data.errors });
        });
   };

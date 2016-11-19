@@ -26,6 +26,22 @@ const messages = {
   stepDeleteSuccess: {
     title: 'Step deleted',
     text: 'Step was succesfully deleted'
+  },
+  imageSuccessUpload: {
+    title: 'Image uploaded',
+    text: 'Image was succesfully uploaded'
+  },
+  imageFailureUpload: {
+    title: 'Image didn\'t uploaded',
+    text: 'Unfortunately, image have not been uploaded. Pleas try it later'
+  },
+  userSuccessUpdate: {
+    title: 'Profile updated',
+    text: 'Your profile succesfully updated'
+  },
+  userFailureUpdate: {
+    title: 'Profile didn\'t updated',
+    text: 'Unfortunately, profile have not been updated. Pleas try it later'
   }
 };
 

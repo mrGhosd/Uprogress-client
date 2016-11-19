@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import RootHeader from 'root/header/RootHeader';
 import ProfileNavigation from 'navigation/profile/ProfileNavigation';
+import PopupNotifications from 'popup_notifications/list/PopupNotificationsList';
 
 class UserLayout extends Component {
 
@@ -24,7 +25,7 @@ class UserLayout extends Component {
 
   render() {
     const isLoading = this.props.loaders.main;
-    
+
     return (
       <div className={CN(css.userLayout)}>
         <RootHeader />
@@ -35,6 +36,7 @@ class UserLayout extends Component {
             {this.props.children}
           </div>
         </div>
+        <PopupNotifications />
       </div>
     );
   }
