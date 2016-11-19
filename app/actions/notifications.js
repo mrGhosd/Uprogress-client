@@ -1,14 +1,27 @@
 import store from 'store';
 import messages from 'text/messages';
 
-export function Info(textId) {
+let lastNotifId = 0;
 
+export function Info(textId) {
+  const structure = {
+    id: `id-${++lastNotifId}`,
+    type: 'danger',
+    content
+  };
 };
 
 export function Alert(textId) {
-  console.log(messages);
-};
+  const content = messages[textId];
+  const structure = {
+    id: `id-${++lastNotifId}`,
+    type: 'danger',
+    content
+  };
 
-export function DropNotification() {
+  store.dispatch({ type: 'ADD_ALERT_NOTIFICATION', notification: structure });
+}
 
+export function DropNotification(id) {
+  store.dispatch({ type: 'DROP_NOTIFICATION', id });
 };

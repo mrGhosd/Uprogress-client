@@ -9,6 +9,7 @@ import { getUser } from 'actions/users';
 
 import RootHeader from 'root/header/RootHeader';
 import Navigation from 'navigation/Navigation';
+import PopupNotifications from 'popup_notifications/list/PopupNotificationsList';
 
 /*eslint-disable */
 import utilsPolyfill from 'utils/polifyll';
@@ -35,9 +36,8 @@ class RootIndex extends Component {
   }
 
   render() {
-
     const isLoading = this.props.loaders.main;
-
+    
     return (
       <div className={CN(css.rootIndex)}>
         <Loader loaded={isLoading} />
@@ -48,6 +48,7 @@ class RootIndex extends Component {
                 {this.props.children}
             </div>
         </div>
+        <PopupNotifications />
       </div>
     );
   }

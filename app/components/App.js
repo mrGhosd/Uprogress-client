@@ -13,7 +13,8 @@ function mapStateToProps(state) {
     directions: state.directions,
     steps: state.steps,
     users: state.users,
-    loaders: state.loaders
+    loaders: state.loaders,
+    notifications: state.notifications
   };
 }
 
