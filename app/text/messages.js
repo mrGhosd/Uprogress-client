@@ -18,6 +18,14 @@ const messages = {
   directionUpdateSuccess: {
     title: 'Direction updated',
     text: 'Direction was succesfully updated'
+  },
+  stepUpdateSuccess: {
+    title: 'Step updated',
+    text: 'Step was succesfully updated'
+  },
+  stepDeleteSuccess: {
+    title: 'Step deleted',
+    text: 'Step was succesfully deleted'
   }
 };
 

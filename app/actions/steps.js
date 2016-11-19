@@ -1,4 +1,5 @@
 import { post, put, destroy } from 'utils/ApiRequest';
+import { Info } from 'actions/notifications';
 
 /**
  * Create step
@@ -71,6 +72,7 @@ export function deleteStep(user, direction_id, id) {
     return destroy(`/users/${user}/directions/${direction_id}/steps/${id}`)
       .then((response) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('stepDeleteSuccess');
         dispatch({ type: 'DELETE_STEP', step: response.data.step });
       });
   };

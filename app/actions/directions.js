@@ -70,7 +70,7 @@ export function getDirection(user, id) {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
       })
-      .catch((response) => {
+      .catch(() => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         Alert('direction_404');
       });
