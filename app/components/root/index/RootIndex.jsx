@@ -31,13 +31,18 @@ class RootIndex extends Component {
     loaders: {}
   }
 
-  componentWillReceiveProps(props) {
-    console.log(props);
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.params.user !== nextProps.params.user) {
+      const { params } = nextProps;
+
+      this.props.dispatch(getUser(params.user));
+    }
+    return true;
   }
 
   componentWillMount() {
     const { params } = this.props;
-    
+
     this.props.dispatch(getUser(params.user));
   }
 

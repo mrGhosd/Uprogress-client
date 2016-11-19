@@ -15,13 +15,6 @@ class UserUpdates extends Component {
     user: {}
   };
 
-  componentWillReceiveProps(props) {
-    console.log(props);
-    // if (props.user.isEmpty) {
-    //   props.dispatch(getUser(props.params.user));
-    // }
-  }
-
   displayItemBlocks(user, updates) {
     if (updates) {
       const keys = Object.keys(updates);

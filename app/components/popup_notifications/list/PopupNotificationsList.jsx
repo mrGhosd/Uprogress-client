@@ -16,7 +16,6 @@ export class PopupNotificationsList extends Component { // eslint-disable-line r
   };
 
   render() {
-    console.log(this.props.notifications);
     return (
       <div className={css.PopupNotifications}>
         {this.props.notifications.map((notif) => {
