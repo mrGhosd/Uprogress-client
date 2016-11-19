@@ -1,4 +1,5 @@
 import { get, post, put } from 'utils/ApiRequest';
+import { Alert, Info } from 'actions/notifications';
 
 /**
  * Get directions list
@@ -23,9 +24,11 @@ export function createDirection(user, direction) {
     return post(`/users/${user}/directions`, { direction })
       .then((response) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('directionCreateSuccess');
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction, created: true });
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION_FAILED', errors: error.data.errors });
       });
@@ -40,11 +43,15 @@ export function createDirection(user, direction) {
  */
 export function updateDirection(user, id, direction) {
   return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
     return put(`/users/${user}/directions/${id}`, { direction })
       .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('directionUpdateSuccess');
         dispatch({ type: 'UPDATE_DIRECTION', direction: response.data.direction, updated: true });
       })
       .catch((errors) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION_FAILED', errors: errors.data.errors });
       });
   };
@@ -62,6 +69,10 @@ export function getDirection(user, id) {
       .then((response) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION', direction: response.data.direction });
+      })
+      .catch((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        Alert('direction_404');
       });
   };
 }

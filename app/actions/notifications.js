@@ -4,11 +4,14 @@ import messages from 'text/messages';
 let lastNotifId = 0;
 
 export function Info(textId) {
+  const content = messages[textId];
   const structure = {
     id: `id-${++lastNotifId}`,
-    type: 'danger',
+    type: 'info',
     content
   };
+
+  store.dispatch({ type: 'ADD_INFO_NOTIFICATION', notification: structure });
 };
 
 export function Alert(textId) {
