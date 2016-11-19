@@ -19,7 +19,7 @@ export class PopupNotificationsList extends Component { // eslint-disable-line r
     return (
       <div className={css.PopupNotifications}>
         {this.props.notifications.map((notif) => {
-          return <Notification key={notif.id} {...notif} />
+          return <Notification key={notif.id} {...notif} />;
         })}
       </div>
     );

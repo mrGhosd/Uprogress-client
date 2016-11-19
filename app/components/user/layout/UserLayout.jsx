@@ -15,12 +15,14 @@ class UserLayout extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    loaders: PropTypes.object
   };
 
   static defaultProps = {
     children: {},
-    currentUser: {}
+    currentUser: {},
+    loaders: {}
   };
 
   render() {

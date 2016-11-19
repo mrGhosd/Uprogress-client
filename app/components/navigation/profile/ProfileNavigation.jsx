@@ -4,7 +4,7 @@ import CN from 'classnames';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 
 /**
  * Mapping application state to properties

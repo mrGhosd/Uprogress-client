@@ -59,7 +59,6 @@ export function currentUser() {
         dispatch({ type: 'CURRENT_USER', current: response.data.currentUser });
       })
       .catch((error) => {
-        console.log(error);
         dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'CURRENT_USER_FAILED', user: error.data.user });
       });
@@ -80,7 +79,6 @@ export function getUser(user) {
         dispatch({ type: 'USER_INFO', user: response.data.user });
       })
       .catch((error) => {
-        console.log(error);
         dispatch({ type: 'STOP_MAIN_LOADER' });
         Alert('user_404');
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });

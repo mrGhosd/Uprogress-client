@@ -28,7 +28,6 @@ export function createDirection(user, direction) {
         dispatch({ type: 'NEW_DIRECTION', direction: response.data.direction, created: true });
       })
       .catch((error) => {
-        console.log(error);
         dispatch({ type: 'STOP_MAIN_LOADER' });
         dispatch({ type: 'DIRECTION_FAILED', errors: error.data.errors });
       });
