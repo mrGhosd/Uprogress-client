@@ -1,5 +1,6 @@
 import { get, post, put } from 'utils/ApiRequest';
 import { getAuthorizationParams } from 'utils/browser';
+import { Alert, Info } from 'actions/notifications';
 
 /**
  * Sign in user
@@ -81,6 +82,7 @@ export function getUser(user) {
       .catch((error) => {
         console.log(error);
         dispatch({ type: 'STOP_MAIN_LOADER' });
+        Alert('user_404');
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };

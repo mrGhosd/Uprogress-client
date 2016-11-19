@@ -31,7 +31,7 @@ class RootIndex extends Component {
     loaders: {}
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     if (this.props.params.user !== nextProps.params.user) {
       const { params } = nextProps;
 

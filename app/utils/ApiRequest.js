@@ -36,7 +36,9 @@ axios.interceptors.response.use((response) => {
  * @return {Promise}          Thenable/Catheable
  */
 function handleErrors(error) {
-  Alert('server_error');
+  if (error.status >= 500) {
+    Alert('server_error');
+  }
   return error;
 }
 
