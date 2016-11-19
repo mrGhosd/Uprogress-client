@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
+import { getUser } from 'actions/users';
 
 import UserUpdatesBlock from 'user/updates/block/UserUpdatesBlock';
 
@@ -13,6 +14,13 @@ class UserUpdates extends Component {
   static defaultProps = {
     user: {}
   };
+
+  componentWillReceiveProps(props) {
+    console.log(props);
+    // if (props.user.isEmpty) {
+    //   props.dispatch(getUser(props.params.user));
+    // }
+  }
 
   displayItemBlocks(user, updates) {
     if (updates) {

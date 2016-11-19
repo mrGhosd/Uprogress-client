@@ -20,24 +20,30 @@ class RootIndex extends Component {
   static propTypes = {
     children: PropTypes.object,
     params: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    loaders: PropTypes.object
   };
 
   static defaultProps = {
     children: {},
     params: {},
-    dispatch: () => {}
+    dispatch: () => {},
+    loaders: {}
+  }
+
+  componentWillReceiveProps(props) {
+    console.log(props);
   }
 
   componentWillMount() {
     const { params } = this.props;
-
+    
     this.props.dispatch(getUser(params.user));
   }
 
   render() {
     const isLoading = this.props.loaders.main;
-    
+
     return (
       <div className={CN(css.rootIndex)}>
         <Loader loaded={isLoading} />
