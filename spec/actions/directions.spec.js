@@ -112,6 +112,8 @@ describe('Directions actions', () => {
             .reply(200, directionParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'UPDATE_DIRECTION', direction: { id: 1 }, updated: true }
         ];
 
@@ -133,6 +135,8 @@ describe('Directions actions', () => {
             .reply(403, directionParams);
 
         const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
           { type: 'DIRECTION_FAILED', errors: { email: [] } }
         ];
 

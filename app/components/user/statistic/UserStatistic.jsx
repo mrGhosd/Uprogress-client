@@ -53,7 +53,7 @@ export class UserStatistic extends Component {
   renderDonut(user, scope) {
     if (user.statistics) {
       const id = `${scope}_pie`;
-      console.log(user.statistics, scope);
+      
       return (
         <Donut data={user.statistics[scope]} id={id} />
       );

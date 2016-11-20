@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import envConfig from '../../config/env.config';
+import { Alert } from 'actions/notifications';
 const host = envConfig[process.env.NODE_ENV].host;
 const port = envConfig[process.env.NODE_ENV].port;
 
@@ -20,6 +21,27 @@ axios.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axios.interceptors.response.use((response) => {
+  return response;
+},
+(error) => {
+  handleErrors(error);
+  return Promise.reject(error);
+});
+
+/**
+ * Handle errors
+ * @param  {Object} errors    Errors object
+ * @return {Promise}          Thenable/Catheable
+ */
+function handleErrors(error) {
+  if (error.status >= 500) {
+    Alert('server_error');
+  }
+  return error;
+}
+
 
 /**
  * Send GET request to project API

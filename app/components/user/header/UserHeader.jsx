@@ -7,7 +7,6 @@ import Dropdown from 'Dropdown/ElementDropdown';
 
 import { signOut } from 'actions/users';
 
-import Button from 'Button/ElementButton';
 import Image from 'Image/ElementImage';
 import SvgIcon from 'SVGIcon/SVGIcon';
 
@@ -28,12 +27,15 @@ export default class UserHeader extends Component {
   }
 
   displayImage(user) {
+    let view;
+
     if (user.attachment) {
-      return <Image size={40} className="circle" src={user.attachment.url} />;
+      view = <Image size={40} className="circle" src={user.attachment.url} />;
     }
     else {
-      return <SvgIcon icon="empty-user" />;
+      view = <SvgIcon icon="empty-user" />;
     }
+    return view;
   }
 
   displayDropdown(user) {

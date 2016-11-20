@@ -9,6 +9,7 @@ import { getUser } from 'actions/users';
 
 import RootHeader from 'root/header/RootHeader';
 import Navigation from 'navigation/Navigation';
+import PopupNotifications from 'popup_notifications/list/PopupNotificationsList';
 
 /*eslint-disable */
 import utilsPolyfill from 'utils/polifyll';
@@ -19,13 +20,24 @@ class RootIndex extends Component {
   static propTypes = {
     children: PropTypes.object,
     params: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    loaders: PropTypes.object
   };
 
   static defaultProps = {
     children: {},
     params: {},
-    dispatch: () => {}
+    dispatch: () => {},
+    loaders: {}
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.params.user !== nextProps.params.user) {
+      const { params } = nextProps;
+
+      this.props.dispatch(getUser(params.user));
+    }
+    return true;
   }
 
   componentWillMount() {
@@ -35,7 +47,6 @@ class RootIndex extends Component {
   }
 
   render() {
-
     const isLoading = this.props.loaders.main;
 
     return (
@@ -48,6 +59,7 @@ class RootIndex extends Component {
                 {this.props.children}
             </div>
         </div>
+        <PopupNotifications />
       </div>
     );
   }

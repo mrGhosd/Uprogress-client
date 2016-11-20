@@ -1,5 +1,13 @@
 import * as d3 from 'd3';
 
+/**
+ * Draw pie diagramm via D3
+ * @param  {String} className Classname of DOM element
+ * @param  {String} id        DOM Id
+ * @param  {Array} data      Array of objects, whic represents the data
+ * @param  {Number} height    Height of pie
+ * @param  {Number} width     Width of pie
+ */
 export default function drawPie(className, id, data, height, width) {
   let radius = Math.min(width, height) / 2;
 
@@ -23,11 +31,11 @@ export default function drawPie(className, id, data, height, width) {
                .append('g')
                .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-  var dataSet = d3.layout.pie().sort(null).value((dataValue) => {
+  let dataSet = d3.layout.pie().sort(null).value((dataValue) => {
     return dataValue.value;
   })(data);
 
-  var tooltip = d3.select(`#${id}`)
+  let tooltip = d3.select(`#${id}`)
           .append('div')
           .attr('class', 'tooltip');
 
