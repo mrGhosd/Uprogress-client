@@ -5,7 +5,8 @@ const initialState = {
   show: {},
   signInErrors: {},
   signUpErrors: {},
-  userFormErrors: {}
+  userFormErrors: {},
+  authorizations: []
 };
 
 /**
@@ -41,7 +42,16 @@ export default function(state = initialState, action) {
         });
     case 'SIGN_OUT':
       localStorage.removeItem('uprogresstoken');
-      return { ...state, current: {} }
+      return { ...state, current: {} };
+    case 'AUTHORIZATIONS_LIST':
+      console.log(action.authorizations);
+      return update(state, {
+        authorizations: { $set: action.authorizations }
+      });
+    case 'REMOVE_AUTHORIZATIONS':
+      return update(state, {
+        authorizations: { $set: [] }
+      });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });
     default:

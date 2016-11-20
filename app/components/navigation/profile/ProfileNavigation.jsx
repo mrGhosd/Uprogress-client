@@ -21,21 +21,22 @@ class ProfileNavigation extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     dispatch: PropTypes.func,
-    route: PropTypes.object
+    location: PropTypes.object
   };
 
   static defaultProps = {
     currentUser: {},
     dispatch: () => {},
-    route: {}
+    location: {}
   };
 
   itemSelected(item) {
     let result;
 
-    if (this.props.route) {
-      result = this.props.route.path == item.path;
+    if (this.props.location.pathname) {
+      result = this.props.location.pathname === item.path;
     }
+
     return result;
   }
 
