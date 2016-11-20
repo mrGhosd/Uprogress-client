@@ -1,17 +1,23 @@
-import React, { Component, PropTypes } from 'react';
+import css from './UserAuthorizations.styl';
+import CN from 'classnames';
 
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
+import UserAuthorizationItem from 'user/authorizations/item/UserAuthorizationsItem';
 
 import { getCurrentUserAuthorizations, removeAuthorizations } from 'actions/users';
 
 export class UserAuthorizations extends Component {
 
   static propTypes = {
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    authorizations: PropTypes.array
   };
 
   static defaultProps = {
-    dispatch: () => {}
+    dispatch: () => {},
+    authorizations: []
   }
 
   componentWillMount() {
@@ -23,9 +29,14 @@ export class UserAuthorizations extends Component {
   }
 
   render() {
+    const { authorizations } = this.props;
 
     return (
-      <div>AuthorizationsList</div>
+      <div className={CN(css.userAuthorizations)}>
+          {authorizations.map((item) => {
+            return <UserAuthorizationItem key={item.id} authorization={item} />
+          })}
+      </div>
     );
   }
 }
