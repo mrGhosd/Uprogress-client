@@ -8,7 +8,7 @@ module.exports = {
     port: 3000
   },
   production: {
-    host: "188.226.234.24",
-    port: 81
+    host: "35.162.216.101",
+    port: 80
   }
 }
