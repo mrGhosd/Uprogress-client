@@ -5,7 +5,8 @@ const initialState = {
   show: {},
   signInErrors: {},
   signUpErrors: {},
-  userFormErrors: {}
+  userFormErrors: {},
+  authorizations: []
 };
 
 /**
@@ -41,7 +42,16 @@ export default function(state = initialState, action) {
         });
     case 'SIGN_OUT':
       localStorage.removeItem('uprogresstoken');
-      return { ...state, current: {} }
+      return { ...state, current: {} };
+    case 'AUTHORIZATIONS_LIST':
+      return update(state, {
+        authorizations: { $set: action.authorizations }
+      });
+    case 'REMOVE_AUTHORIZATIONS':
+      const authIndex = authorizationsIndex(state, action.authorization);
+      return update(state, {
+        authorizations: {$splice: [[authIndex, 1]]}
+      });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });
     default:
@@ -49,3 +59,16 @@ export default function(state = initialState, action) {
   }
 }
 /*eslint-enable */
+
+/**
+  * Find index of authorization
+  * @param  {Object} state Application state
+  * @param  {Object} action Action object
+  * @return {Object} Updated state
+*/
+function authorizationsIndex(state, authorization) {
+  const ids = state.authorizations.map((item) => item.id);
+  const index = ids.indexOf(authorization.id);
+
+  return index;
+}

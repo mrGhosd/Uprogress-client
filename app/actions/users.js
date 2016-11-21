@@ -1,4 +1,4 @@
-import { get, post, put } from 'utils/ApiRequest';
+import { get, post, put, destroy } from 'utils/ApiRequest';
 import { getAuthorizationParams } from 'utils/browser';
 import { Alert, Info } from 'actions/notifications';
 
@@ -161,4 +161,42 @@ export function getUserStatistics(id) {
  */
 export function signOut() {
   return { type: 'SIGN_OUT' };
+}
+
+/**
+ * Get currentUser authorizations list
+ * @return {Dispatch} Dispatch function
+ */
+export function getCurrentUserAuthorizations() {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return get('/authorizations')
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         dispatch({ type: 'AUTHORIZATIONS_LIST', authorizations: response.data.authorizations });
+       })
+       .catch((error) => {
+         console.log(error);
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         dispatch({ type: 'AUTHORIZATIONS_LIST_FAILED', errors: error.data.errors });
+       });
+  };
+}
+
+/**
+ * Remove authorizations list
+ * @return {Dispatch} Dispatch function
+ */
+export function removeAuthorization(id) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return destroy(`/authorizations/${id}`)
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         dispatch({ type: 'REMOVE_AUTHORIZATIONS', authorization: response.data.authorization });
+       })
+       .catch(() => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+       });
+  };
 }
