@@ -5,7 +5,7 @@ import SvgIcon from 'SVGIcon/SVGIcon';
 
 import React, { Component, PropTypes } from 'react';
 
-import { getIcon } from 'utils/iconsForAuthoirzations.js';
+import { getClientIcon,  getOSIcon } from 'utils/iconsForAuthoirzations.js';
 
 export default class UserAuthorizationsItem extends Component {
 
@@ -19,11 +19,28 @@ export default class UserAuthorizationsItem extends Component {
 
   render() {
     const { authorization } = this.props;
+    console.log(authorization);
 
     return (
       <div className={CN(css.userAuthorizationsItem, 'Card')}>
-        <SvgIcon icon={getIcon(authorization)} />
-        {authorization.appName}
+        <div className="client block">
+          <SvgIcon icon={getClientIcon(authorization)} />
+          <div className="info">
+            <span>{authorization.appName}</span>
+            <span>{authorization.appVersion}</span>
+          </div>
+        </div>
+
+        <div className="os block">
+          <SvgIcon icon={ getOSIcon(authorization)} />
+            <div className="info">
+              <span>{authorization.platform}</span>
+              <span>{authorization.platformVersion}</span>
+            </div>
+        </div>
+        <div className="provider block">
+
+        </div>
       </div>
     );
   }
