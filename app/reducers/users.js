@@ -47,10 +47,14 @@ export default function(state = initialState, action) {
       return update(state, {
         authorizations: { $set: action.authorizations }
       });
-    case 'REMOVE_AUTHORIZATIONS':
+    case 'REMOVE_AUTHORIZATION':
       const authIndex = authorizationsIndex(state, action.authorization);
       return update(state, {
         authorizations: {$splice: [[authIndex, 1]]}
+      });
+    case 'REMOVE_AUTHORIZATIONS':
+      return update(state, {
+        authorizations: { $set: [] }
       });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });

@@ -184,7 +184,7 @@ export function getCurrentUserAuthorizations() {
 }
 
 /**
- * Remove authorizations list
+ * Remove authorizations
  * @return {Dispatch} Dispatch function
  */
 export function removeAuthorization(id) {
@@ -193,10 +193,18 @@ export function removeAuthorization(id) {
     return destroy(`/authorizations/${id}`)
        .then((response) => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
-         dispatch({ type: 'REMOVE_AUTHORIZATIONS', authorization: response.data.authorization });
+         dispatch({ type: 'REMOVE_AUTHORIZATION', authorization: response.data.authorization });
        })
        .catch(() => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
        });
   };
+}
+
+/**
+ * Remove authorizations list
+ * @return {Dispatch} Dispatch function
+ */
+export function removeAuthorizations() {
+  return { type: 'REMOVE_AUTHORIZATIONS' } ;
 }
