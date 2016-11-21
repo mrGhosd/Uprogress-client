@@ -29,12 +29,12 @@ export class UserAuthorizations extends Component {
   }
 
   render() {
-    const { authorizations } = this.props;
-
+    const { authorizations, dispatch } = this.props;
+    
     return (
       <div className={CN(css.userAuthorizations)}>
           {authorizations.map((item) => {
-            return <UserAuthorizationItem key={item.id} authorization={item} />
+            return <UserAuthorizationItem key={item.id} dispatch={dispatch} authorization={item} />
           })}
       </div>
     );

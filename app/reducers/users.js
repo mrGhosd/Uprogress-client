@@ -48,8 +48,9 @@ export default function(state = initialState, action) {
         authorizations: { $set: action.authorizations }
       });
     case 'REMOVE_AUTHORIZATIONS':
+      const authIndex = authorizationsIndex(state, action.authorization);
       return update(state, {
-        authorizations: { $set: [] }
+        authorizations: {$splice: [[authIndex, 1]]}
       });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });
@@ -58,3 +59,16 @@ export default function(state = initialState, action) {
   }
 }
 /*eslint-enable */
+
+/**
+  * Find index of authorization
+  * @param  {Object} state Application state
+  * @param  {Object} action Action object
+  * @return {Object} Updated state
+*/
+function authorizationsIndex(state, authorization) {
+  const ids = state.authorizations.map((item) => item.id);
+  const index = ids.indexOf(authorization.id);
+
+  return index;
+}

@@ -4,22 +4,29 @@ import CN from 'classnames';
 import SvgIcon from 'SVGIcon/SVGIcon';
 
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
+import { removeAuthorization } from 'actions/users';
 import { getClientIcon,  getOSIcon } from 'utils/iconsForAuthoirzations.js';
 
 export default class UserAuthorizationsItem extends Component {
 
   static propTypes = {
-    authorization: PropTypes.object
+    authorization: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
-    authorization: {}
+    authorization: {},
+    dispatch: () => {}
   };
+
+  destroyAuth(id) {
+    this.props.dispatch(removeAuthorization(id));
+  }
 
   render() {
     const { authorization } = this.props;
-    console.log(authorization);
 
     return (
       <div className={CN(css.userAuthorizationsItem, 'Card')}>
@@ -40,6 +47,11 @@ export default class UserAuthorizationsItem extends Component {
         </div>
         <div className="provider block">
 
+        </div>
+        <div className="actions block">
+          <Link onClick={() => this.destroyAuth(authorization.id)}>
+            <SvgIcon icon="minus_icon" />
+          </Link>
         </div>
       </div>
     );
