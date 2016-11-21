@@ -44,7 +44,6 @@ export default function(state = initialState, action) {
       localStorage.removeItem('uprogresstoken');
       return { ...state, current: {} };
     case 'AUTHORIZATIONS_LIST':
-      console.log(action.authorizations);
       return update(state, {
         authorizations: { $set: action.authorizations }
       });

@@ -5,6 +5,8 @@ import SvgIcon from 'SVGIcon/SVGIcon';
 
 import React, { Component, PropTypes } from 'react';
 
+import { getIcon } from 'utils/iconsForAuthoirzations.js';
+
 export default class UserAuthorizationsItem extends Component {
 
   static propTypes = {
@@ -20,7 +22,7 @@ export default class UserAuthorizationsItem extends Component {
 
     return (
       <div className={CN(css.userAuthorizationsItem, 'Card')}>
-        <SvgIcon icon="chrome_auth_icon" />
+        <SvgIcon icon={getIcon(authorization)} />
         {authorization.appName}
       </div>
     );
