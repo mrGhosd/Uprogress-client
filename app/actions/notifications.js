@@ -15,7 +15,7 @@ export function Info(textId) {
     content
   };
 
-  store.dispatch({ type: 'ADD_INFO_NOTIFICATION', notification: structure });
+  return store.dispatch({ type: 'ADD_INFO_NOTIFICATION', notification: structure });
 }
 
 /**
@@ -30,7 +30,7 @@ export function Alert(textId) {
     content
   };
 
-  store.dispatch({ type: 'ADD_ALERT_NOTIFICATION', notification: structure });
+  return store.dispatch({ type: 'ADD_ALERT_NOTIFICATION', notification: structure });
 }
 
 /**
@@ -38,5 +38,5 @@ export function Alert(textId) {
  * @param {String} id popup notification id
  */
 export function DropNotification(id) {
-  store.dispatch({ type: 'DROP_NOTIFICATION', id });
+  return store.dispatch({ type: 'DROP_NOTIFICATION', id });
 }
