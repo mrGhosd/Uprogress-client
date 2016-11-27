@@ -176,7 +176,6 @@ export function getCurrentUserAuthorizations() {
          dispatch({ type: 'AUTHORIZATIONS_LIST', authorizations: response.data.authorizations });
        })
        .catch((error) => {
-         console.log(error);
          dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'AUTHORIZATIONS_LIST_FAILED', errors: error.data.errors });
        });
@@ -206,5 +205,5 @@ export function removeAuthorization(id) {
  * @return {Dispatch} Dispatch function
  */
 export function removeAuthorizations() {
-  return { type: 'REMOVE_AUTHORIZATIONS' } ;
+  return { type: 'REMOVE_AUTHORIZATIONS' };
 }
