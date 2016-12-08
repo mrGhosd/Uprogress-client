@@ -78,7 +78,14 @@ describe('Directions reducer', () => {
   });
 
   describe('UPDATE_STEP', () => {
+    it('return updated detailed and list key', () => {
+      const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
+      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' }};
 
+      expect(
+        reducer(defaultState, { type: 'UPDATE_STEP', step })
+      ).toEqual({ detail: step.direction, list: [step.direction] });
+    });
   });
 
   describe('CREATE_STEP', () => {
