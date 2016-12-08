@@ -67,7 +67,14 @@ describe('Directions reducer', () => {
   });
 
   describe('UPDATE_DIRECTION', () => {
+    it('return updated detailed, isUpdated and list key', () => {
+      const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
+      const direction = { id: 1, title: 'Title1', description: 'Desc1' };
 
+      expect(
+        reducer(defaultState, { type: 'UPDATE_DIRECTION', direction, updated: true })
+      ).toEqual({ detail: direction, list: [direction], isUpdated: true });
+    });
   });
 
   describe('UPDATE_STEP', () => {
