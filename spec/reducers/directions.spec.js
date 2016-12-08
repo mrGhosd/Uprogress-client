@@ -100,11 +100,24 @@ describe('Directions reducer', () => {
   });
 
   describe('DELETE_STEP', () => {
+    it('return updated detailed and list key', () => {
+      const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
+      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' }};
 
+      expect(
+        reducer(defaultState, { type: 'DELETE_STEP', step })
+      ).toEqual({ detail: step.direction, list: [step.direction] });
+    });
   });
 
   describe('USER_INFO', () => {
+    it('return updated list key', () => {
+      const user = { directions: [{ id: 1, title: 'Title1', description: 'Desc1' }]};
 
+      expect(
+        reducer({}, { type: 'USER_INFO', user })
+      ).toEqual({ list: user.directions });
+    });
   });
 
   describe('REMOVE_FORM_ERRORS', () => {
