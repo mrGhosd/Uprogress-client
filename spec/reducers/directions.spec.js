@@ -121,6 +121,12 @@ describe('Directions reducer', () => {
   });
 
   describe('REMOVE_FORM_ERRORS', () => {
+    it('return updated errors key', () => {
+      const defaultState = {errors: { title: 'Error', description: 'Error' }};
 
+      expect(
+        reducer(defaultState, { type: 'REMOVE_FORM_ERRORS' })
+      ).toEqual({ errors: {} });
+    });
   });
 });
