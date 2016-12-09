@@ -78,6 +78,7 @@ export default class RootHeader extends Component {
 
     return (
       <div className={CN(css.rootHeader, 'Card')}>
+        <div className="menu-switcher">Menu</div>
         <div className="left-part">UProgress</div>
         <div className="right-part">{template}</div>
       </div>

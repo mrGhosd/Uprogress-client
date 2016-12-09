@@ -13,6 +13,9 @@
     display: flex
     align-items: center
 
+  .menu-switcher
+    display: none
+
   .user-info
     display: flex
     flex-direction: row
@@ -34,3 +37,12 @@
     a
       color: uprogress-nowhite-color
       margin-right: 10px
+
+@media screen and (max-device-width: 500px)
+  :local(.rootHeader)
+
+    .left-part
+      display: none
+
+    .menu-switcher
+      display: block
