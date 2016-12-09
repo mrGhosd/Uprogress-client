@@ -40,14 +40,34 @@ describe('Steps reducers', () => {
   });
 
   describe('UPDATE_STEP', () => {
+    it('return updated steps list, edit and errors key', () => {
+      const step = { title: 'Step', description: 'Step' };
+      const defaultState = { list: [step] };
 
+      expect(
+        reducer(defaultState, { type: 'UPDATE_STEP', step })
+      ).toEqual({ list: [step], errors: {}, edit: {} });
+    });
   });
 
   describe('DELETE_STEP', () => {
+    it('return updated steps list key', () => {
+      const step = { title: 'Step', description: 'Step' };
+      const defaultState = { list: [step] };
 
+      expect(
+        reducer(defaultState, { type: 'DELETE_STEP', step })
+      ).toEqual({ list: [] });
+    });
   });
 
   describe('FAILED_OPERATION', () => {
+    it('return updated errors key', () => {
+      const errors = { title: 'Error', description: 'Error' };
 
+      expect(
+        reducer({}, { type: 'FAILED_OPERATION', errors })
+      ).toEqual({ errors });
+    });
   });
 });
