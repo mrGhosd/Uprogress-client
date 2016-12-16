@@ -18,7 +18,13 @@ describe('Users reducers', () => {
   });
 
   describe('SIGN_IN_FAILED', () => {
+    it('return updated signInErrors key', () => {
+      const errors = { email: 'Email' };
 
+      expect(
+        reducer({ }, { type: 'SIGN_IN_FAILED', errors })
+      ).toEqual({ signInErrors: errors });
+    });
   });
 
   describe('SIGN_UP_USER', () => {
@@ -37,7 +43,13 @@ describe('Users reducers', () => {
   });
 
   describe('SIGN_UP_FAILED', () => {
+    it('return updated signUpErrors key', () => {
+      const errors = { email: 'Email' };
 
+      expect(
+        reducer({ }, { type: 'SIGN_UP_FAILED', errors })
+      ).toEqual({ signUpErrors: errors });
+    });
   });
 
   describe('CURRENT_USER', () => {
