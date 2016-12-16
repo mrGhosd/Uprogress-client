@@ -1,9 +1,20 @@
-import reducer from 'reducers/steps';
+import reducer from 'reducers/users';
 import expect from 'expect';
 
 describe('Users reducers', () => {
   describe('SIGN_IN_USER', () => {
+    const token = '12345';
 
+    it('return updated list key', () => {
+      expect(
+        reducer({ signInErrors: {} }, { type: 'SIGN_IN_USER', token })
+      ).toEqual({ signInErrors: {} });
+    });
+
+    it('saves token in localStorage', () => {
+      reducer({ signInErrors: {} }, { type: 'SIGN_IN_USER', token })
+      expect(localStorage.getItem('uprogresstoken')).toEqual(token);
+    });
   });
 
   describe('SIGN_IN_FAILED', () => {
