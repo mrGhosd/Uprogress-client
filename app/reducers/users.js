@@ -36,10 +36,10 @@ export default function(state = initialState, action) {
       });
     case 'USER_INFO':
       return { ...state, show: action.user };
-      case 'USER_INFO_FAILED':
-        return update(state, {
-          show: { $set: {} }
-        });
+    case 'USER_INFO_FAILED':
+      return update(state, {
+        show: { $set: {} }
+      });
     case 'SIGN_OUT':
       localStorage.removeItem('uprogresstoken');
       return { ...state, current: {} };
