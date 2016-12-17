@@ -94,7 +94,7 @@ describe('Users reducers', () => {
   describe('SIGN_OUT', () => {
     const current = { id: 1 };
     const token = '12345';
-    
+
     localStorage.setItem('uprogresstoken', token);
 
     it('returns updated current key', () => {
@@ -110,15 +110,33 @@ describe('Users reducers', () => {
   });
 
   describe('AUTHORIZATIONS_LIST', () => {
+    it('return update authorizations key', () => {
+      const authorizations = [{ id: 1 }];
 
+      expect(
+        reducer({}, { type: 'AUTHORIZATIONS_LIST', authorizations })
+      ).toEqual({ authorizations });
+    });
   });
 
   describe('REMOVE_AUTHORIZATION', () => {
+    it('return update authorizations key', () => {
+      const authorizations = [{ id: 1 }];
 
+      expect(
+        reducer({ authorizations }, { type: 'REMOVE_AUTHORIZATION', authorization: authorizations[0] })
+      ).toEqual({ authorizations: [] });
+    });
   });
 
   describe('REMOVE_AUTHORIZATIONS', () => {
+    it('return update authorizations key', () => {
+      const authorizations = [{ id: 1 }];
 
+      expect(
+        reducer({ authorizations }, { type: 'REMOVE_AUTHORIZATIONS' })
+      ).toEqual({ authorizations: [] });
+    });
   });
 
   describe('USER_STATISTICS_SUCCESS', () => {
