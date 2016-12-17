@@ -53,11 +53,24 @@ describe('Users reducers', () => {
   });
 
   describe('CURRENT_USER', () => {
+    it('returns updated current key', () => {
+      const current = { id: 1 };
 
+      expect(
+        reducer({ }, { type: 'CURRENT_USER', current })
+      ).toEqual({ current });
+    });
   });
 
   describe('USER_UPLOAD_AVATAR', () => {
+    it('returns updated attachment key in current', () => {
+      const current = { attachment: {} };
+      const attachment = { url: '1' };
 
+      expect(
+        reducer({ current }, { type: 'USER_UPLOAD_AVATAR', attachment })
+      ).toEqual({ current: { attachment } });
+    });
   });
 
   describe('USER_INFO', () => {
