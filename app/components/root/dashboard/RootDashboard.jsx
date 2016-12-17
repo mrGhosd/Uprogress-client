@@ -32,6 +32,9 @@ export class RootDashboard extends Component {
     if (!currentUser.isEmpty) {
       this.context.router.push(`/${currentUser.nick}`);
     }
+    else {
+      this.context.router.push('/sign_in');
+    }
   }
 
   render() {
