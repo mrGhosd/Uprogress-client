@@ -74,15 +74,39 @@ describe('Users reducers', () => {
   });
 
   describe('USER_INFO', () => {
+    it('returns updated show key', () => {
+      const user = { id: 1 };
 
+      expect(
+        reducer({}, { type: 'USER_INFO', user })
+      ).toEqual({ show: user });
+    });
   });
 
   describe('USER_INFO_FAILED', () => {
-
+    it('returns updated show key', () => {
+      expect(
+        reducer({ show: { id: 1 } }, { type: 'USER_INFO_FAILED' })
+      ).toEqual({ show: {} });
+    });
   });
 
   describe('SIGN_OUT', () => {
+    const current = { id: 1 };
+    const token = '12345';
+    
+    localStorage.setItem('uprogresstoken', token);
 
+    it('returns updated current key', () => {
+      expect(
+        reducer({ current }, { type: 'SIGN_OUT' })
+      ).toEqual({ current: {} });
+    });
+
+    it('removes token from localstorage', () => {
+      reducer({ current }, { type: 'SIGN_OUT' });
+      expect(localStorage.getItem('uprogresstoken')).toEqual(null);
+    });
   });
 
   describe('AUTHORIZATIONS_LIST', () => {
