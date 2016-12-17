@@ -140,6 +140,13 @@ describe('Users reducers', () => {
   });
 
   describe('USER_STATISTICS_SUCCESS', () => {
+    it('return update statistics key', () => {
+      const defaultState = { show: { statistics: [] } };
+      const statistics = [{ id: 1 }];
 
+      expect(
+        reducer(defaultState, { type: 'USER_STATISTICS_SUCCESS', statistics })
+      ).toEqual({ show: { statistics } });
+    });
   });
 });
