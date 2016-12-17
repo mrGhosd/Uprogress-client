@@ -12,8 +12,9 @@ import { removeFormErrors } from 'actions/directions';
  */
 export function redirectFromRoot(nextState, replace, callback) {
   const storeContent = store.getState();
+  const token = localStorage.getItem('uprogresstoken');
 
-  if (storeContent.users.current.isEmpty) {
+  if (!token && storeContent.users.current.isEmpty) {
     replace('/sign_in');
   }
   callback();

@@ -2,7 +2,11 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import expect from 'expect';
-import { signIn, signUp, signOut, currentUser, getUser, updateUser } from 'actions/users';
+import {
+  signIn, signUp, signOut, currentUser,
+  getUser, updateUser, getCurrentUserAuthorizations,
+  removeAuthorization, removeAuthorizations
+} from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
 
@@ -292,6 +296,103 @@ describe('Users actions', () => {
             expect(store.getActions()).toEqual(expectedActions);
           });
       });
+    });
+  });
+
+  describe('#getCurrentUserAuthorizations()', () => {
+    context('with valid attributes', () => {
+      it('fires AUTHORIZATIONS_LIST action', () => {
+        const authorizations = {
+          authorizations: [
+            { id: 1 }
+          ]
+        };
+
+        localStorage.setItem('uprogresstoken', '12345');
+        nock('http://localhost:3000', { reqheaders: { uprogresstoken: '12345' } })
+            .get('/api/v1/authorizations')
+            .reply(200, authorizations);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'AUTHORIZATIONS_LIST', authorizations: authorizations.authorizations }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(getCurrentUserAuthorizations())
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      it('fires AUTHORIZATIONS_LIST_FAILED action', () => {
+        const errorParams = { errors: { status: 403 } };
+
+        localStorage.setItem('uprogresstoken', '12345');
+        nock('http://localhost:3000', { reqheaders: { uprogresstoken: '12345' } })
+            .get('/api/v1/authorizations')
+            .reply(403, errorParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'AUTHORIZATIONS_LIST_FAILED', errors: errorParams.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(getCurrentUserAuthorizations())
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+  });
+
+  describe('#removeAuthorization()', () => {
+    context('with valid attributes', () => {
+      it('fires REMOVE_AUTHORIZATION action', () => {
+        const authorizations = {
+          authorization:
+          {
+            id: 1
+          }
+        };
+
+        localStorage.setItem('uprogresstoken', '12345');
+        nock('http://localhost:3000', { reqheaders: { uprogresstoken: '12345' } })
+            .delete('/api/v1/authorizations/1')
+            .reply(200, authorizations);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'REMOVE_AUTHORIZATION', authorization: authorizations.authorization }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(removeAuthorization(1))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      //  TODO: implement handling
+    });
+  });
+
+  describe('#removeAuthorizations()', () => {
+    it('fires REMOVE_AUTHORIZATIONS action', () => {
+      const expectedActions = { type: 'REMOVE_AUTHORIZATIONS' };
+
+      expect(removeAuthorizations()).toEqual(expectedActions);
     });
   });
 });
