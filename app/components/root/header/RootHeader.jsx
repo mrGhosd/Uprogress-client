@@ -16,7 +16,7 @@ function mapStateToProps(state) {
   return { currentUser: state.users.current };
 }
 
-export default class RootHeader extends Component {
+export class RootHeader extends Component {
   state = {
     currentUser: {}
   };
