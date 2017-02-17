@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import SvgIcon from 'SVGIcon/SVGIcon';
 import UserHeader from 'user/header/UserHeader';
 
 /**
@@ -78,7 +79,9 @@ export class RootHeader extends Component {
 
     return (
       <div className={CN(css.rootHeader, 'Card')}>
-        <div className="menu-switcher">Menu</div>
+        <div className="menu-switcher">
+            <SvgIcon icon="menu_icon" />
+          </div>
         <div className="left-part">UProgress</div>
         <div className="right-part">{template}</div>
       </div>
