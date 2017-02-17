@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import { toggleNavigationMenu } from 'actions/base';
+
 import SvgIcon from 'SVGIcon/SVGIcon';
 import UserHeader from 'user/header/UserHeader';
 
@@ -74,13 +76,19 @@ export class RootHeader extends Component {
     return template;
   }
 
+  toggleMenu() {
+    toggleNavigationMenu();
+  }
+
   render() {
     const template = this.rightHeaderPart();
 
     return (
       <div className={CN(css.rootHeader, 'Card')}>
         <div className="menu-switcher">
-            <SvgIcon icon="menu_icon" />
+            <a onClick={this::this.toggleMenu}>
+              <SvgIcon icon="menu_icon" />
+            </a>
           </div>
         <div className="left-part">UProgress</div>
         <div className="right-part">{template}</div>
