@@ -4,60 +4,60 @@
 
   &.horizontal-bottom
 
-  ul.nav-bar
-    width: 100%
-    display: flex
+    ul.nav-bar
+      width: 100%
+      display: flex
 
-    li
-      cursor: pointer
-      box-sizing: border-box
+      li
+        cursor: pointer
+        box-sizing: border-box
 
-      a
-        position: relative
-        padding: 16px 22px 12px
-        display: block
-        border-radius: 8px 8px 0 0
-        text-decoration: none
-        text-transform: uppercase
-        font-size: fontMiddleSize - 1
-        letter-spacing: 1px
-        margin-right: 4px
+        a
+          position: relative
+          padding: 16px 22px 12px
+          display: block
+          border-radius: 8px 8px 0 0
+          text-decoration: none
+          text-transform: uppercase
+          font-size: fontMiddleSize - 1
+          letter-spacing: 1px
+          margin-right: 4px
 
-        &.active
-          tabBackgroundColor = uprogress-lightblue-color
-          background-color: tabBackgroundColor
-          color: white
-          span
-            background: none
-          svg
-            display: block
-
+          &.active
+            tabBackgroundColor = uprogress-lightblue-color
+            background-color: tabBackgroundColor
+            color: white
+            span
+              background: none
             svg
-              opacity: 1
+              display: block
 
-        &:hover
-          background-color: uprogress-blue-color
-          color: white
-          svg
-            opacity: .45
+              svg
+                opacity: 1
 
-      svg
-        display: none
-        width: 4px
-        height: 4px
+          &:hover
+            background-color: uprogress-blue-color
+            color: white
+            svg
+              opacity: .45
 
-        &.left
-          position: absolute
-          left: -4px
-          bottom: 0px
+        svg
+          display: none
+          width: 4px
+          height: 4px
 
-        &.right
-          position: absolute
-          right: -4px
-          bottom: 0px
+          &.left
+            position: absolute
+            left: -4px
+            bottom: 0px
 
-      &:first-child
-        margin-left: 0
+          &.right
+            position: absolute
+            right: -4px
+            bottom: 0px
+
+        &:first-child
+          margin-left: 0
 
   &.vertical-menu
     display: block

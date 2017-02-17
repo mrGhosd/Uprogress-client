@@ -58,7 +58,7 @@ module.exports = {
     modulesDirectories: [
       'web_modules',
       'node_modules',
-      '../app',
+      path.join(__dirname, '../app'),
       path.join(__dirname, '../app/components'),
       path.join(__dirname, '../app/elements')
     ]
