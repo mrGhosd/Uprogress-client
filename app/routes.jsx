@@ -9,6 +9,7 @@ import Users from 'routes/Users';
 import SignIn from 'authorization/SignIn';
 import SignUp from 'authorization/SignUp';
 import RestorePassword from 'authorization/RestorePassword';
+import ResetPassword from 'authorization/ResetPassword';
 import UserLayout from 'user/layout/UserLayout';
 import UserProfile from 'user/profile/UserProfile';
 import UserAuthorizations from 'user/authorizations/UserAuthorizations';
@@ -24,7 +25,7 @@ export default (
         <Route path="/sign_in" component={SignIn} />
         <Route path="/sign_up" component={SignUp} />
         <Route path="/restore_password" component={RestorePassword} />
-
+        <Route path="/reset_password" component={ResetPassword} />
         <Route path="/" component={RootDashboard} onEnter={redirectFromRoot} />
 
         <Route path="/profile" component={UserLayout}>
