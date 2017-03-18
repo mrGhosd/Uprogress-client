@@ -35,7 +35,6 @@ export function restorePassword(user) {
     return post('/sessions/restore_password', { user })
       .then((response) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
-        console.log(response);
         Info('restorePasswordSuccess');
         dispatch({ type: 'PASSWORD_RESTORE_SUCCESS', token: response.data.token });
       })
