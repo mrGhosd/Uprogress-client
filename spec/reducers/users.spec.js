@@ -149,4 +149,26 @@ describe('Users reducers', () => {
       ).toEqual({ show: { statistics } });
     });
   });
+
+  describe('PASSWORD_RESTORE_SUCCESS', () => {
+    it('return empty restorePasswordErrors key', () => {
+      const defaultState = { restorePasswordErrors: { email: ['There is no such user'] } };
+      const action = { token: '12345' };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESTORE_SUCCESS', action })
+      ).toEqual({ restorePasswordErrors: {} });
+    });
+  });
+
+  describe('PASSWORD_RESTORE_FAILED', () => {
+    it('return empty restorePasswordErrors key', () => {
+      const defaultState = { restorePasswordErrors: {} };
+      const action = { email: ['There is no such user'] };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESTORE_FAILED', action })
+      ).toEqual({ restorePasswordErrors: action.errors });
+    });
+  });
 });
