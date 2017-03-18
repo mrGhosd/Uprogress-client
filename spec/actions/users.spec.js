@@ -5,7 +5,7 @@ import expect from 'expect';
 import {
   signIn, signUp, signOut, currentUser,
   getUser, updateUser, getCurrentUserAuthorizations,
-  removeAuthorization, removeAuthorizations
+  removeAuthorization, removeAuthorizations, restorePassword
 } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
@@ -393,6 +393,56 @@ describe('Users actions', () => {
       const expectedActions = { type: 'REMOVE_AUTHORIZATIONS' };
 
       expect(removeAuthorizations()).toEqual(expectedActions);
+    });
+  });
+
+  describe('#resetPassword()', () => {
+    context('with valid attributes', () => {
+      it('fires PASSWORD_RESTORE_SUCCESS action', () => {
+        const requestParams = { user: { email: 'example@text.com' } };
+        const responseParams = { token: '12345', message: 'Ahahaha' };
+
+        nock('http://localhost:3000')
+            .post('/api/v1/sessions/restore_password', requestParams)
+            .reply(200, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_RESTORE_SUCCESS', token: '12345' }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(restorePassword({ email: 'example@text.com' }))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      it('fires PASSWORD_RESTORE_SUCCESS action', () => {
+        const requestParams = { user: { email: 'example@text.com' } };
+        const responseParams = { errors: { email: 'There is no such user' } };
+
+        nock('http://localhost:3000')
+            .post('/api/v1/sessions/restore_password', requestParams)
+            .reply(403, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_RESTORE_FAILED', errors: responseParams.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(restorePassword({ email: 'example@text.com' }))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
     });
   });
 });
