@@ -5,6 +5,7 @@ const initialState = {
   show: {},
   signInErrors: {},
   signUpErrors: {},
+  restorePasswordErrors: {},
   userFormErrors: {},
   authorizations: []
 };
@@ -58,6 +59,10 @@ export default function(state = initialState, action) {
       });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });
+    case 'PASSWORD_RESTORE_SUCCESS':
+      return { ...state, restorePasswordErrors: {} };
+    case 'PASSWORD_RESTORE_FAILED':
+      return { ...state, restorePasswordErrors: action.errors };
     default:
       return state;
   }

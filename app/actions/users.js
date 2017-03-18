@@ -25,6 +25,26 @@ export function signIn(user) {
 }
 
 /**
+ * Restore forgotten password
+ * @param {Object} user User parameters
+ * @return {Dispatch} dispatch function
+ */
+export function restorePassword(user) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return post('/sessions/restore_password', { user })
+      .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESTORE_SUCCESS', token: response.data.token });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESTORE_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
  * Sign up user
  * @param {Object} user User parameters
  * @return {Dispatch} Dispatch function

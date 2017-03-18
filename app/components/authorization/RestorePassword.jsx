@@ -3,8 +3,9 @@ import css from './SignPage.styl';
 import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Loader from 'react-loader';
+
+import { restorePassword } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
@@ -46,7 +47,7 @@ class RestorePassword extends Component {
   submitForm() {
     const user = this.state.user;
 
-    // this.props.dispatch(signIn(user));
+    this.props.dispatch(restorePassword(user));
   }
 
   render() {
@@ -56,6 +57,7 @@ class RestorePassword extends Component {
     return (
       <div className={CN(css.signPage, 'Card')}>
         <Loader loaded={loader} />
+        <p>Mail with link will be sended to your email.</p>
         <form>
           <TextField ref="email"
             name="email"

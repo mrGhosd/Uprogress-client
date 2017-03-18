@@ -85,6 +85,7 @@ class SignIn extends Component {
             onChange={this::this.handleChange} error={errors.password} />
           <Button onClick={this::this.submitForm} color="blue">Sign in</Button>
           <p>Don't have an account? <Link to="/sign_up">Sign up</Link></p>
+          <p>Forget password? Click <Link to="/restore_password">here</Link> to restore.</p>
         </form>
       </div>
     );
