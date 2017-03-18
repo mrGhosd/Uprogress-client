@@ -6,6 +6,7 @@ import steps from './steps';
 import users from './users';
 import loaders from './loaders';
 import notifications from './notifications';
+import base from './base';
 
 const rootReducer = combineReducers({
   directions,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   users,
   loaders,
   notifications,
+  base,
   routing: routerReducer
 });
 

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import { toggleNavigationMenu } from 'actions/base';
+
+import SvgIcon from 'SVGIcon/SVGIcon';
 import UserHeader from 'user/header/UserHeader';
 
 /**
@@ -16,7 +19,7 @@ function mapStateToProps(state) {
   return { currentUser: state.users.current };
 }
 
-export default class RootHeader extends Component {
+export class RootHeader extends Component {
   state = {
     currentUser: {}
   };
@@ -73,12 +76,20 @@ export default class RootHeader extends Component {
     return template;
   }
 
+  toggleMenu() {
+    toggleNavigationMenu();
+  }
+
   render() {
     const template = this.rightHeaderPart();
 
     return (
       <div className={CN(css.rootHeader, 'Card')}>
-        <div className="menu-switcher">Menu</div>
+        <div className="menu-switcher">
+            <a onClick={this::this.toggleMenu}>
+              <SvgIcon icon="menu_icon" />
+            </a>
+          </div>
         <div className="left-part">UProgress</div>
         <div className="right-part">{template}</div>
       </div>

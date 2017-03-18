@@ -3,11 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
-  entry: {
-    app: [
+  entry: [
       './app/app.jsx'
-    ]
-  },
+  ],
   output: {
     path: path.resolve(__dirname, '..', 'production'),
     filename: 'bundle.js',
@@ -60,7 +58,7 @@ module.exports = {
     modulesDirectories: [
       'web_modules',
       'node_modules',
-      '../app',
+      path.join(__dirname, '../app'),
       path.join(__dirname, '../app/components'),
       path.join(__dirname, '../app/elements')
     ]

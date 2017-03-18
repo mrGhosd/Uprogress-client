@@ -6,3 +6,16 @@
     display: flex
     flex-direction: row
     justify-content: space-between
+
+@media screen and (max-width: 767px)
+  :local(.dashboard)
+    .base-info
+      flex-direction: column
+      > div
+        margin: 10px 0px 10px 0px
+
+    .widget-content,
+    .dashboard-widget
+      display: none !important
+      ul.nav-bar
+        flex-direction: column

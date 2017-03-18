@@ -14,7 +14,8 @@ function mapStateToProps(state) {
   return {
     directions: state.directions.list,
     user: state.users.show,
-    currentUser: state.users.current
+    currentUser: state.users.current,
+    isShow: state.base.isShow
   };
 }
 
@@ -26,7 +27,8 @@ export class Navigation extends Component {
     dispatch: PropTypes.func,
     params: PropTypes.object,
     context: PropTypes.object,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    isShow: PropTypes.bool
   };
 
   static defaultProps = {
@@ -35,7 +37,8 @@ export class Navigation extends Component {
     params: {},
     context: {},
     user: {},
-    currentUser: {}
+    currentUser: {},
+    isShow: false
   };
 
   itemSelected(item) {
@@ -46,14 +49,15 @@ export class Navigation extends Component {
 
       result = directionId == item.id || directionId == item.slug;
     }
+
     return result;
   }
 
   render() {
-    const { directions, user, currentUser } = this.props;
-    
+    const { directions, user, currentUser, isShow } = this.props;
+
     return (
-      <div className={CN(css.navigation, 'Card', 'divine')}>
+      <div className={CN(css.navigation, 'Card', 'divine', { hide: !isShow })}>
         {currentUser.id === user.id && <Link to={`/${user.nick}/directions/new`} className="create-button">Add</Link>}
         {directions.map((item, index) => {
           return (
