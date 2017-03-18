@@ -9,6 +9,7 @@ import { restorePassword } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
+import PopupNotifications from 'popup_notifications/list/PopupNotificationsList';
 
 class RestorePassword extends Component {
   constructor(props, context) {
@@ -66,6 +67,7 @@ class RestorePassword extends Component {
             onChange={this::this.handleChange} error={errors.email} />
           <Button onClick={this::this.submitForm} color="blue">Restore password</Button>
         </form>
+        <PopupNotifications />
       </div>
     );
   }
