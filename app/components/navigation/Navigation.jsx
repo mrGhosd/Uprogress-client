@@ -49,12 +49,13 @@ export class Navigation extends Component {
 
       result = directionId == item.id || directionId == item.slug;
     }
+
     return result;
   }
 
   render() {
     const { directions, user, currentUser, isShow } = this.props;
-    
+
     return (
       <div className={CN(css.navigation, 'Card', 'divine', { hide: !isShow })}>
         {currentUser.id === user.id && <Link to={`/${user.nick}/directions/new`} className="create-button">Add</Link>}
