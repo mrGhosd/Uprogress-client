@@ -504,4 +504,12 @@ describe('Users actions', () => {
       });
     });
   });
+
+  describe('#removeResetPassword', () => {
+    it('fires DEFAULT_RESET action', () => {
+      const expectedActions = { type: 'DEFAULT_RESET' };
+
+      expect(removeResetPassword()).toEqual(expectedActions);
+    });
+  });
 });
