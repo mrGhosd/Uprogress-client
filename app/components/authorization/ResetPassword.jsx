@@ -72,7 +72,7 @@ class ResetPassword extends Component {
       <div className={CN(css.signPage, 'Card')}>
         <Loader loaded={loader} />
         <p>Enter new password here</p>
-        {errors.token && <p>{errors.token}</p>}
+        {errors.token && <p className="error">{errors.token}</p>}
         <form>
           <TextField ref="password"
             name="password"
