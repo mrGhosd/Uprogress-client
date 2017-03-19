@@ -5,7 +5,7 @@ import CN from 'classnames';
 import { connect } from 'react-redux';
 import Loader from 'react-loader';
 
-// import { restorePassword } from 'actions/users';
+import { resetPassword, removeResetPassword } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
@@ -23,13 +23,15 @@ class ResetPassword extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     errors: PropTypes.object,
-    loader: PropTypes.bool
+    loader: PropTypes.bool,
+    location: PropTypes.object
   };
 
   static defaultProps = {
     dispatch: () => {},
     errors: {},
-    loader: true
+    loader: true,
+    location: {}
   };
 
   state = {
@@ -50,8 +52,16 @@ class ResetPassword extends Component {
     const user = this.state.user;
     const token = this.props.location.query.reset;
 
-    console.log(token);
-    // this.props.dispatch(restorePassword(user));
+    user['token'] = token;
+
+    this.props.dispatch(resetPassword(user));
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.reset) {
+      this.context.router.push('/sign_in');
+      this.props.dispatch(removeResetPassword());
+    }
   }
 
   render() {
@@ -62,6 +72,7 @@ class ResetPassword extends Component {
       <div className={CN(css.signPage, 'Card')}>
         <Loader loaded={loader} />
         <p>Enter new password here</p>
+        {errors.token && <p>{errors.token}</p>}
         <form>
           <TextField ref="password"
             name="password"
@@ -90,7 +101,8 @@ class ResetPassword extends Component {
  */
 function mapStateToProps(state) {
   return {
-    errors: state.users.restorePasswordErrors,
+    reset: state.users.resetPassword,
+    errors: state.users.resetPasswordErrors,
     loader: state.loaders.main
   };
 }

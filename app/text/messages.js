@@ -46,6 +46,10 @@ const messages = {
   restorePasswordSuccess: {
     title: 'Success',
     text: 'Mail was succesfully sended'
+  },
+  resetPasswordSuccess: {
+    title: 'Success',
+    text: 'You succesfully update password'
   }
 };
 

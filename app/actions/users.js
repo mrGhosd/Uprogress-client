@@ -46,6 +46,34 @@ export function restorePassword(user) {
 }
 
 /**
+ * Reset user password with token
+ * @param {Object} user User parameters
+ * @return {Dispatch} dispatch function
+ */
+export function resetPassword(user) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put('/sessions/reset_password', { user })
+      .then(() => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESET_SUCCESS', reset: true });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESET_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
+ * Make reset password false again
+ * @return {Dispatch} Dispatch function
+ */
+export function removeResetPassword() {
+  return { type: 'DEFAULT_RESET' };
+}
+
+/**
  * Sign up user
  * @param {Object} user User parameters
  * @return {Dispatch} Dispatch function
