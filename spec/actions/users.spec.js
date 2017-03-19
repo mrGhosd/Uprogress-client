@@ -5,7 +5,8 @@ import expect from 'expect';
 import {
   signIn, signUp, signOut, currentUser,
   getUser, updateUser, getCurrentUserAuthorizations,
-  removeAuthorization, removeAuthorizations, restorePassword
+  removeAuthorization, removeAuthorizations, restorePassword,
+  resetPassword, removeResetPassword
 } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
@@ -396,7 +397,7 @@ describe('Users actions', () => {
     });
   });
 
-  describe('#resetPassword()', () => {
+  describe('#restorePassword()', () => {
     context('with valid attributes', () => {
       it('fires PASSWORD_RESTORE_SUCCESS action', () => {
         const requestParams = { user: { email: 'example@text.com' } };
@@ -439,6 +440,64 @@ describe('Users actions', () => {
         const store = mockStore({});
 
         return store.dispatch(restorePassword({ email: 'example@text.com' }))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+  });
+
+  describe('#resetPassword', () => {
+    context('with valid attributes', () => {
+      it('fires PASSWORD_RESET_SUCCESS action', () => {
+        const requestParams = {
+          password: 'password',
+          password_confirmation: 'password',
+          token: '12345'
+        };
+        const responseParams = { message: 'Success' };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/sessions/reset_password', { user: requestParams })
+            .reply(200, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_RESET_SUCCESS', reset: true }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(resetPassword(requestParams))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      it('fires PASSWORD_RESET_FAILED action', () => {
+        const requestParams = {
+          password: 'password',
+          password_confirmation: 'password',
+          token: ''
+        };
+        const responseParams = { errors: { token: 'Invalid' } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/sessions/reset_password', { user: requestParams })
+            .reply(403, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_RESET_FAILED', errors: responseParams.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(resetPassword(requestParams))
           .then(() => {
             expect(store.getActions()).toEqual(expectedActions);
           });
