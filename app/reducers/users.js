@@ -65,12 +65,13 @@ export default function(state = initialState, action) {
       return { ...state, restorePasswordErrors: {} };
     case 'PASSWORD_RESTORE_FAILED':
       return { ...state, restorePasswordErrors: action.errors };
-      case 'PASSWORD_RESET_SUCCESS':
-        return { ...state, resetPasswordErrors: {}, resetPassword: action.reset };
-      case 'PASSWORD_RESET_FAILED':
-        return { ...state, resetPasswordErrors: action.errors };
-      case 'DEFAULT_RESET':
-        return { ...state, resetPassword: false };
+    case 'PASSWORD_RESET_SUCCESS':
+      console.log("ACTION IS", action);
+      return { ...state, resetPasswordErrors: {}, resetPassword: action.resetPassword };
+    case 'PASSWORD_RESET_FAILED':
+      return { ...state, resetPasswordErrors: action.errors };
+    case 'DEFAULT_RESET':
+      return { ...state, resetPassword: false };
     default:
       return state;
   }

@@ -464,7 +464,7 @@ describe('Users actions', () => {
         const expectedActions = [
           { type: 'START_MAIN_LOADER' },
           { type: 'STOP_MAIN_LOADER' },
-          { type: 'PASSWORD_RESET_SUCCESS', reset: true }
+          { type: 'PASSWORD_RESET_SUCCESS', resetPassword: true }
         ];
 
         const store = mockStore({});

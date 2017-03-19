@@ -56,7 +56,7 @@ export function resetPassword(user) {
     return put('/sessions/reset_password', { user })
       .then(() => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
-        dispatch({ type: 'PASSWORD_RESET_SUCCESS', reset: true });
+        dispatch({ type: 'PASSWORD_RESET_SUCCESS', resetPassword: true });
       })
       .catch((error) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
