@@ -6,7 +6,7 @@ import {
   signIn, signUp, signOut, currentUser,
   getUser, updateUser, getCurrentUserAuthorizations,
   removeAuthorization, removeAuthorizations, restorePassword,
-  resetPassword, removeResetPassword
+  resetPassword, removeResetPassword, changePassword
 } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
@@ -510,6 +510,39 @@ describe('Users actions', () => {
       const expectedActions = { type: 'DEFAULT_RESET' };
 
       expect(removeResetPassword()).toEqual(expectedActions);
+    });
+  });
+
+  describe('#changePassword', () => {
+    context('with valid attributes', () => {
+
+    });
+
+    context('with invalid attributes', () => {
+      it('fires PASSWORD_CHANGE_FAILED action', () => {
+        const requestParams = {
+          password: 'password',
+          password_confirmation: 'password',
+        };
+        const responseParams = { errors: { password: 'Invalid' } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/users/change_password', { user: requestParams })
+            .reply(403, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_CHANGE_FAILED', errors: responseParams.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(changePassword(requestParams))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
     });
   });
 });

@@ -74,8 +74,8 @@ export default function(state = initialState, action) {
       return { ...state, resetPassword: false };
     case 'PASSWORD_CHANGE_SUCCESS':
       return { ...state, changePasswordErrors: {} };
-      case 'PASSWORD_CHANGE_FAILED':
-        return { ...state, changePasswordErrors: action.errors };
+    case 'PASSWORD_CHANGE_FAILED':
+      return { ...state, changePasswordErrors: action.errors };
     default:
       return state;
   }

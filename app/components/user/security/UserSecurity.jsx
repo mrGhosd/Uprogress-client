@@ -88,7 +88,7 @@ class UserSecurity extends Component {
  */
 function mapStateToProps(state) {
   return {
-    errors: state.users.resetPasswordErrors,
+    errors: state.users.changePasswordErrors,
     loader: state.loaders.main
   };
 }
