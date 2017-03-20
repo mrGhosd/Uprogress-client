@@ -9,7 +9,8 @@ const initialState = {
   userFormErrors: {},
   authorizations: [],
   resetPasswordErrors: {},
-  resetPassword: false
+  resetPassword: false,
+  changePasswordErrors: {}
 };
 
 /**
@@ -66,12 +67,15 @@ export default function(state = initialState, action) {
     case 'PASSWORD_RESTORE_FAILED':
       return { ...state, restorePasswordErrors: action.errors };
     case 'PASSWORD_RESET_SUCCESS':
-      console.log("ACTION IS", action);
       return { ...state, resetPasswordErrors: {}, resetPassword: action.resetPassword };
     case 'PASSWORD_RESET_FAILED':
       return { ...state, resetPasswordErrors: action.errors };
     case 'DEFAULT_RESET':
       return { ...state, resetPassword: false };
+    case 'PASSWORD_CHANGE_SUCCESS':
+      return { ...state, changePasswordErrors: {} };
+      case 'PASSWORD_CHANGE_FAILED':
+        return { ...state, changePasswordErrors: action.errors };
     default:
       return state;
   }
