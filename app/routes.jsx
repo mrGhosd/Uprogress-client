@@ -13,6 +13,7 @@ import ResetPassword from 'authorization/ResetPassword';
 import UserLayout from 'user/layout/UserLayout';
 import UserProfile from 'user/profile/UserProfile';
 import UserAuthorizations from 'user/authorizations/UserAuthorizations';
+import UserSecurity from 'user/security/UserSecurity';
 
 import { Provider } from 'react-redux';
 
@@ -31,6 +32,7 @@ export default (
         <Route path="/profile" component={UserLayout}>
           <IndexRoute component={UserProfile} />
           <Route path="authorizations" component={UserAuthorizations} />
+          <Route path="security" component={UserSecurity} />
         </Route>
 
         {Users}
