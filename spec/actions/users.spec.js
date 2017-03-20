@@ -515,7 +515,30 @@ describe('Users actions', () => {
 
   describe('#changePassword', () => {
     context('with valid attributes', () => {
+      it('fires PASSWORD_CHANGE_SUCCESS action', () => {
+        const requestParams = {
+          password: 'password',
+          password_confirmation: 'password',
+        };
+        const responseParams = { current_user: { id: 1 } };
 
+        nock('http://localhost:3000')
+            .put('/api/v1/users/change_password', { user: requestParams })
+            .reply(200, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'PASSWORD_CHANGE_SUCCESS' }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(changePassword(requestParams))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
     });
 
     context('with invalid attributes', () => {
