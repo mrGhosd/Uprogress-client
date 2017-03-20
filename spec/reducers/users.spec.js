@@ -149,4 +149,78 @@ describe('Users reducers', () => {
       ).toEqual({ show: { statistics } });
     });
   });
+
+  describe('PASSWORD_RESTORE_SUCCESS', () => {
+    it('return empty restorePasswordErrors key', () => {
+      const defaultState = { restorePasswordErrors: { email: ['There is no such user'] } };
+      const action = { token: '12345' };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESTORE_SUCCESS', action })
+      ).toEqual({ restorePasswordErrors: {} });
+    });
+  });
+
+  describe('PASSWORD_RESTORE_FAILED', () => {
+    it('return empty restorePasswordErrors key', () => {
+      const defaultState = { restorePasswordErrors: {} };
+      const action = { email: ['There is no such user'] };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESTORE_FAILED', action })
+      ).toEqual({ restorePasswordErrors: action.errors });
+    });
+  });
+
+  describe('PASSWORD_RESET_SUCCESS', () => {
+    it('return empty resetPasswordErrors key', () => {
+      const defaultState = { resetPasswordErrors: { password: ['Does not match password'] }, resetPassword: false };
+      const action = { resetPassword: true };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESET_SUCCESS', resetPassword: action.resetPassword })
+      ).toEqual({ resetPasswordErrors: {}, resetPassword: true });
+    });
+  });
+
+  describe('PASSWORD_RESET_FAILED', () => {
+    it('return filled resetPasswordErrors key', () => {
+      const defaultState = { resetPasswordErrors: [] };
+      const action = { token: ['There is no suce token'] };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_RESET_FAILED', action })
+      ).toEqual({ resetPasswordErrors: action.errors });
+    });
+  });
+
+  describe('DEFAULT_RESET', () => {
+    it('return false resetPassword key', () => {
+      const defaultState = { resetPassword: true };
+
+      expect(
+        reducer(defaultState, { type: 'DEFAULT_RESET' })
+      ).toEqual({ resetPassword: false });
+    });
+  });
+
+  describe('PASSWORD_CHANGE_SUCCESS', () => {
+    it('return false changePassword key', () => {
+      const defaultState = { changePasswordErrors: { email: ['Can\'t be blank'] } };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_CHANGE_SUCCESS' })
+      ).toEqual({ changePasswordErrors: {} });
+    });
+  });
+
+  describe('PASSWORD_CHANGE_FAILED', () => {
+    it('return fulled changePassword', () => {
+      const defaultState = { changePasswordErrors: {} };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_CHANGE_FAILED', errors: { email: ['Can\'t be blank'] } })
+      ).toEqual({ changePasswordErrors: { email: ['Can\'t be blank'] } });
+    });
+  });
 });

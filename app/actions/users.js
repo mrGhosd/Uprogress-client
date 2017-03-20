@@ -25,6 +25,76 @@ export function signIn(user) {
 }
 
 /**
+ * Restore forgotten password
+ * @param {Object} user User parameters
+ * @return {Dispatch} dispatch function
+ */
+export function restorePassword(user) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return post('/sessions/restore_password', { user })
+      .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('restorePasswordSuccess');
+        dispatch({ type: 'PASSWORD_RESTORE_SUCCESS', token: response.data.token });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESTORE_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
+ * Reset user password with token
+ * @param {Object} user User parameters
+ * @return {Dispatch} dispatch function
+ */
+export function resetPassword(user) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put('/sessions/reset_password', { user })
+      .then(() => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESET_SUCCESS', resetPassword: true });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_RESET_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
+ * Make reset password false again
+ * @return {Dispatch} Dispatch function
+ */
+export function removeResetPassword() {
+  return { type: 'DEFAULT_RESET' };
+}
+
+/**
+ * Change password for current user
+ * @param {Object} user User parameters
+ * @return {Dispatch} dispatch function
+ */
+export function changePassword(user) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put('/users/change_password', { user })
+      .then(() => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('resetPasswordSuccess');
+        dispatch({ type: 'PASSWORD_CHANGE_SUCCESS' });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'PASSWORD_CHANGE_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
  * Sign up user
  * @param {Object} user User parameters
  * @return {Dispatch} Dispatch function

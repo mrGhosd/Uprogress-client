@@ -42,6 +42,14 @@ const messages = {
   userFailureUpdate: {
     title: 'Profile didn\'t updated',
     text: 'Unfortunately, profile have not been updated. Pleas try it later'
+  },
+  restorePasswordSuccess: {
+    title: 'Success',
+    text: 'Mail was succesfully sended'
+  },
+  resetPasswordSuccess: {
+    title: 'Success',
+    text: 'You succesfully update password'
   }
 };
 

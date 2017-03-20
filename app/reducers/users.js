@@ -5,8 +5,12 @@ const initialState = {
   show: {},
   signInErrors: {},
   signUpErrors: {},
+  restorePasswordErrors: {},
   userFormErrors: {},
-  authorizations: []
+  authorizations: [],
+  resetPasswordErrors: {},
+  resetPassword: false,
+  changePasswordErrors: {}
 };
 
 /**
@@ -58,6 +62,20 @@ export default function(state = initialState, action) {
       });
     case 'USER_STATISTICS_SUCCESS':
       return update(state, { show: { statistics: { $set: action.statistics } } });
+    case 'PASSWORD_RESTORE_SUCCESS':
+      return { ...state, restorePasswordErrors: {} };
+    case 'PASSWORD_RESTORE_FAILED':
+      return { ...state, restorePasswordErrors: action.errors };
+    case 'PASSWORD_RESET_SUCCESS':
+      return { ...state, resetPasswordErrors: {}, resetPassword: action.resetPassword };
+    case 'PASSWORD_RESET_FAILED':
+      return { ...state, resetPasswordErrors: action.errors };
+    case 'DEFAULT_RESET':
+      return { ...state, resetPassword: false };
+    case 'PASSWORD_CHANGE_SUCCESS':
+      return { ...state, changePasswordErrors: {} };
+    case 'PASSWORD_CHANGE_FAILED':
+      return { ...state, changePasswordErrors: action.errors };
     default:
       return state;
   }

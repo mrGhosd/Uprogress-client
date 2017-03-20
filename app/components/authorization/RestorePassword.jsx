@@ -3,16 +3,15 @@ import css from './SignPage.styl';
 import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Loader from 'react-loader';
 
-import { signIn } from 'actions/users';
+import { restorePassword } from 'actions/users';
 
 import TextField from 'TextField/ElementTextField';
 import Button from 'Button/ElementButton';
+import PopupNotifications from 'popup_notifications/list/PopupNotificationsList';
 
-class SignIn extends Component {
-
+class RestorePassword extends Component {
   constructor(props, context) {
     super(props, context);
   }
@@ -23,26 +22,21 @@ class SignIn extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    signInErrors: PropTypes.object,
+    errors: PropTypes.object,
     loader: PropTypes.bool
   };
 
   static defaultProps = {
     dispatch: () => {},
-    signInErrors: {},
+    errors: {},
     loader: true
   };
 
   state = {
     user: {
-      email: '',
-      password: ''
-    },
-    errors: {
-      email: [],
-      password: []
+      email: ''
     }
-  };
+  }
 
   handleChange(event) {
     let lastState = this.state.user;
@@ -51,42 +45,29 @@ class SignIn extends Component {
     this.setState({ user: lastState });
   }
 
-  componentWillReceiveProps(props) {
-    if (props.current && !props.current.isEmpty) {
-      this.context.router.push(`/${props.current.nick}`);
-    }
-  }
-
   submitForm() {
     const user = this.state.user;
 
-    this.props.dispatch(signIn(user));
+    this.props.dispatch(restorePassword(user));
   }
 
   render() {
-    const user = this.state.user;
-    const errors = this.props.signInErrors;
-    const { loader } = this.props;
+    const { user } = this.state;
+    const { loader, errors } = this.props;
 
     return (
       <div className={CN(css.signPage, 'Card')}>
         <Loader loaded={loader} />
+        <p>Mail with link will be sended to your email.</p>
         <form>
           <TextField ref="email"
             name="email"
             placeholder="Email"
             value={user.email}
             onChange={this::this.handleChange} error={errors.email} />
-          <TextField ref="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={user.password}
-            onChange={this::this.handleChange} error={errors.password} />
-          <Button onClick={this::this.submitForm} color="blue">Sign in</Button>
-          <p>Don't have an account? <Link to="/sign_up">Sign up</Link></p>
-          <p>Forget password? Click <Link to="/restore_password">here</Link> to restore.</p>
+          <Button onClick={this::this.submitForm} color="blue">Restore password</Button>
         </form>
+        <PopupNotifications />
       </div>
     );
   }
@@ -99,10 +80,9 @@ class SignIn extends Component {
  */
 function mapStateToProps(state) {
   return {
-    current: state.users.current,
-    signInErrors: state.users.signInErrors,
+    errors: state.users.restorePasswordErrors,
     loader: state.loaders.main
   };
 }
 
-export default connect(mapStateToProps)(SignIn);
+export default connect(mapStateToProps)(RestorePassword);
