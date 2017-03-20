@@ -203,4 +203,24 @@ describe('Users reducers', () => {
       ).toEqual({ resetPassword: false });
     });
   });
+
+  describe('PASSWORD_CHANGE_SUCCESS', () => {
+    it('return false changePassword key', () => {
+      const defaultState = { changePasswordErrors: { email: ['Can\'t be blank'] } };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_CHANGE_SUCCESS' })
+      ).toEqual({ changePasswordErrors: {} });
+    });
+  });
+
+  describe('PASSWORD_CHANGE_FAILED', () => {
+    it('return fulled changePassword', () => {
+      const defaultState = { changePasswordErrors: {} };
+
+      expect(
+        reducer(defaultState, { type: 'PASSWORD_CHANGE_FAILED', errors: { email: ['Can\'t be blank'] } })
+      ).toEqual({ changePasswordErrors: { email: ['Can\'t be blank'] } });
+    });
+  });
 });
