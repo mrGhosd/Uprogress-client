@@ -61,6 +61,7 @@
     "react-addons-css-transition-group": "^15.4.0",
     "react-addons-pure-render-mixin": "^15.4.0",
     "react-bootstrap-dropdown": "^0.3.0",
+    "react-cookie": "^1.0.5",
     "react-dd-menu": "^1.0.7",
     "react-dom": "^15.0.2",
     "react-dropzone": "^3.6.0",

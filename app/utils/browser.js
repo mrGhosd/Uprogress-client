@@ -20,7 +20,7 @@ function getBrowserVersion() {
  * Return OS name
  * @return {String} OS name
  */
-function getOSName() {
+export function getOSName() {
   return platform.os.family;
 }
 
@@ -30,6 +30,14 @@ function getOSName() {
  */
 function getOSVersion() {
   return platform.os.version;
+}
+
+/**
+ * Return device product name
+ * @return {String} OS version
+ */
+export function getProduct() {
+  return platform.product;
 }
 
 /**

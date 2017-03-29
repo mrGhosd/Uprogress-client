@@ -2,7 +2,10 @@ import store from 'store';
 
 import { getUser } from 'actions/users';
 import { removeFormErrors } from 'actions/directions';
+import { getOSName } from 'utils/browser';
+import cookie from 'react-cookie';
 
+let redirectToMobileLanding = true;
 /**
  * Redirect from root path if user not signed in
  * @param  {Object} nextState state of the router
@@ -45,4 +48,19 @@ export function updateUserInfo(nextState, replace, callback) {
  */
 export function removeErrorsFromForm() {
   store.dispatch(removeFormErrors());
+}
+
+/**
+ * Check device type
+ */
+export function checkMobileDevice(nextState, replace, callback) {
+  let isMobile = getOSName() === 'Android' || getOSName() === 'iOS';
+  let hideLanding = localStorage.getItem('hideMobileLanding');
+
+  // console.log(isMobile, !cookie.load('hideMobileLanding'))
+  if (isMobile && !hideLanding && redirectToMobileLanding) {
+    redirectToMobileLanding = false;
+    replace('/landing_mobile');
+  }
+  callback();
 }

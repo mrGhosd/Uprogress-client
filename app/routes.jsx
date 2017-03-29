@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { redirectFromRoot } from 'routes/redirects';
+import { redirectFromRoot, checkMobileDevice } from 'routes/redirects';
 
 import App from 'App.js';
 import RootDashboard from 'root/dashboard/RootDashboard';
@@ -14,6 +14,7 @@ import UserLayout from 'user/layout/UserLayout';
 import UserProfile from 'user/profile/UserProfile';
 import UserAuthorizations from 'user/authorizations/UserAuthorizations';
 import UserSecurity from 'user/security/UserSecurity';
+import LandingMobile from 'landing/mobile/LandingMobile';
 
 import { Provider } from 'react-redux';
 
@@ -22,7 +23,8 @@ import store from './store';
 export default (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={App}>
+      <Route component={App} onEnter={checkMobileDevice}>
+        <Route path="/landing_mobile" component={LandingMobile} />
         <Route path="/sign_in" component={SignIn} />
         <Route path="/sign_up" component={SignUp} />
         <Route path="/restore_password" component={RestorePassword} />
