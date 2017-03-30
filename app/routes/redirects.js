@@ -57,7 +57,6 @@ export function checkMobileDevice(nextState, replace, callback) {
   let isMobile = getOSName() === 'Android' || getOSName() === 'iOS';
   let hideLanding = localStorage.getItem('hideMobileLanding');
 
-  // console.log(isMobile, !cookie.load('hideMobileLanding'))
   if (isMobile && !hideLanding && redirectToMobileLanding) {
     redirectToMobileLanding = false;
     replace('/landing_mobile');
