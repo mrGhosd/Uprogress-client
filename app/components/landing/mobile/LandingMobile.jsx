@@ -30,7 +30,7 @@ export class LandingMobile extends Component {
   getDetailInfo() {
     let object = {};
 
-    if (getProduct() == 'iOS') {
+    if (getProduct() == 'iPhone') {
       object['link'] = 'https://itunes.apple.com/us/app/u-progress/id1219463214?mt=8';
       object['shop'] = 'App Store';
       object['icon'] = 'app_store_icon';

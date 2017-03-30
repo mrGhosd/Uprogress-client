@@ -1,7 +1,6 @@
 import css from './Dashboard.styl';
 
 import CN from 'classnames';
-import platform from 'platform';
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -31,7 +30,6 @@ class Dashboard extends Component {
   render() {
     const { user, dispatch } = this.props;
     let tabs = {};
-    console.log(platform);
 
     tabs[`/${user.nick}/info`] = 'Progress';
     tabs[`/${user.nick}/shared`] = 'Shared';
