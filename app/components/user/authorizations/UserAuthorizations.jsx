@@ -34,7 +34,7 @@ export class UserAuthorizations extends Component {
     return (
       <div className={CN(css.userAuthorizations)}>
           {authorizations.map((item) => {
-            return <UserAuthorizationItem key={item.id} dispatch={dispatch} authorization={item} />
+            return <UserAuthorizationItem key={item.id} dispatch={dispatch} authorization={item} />;
           })}
       </div>
     );

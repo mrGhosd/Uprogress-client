@@ -2,6 +2,7 @@ import css from './UserAuthorizationsItem.styl';
 import CN from 'classnames';
 
 import SvgIcon from 'SVGIcon/SVGIcon';
+import LogoIcon from 'SVGIcon/LogoIcon';
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
@@ -25,13 +26,22 @@ export default class UserAuthorizationsItem extends Component {
     this.props.dispatch(removeAuthorization(id));
   }
 
+  chooseIcon(client) {
+    if (client === 'uprogress_auth_icon') {
+      return <LogoIcon />;
+    }
+    else {
+      return <SvgIcon icon={client} />;
+    }
+  }
+
   render() {
     const { authorization } = this.props;
 
     return (
       <div className={CN(css.userAuthorizationsItem, 'Card')}>
         <div className="client block">
-          <SvgIcon icon={getClientIcon(authorization)} />
+          {this.chooseIcon(getClientIcon(authorization))}
           <div className="info">
             <span>{authorization.appName}</span>
             <span>{authorization.appVersion}</span>

@@ -13,6 +13,7 @@ import React, { Component, PropTypes } from 'react';
  */
 function mapStateToProps(state) {
   return {
+    isShow: state.base.isShow,
     currentUser: state.users.current
   };
 }
@@ -41,6 +42,7 @@ class ProfileNavigation extends Component {
   }
 
   render() {
+    const { isShow } = this.props;
     const tabs = [
       { name: 'Profile settings', path: '/profile' },
       { name: 'Authorizations', path: '/profile/authorizations' },
@@ -48,7 +50,7 @@ class ProfileNavigation extends Component {
     ];
 
     return (
-      <div className={CN(css.navigation, 'Card', 'divine')}>
+      <div className={CN(css.navigation, 'Card', 'divine', { hide: !isShow })}>
         {tabs.map((item, index) => {
           return (
             <Link className={CN({ 'navigation-item': true, 'selected': this.itemSelected(item) })}

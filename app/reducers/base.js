@@ -14,11 +14,16 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case 'TOGGLE_NAVIGATION_MENU':
-      const toggleValue = state.isShow
+      const toggleValue = state.isShow;
 
       return update(state, {
         isShow: { $set: !toggleValue }
       })
+
+      case 'SET_NAVIGATION_MENU':
+        return update(state, {
+          isShow: { $set: action.show }
+        })
     default:
       return state;
   }

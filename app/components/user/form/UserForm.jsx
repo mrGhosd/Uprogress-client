@@ -66,7 +66,7 @@ export default class UserForm extends Component {
       attachableType: 'User',
       file: files.first
     };
-    
+
     this.props.dispatch(uploadImage(params));
   }
 
@@ -94,7 +94,7 @@ export default class UserForm extends Component {
     return (
       <div className={CN(css.userForm)}>
         <div className="user-avatart">
-          <FileUploader onDrop={this::this.onDrop}>
+          <FileUploader className="uploader" onDrop={this::this.onDrop}>
             {image}
           </FileUploader>
         </div>
