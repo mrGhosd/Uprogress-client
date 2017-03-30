@@ -8,6 +8,8 @@ DISTRIBUTION_ID=E3JUMKK33HB6BA
 echo "Building production"
 if npm run build ; then
    echo "Build Successful"
+   mkdir -p production/images
+   mv production/sprite.svg production/images
 else
   echo "exiting.."
   exit 1
