@@ -87,7 +87,7 @@ export class RootHeader extends Component {
       <div className={CN(css.rootHeader, 'Card')}>
         <div className="menu-switcher">
             <a onClick={this::this.toggleMenu}>
-              <SvgIcon icon="menu_icon" />
+              <SvgIcon icon="menu-icon" />
             </a>
           </div>
         <div className="left-part">UProgress</div>
