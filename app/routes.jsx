@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { redirectFromRoot, checkMobileDevice } from 'routes/redirects';
+import { redirectFromRoot, checkMobileDevice,hideMobileNavigation } from 'routes/redirects';
 
 import App from 'App.js';
 import RootDashboard from 'root/dashboard/RootDashboard';
@@ -23,7 +23,9 @@ import store from './store';
 export default (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={App} onEnter={checkMobileDevice}>
+      <Route component={App}
+        onChange={hideMobileNavigation}
+        onEnter={checkMobileDevice}>
         <Route path="/landing_mobile" component={LandingMobile} />
         <Route path="/sign_in" component={SignIn} />
         <Route path="/sign_up" component={SignUp} />

@@ -1,10 +1,18 @@
 import store from 'store';
 
 import { getUser } from 'actions/users';
+import { setNavigationMenu } from 'actions/base';
 import { removeFormErrors } from 'actions/directions';
 import { getOSName } from 'utils/browser';
 
 let redirectToMobileLanding = true;
+
+/*
+* check if current device is mobile
+*/
+function isMobileDevice() {
+  return getOSName() === 'Android' || getOSName() === 'iOS';
+}
 
 /**
  * Redirect from root path if user not signed in
@@ -54,7 +62,7 @@ export function removeErrorsFromForm() {
  * Check device type
  */
 export function checkMobileDevice(nextState, replace, callback) {
-  let isMobile = getOSName() === 'Android' || getOSName() === 'iOS';
+  let isMobile = isMobileDevice();
   let hideLanding = localStorage.getItem('hideMobileLanding');
 
   if (isMobile && !hideLanding && redirectToMobileLanding) {
@@ -62,4 +70,17 @@ export function checkMobileDevice(nextState, replace, callback) {
     replace('/landing_mobile');
   }
   callback();
+}
+
+/**
+ * Hide navigation menu if it is an mobile version
+ */
+export function hideMobileNavigation() {
+  if (isMobileDevice()) {
+    const storeContent = store.getState();
+
+    if (storeContent.base.isShow) {
+      store.dispatch(setNavigationMenu(false));
+    }
+  }
 }
