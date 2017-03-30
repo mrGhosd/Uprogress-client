@@ -1,5 +1,5 @@
-const clients = ['Chrome', 'Safari'];
-const systems = ['OS X'];
+const clients = ['Chrome', 'Safari', 'Mozilla', 'Opera', 'UProgress'];
+const systems = ['OS X', 'Android', 'iOS'];
 
 /**
  * Return icon name
@@ -8,7 +8,7 @@ const systems = ['OS X'];
  */
 export function getClientIcon(authorization) {
   const client = matchedClient(authorization);
-
+  console.log(`${client}_auth_icon`);
   return `${client}_auth_icon`;
 }
 
@@ -28,7 +28,7 @@ function matchedClient(authorization) {
 
 export function getOSIcon(authorization) {
   const os = matchedOS(authorization);
-
+  console.log(os);
   return `${os}_os_auth_icon`;
 }
 
