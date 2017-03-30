@@ -3,9 +3,9 @@ import store from 'store';
 import { getUser } from 'actions/users';
 import { removeFormErrors } from 'actions/directions';
 import { getOSName } from 'utils/browser';
-import cookie from 'react-cookie';
 
 let redirectToMobileLanding = true;
+
 /**
  * Redirect from root path if user not signed in
  * @param  {Object} nextState state of the router
