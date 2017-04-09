@@ -7,6 +7,8 @@ import CN from 'classnames';
 import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
 
+import SvgIcon from 'SVGIcon/SVGIcon';
+
 import { getDirection } from 'actions/directions';
 import { isCurrentUser } from 'utils/currentUser';
 
@@ -86,7 +88,13 @@ class DirectionsDetail extends Component {
 
     return (
       <div className={CN(css.directionsDetail)}>
-        <h1>{direction.title}</h1>
+        <div className="direction-detail-header">
+          <h1>{direction.title}</h1>
+          <div className="appointment-handler">
+            <SvgIcon icon="clock_icon" />
+          </div>
+        </div>
+
         <p>{direction.description}</p>
         {progressBar}
         {isCurrentUser(currentUser, user) && <StepsForm direction={direction}
