@@ -1,10 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import css from './AppointmentForm.styl';
 
-import TextField from 'TextField/ElementTextField';
+import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
+import CN from 'classnames';
+
 import TextArea from 'TextArea/ElementTextArea';
 import Button from 'Button/ElementButton';
 
 import DatePicker from 'DatePicker/ElementDatePicker';
+import TimePicker from 'TimePicker/ElementTimePicker';
 
 export default class AppointmentsForm extends Component {
 
@@ -23,8 +27,9 @@ export default class AppointmentsForm extends Component {
   };
 
   state = {
-    date: '',
-    message: ''
+    date: moment(),
+    message: '',
+    time: moment().format('HH:00')
   };
 
   handleChange(event) {
@@ -35,8 +40,17 @@ export default class AppointmentsForm extends Component {
   }
 
   dateChange(date) {
-    this.setState({ date });
-    // console.log(date.format('YYYY-MM-DD'));
+    let lastState = this.state;
+
+    lastState['date'] = date;
+    this.setState(lastState);
+  }
+
+  timeChange(event) {
+    let lastState = this.state;
+
+    lastState['time'] = event.target.value;
+    this.setState(lastState);
   }
 
   submitForm() {
@@ -59,16 +73,19 @@ export default class AppointmentsForm extends Component {
   }
 
   render() {
-    const { date } = this.state;
+    const { date, time } = this.state;
     const { errors } = this.props;
 
     return (
-      <div>
+      <div className={CN(css.appointmentForm)}>
         <form>
           <DatePicker selected={date} onChange={ this::this.dateChange } />
-         <TextArea ref="description"
-           name="description"
-           onChange={(event) => this.handleChange(event)}
+          <TimePicker defaultValue={time} onChange={ this::this.timeChange } />
+         <TextArea
+           classValue="message-field"
+           ref="message"
+           name="message"
+           onChange={this::this.handleChange}
            value={this.state.message}
            error={errors.message} />
          <Button onClick={this::this.submitForm} color="blue" >Save</Button>
