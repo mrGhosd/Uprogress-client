@@ -3,6 +3,7 @@ import css from './directionsDetail.styl';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CN from 'classnames';
+import Popover from 'react-popover';
 
 import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
@@ -15,7 +16,8 @@ import { isCurrentUser } from 'utils/currentUser';
 class DirectionsDetail extends Component {
 
   state = {
-    directionLoad: true
+    directionLoad: true,
+    appointmentPopoverOpen: false
   };
 
   static propTypes = {
@@ -82,8 +84,13 @@ class DirectionsDetail extends Component {
     return template;
   }
 
+  togglePopover() {
+    this.setState({ appointmentPopoverOpen: !this.state.appointmentPopoverOpen });
+  }
+
   render() {
     const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
+    const { appointmentPopoverOpen } = this.state;
     const progressBar = this.progressBar(direction);
 
     return (
@@ -91,7 +98,14 @@ class DirectionsDetail extends Component {
         <div className="direction-detail-header">
           <h1>{direction.title}</h1>
           <div className="appointment-handler">
-            <SvgIcon icon="clock_icon" />
+            <Popover
+              isOpen={appointmentPopoverOpen}
+              body="BODY"
+              preferPlace="left">
+              <a onClick={this::this.togglePopover}>
+                <SvgIcon icon="clock_icon" />
+              </a>
+            </Popover>
           </div>
         </div>
 
