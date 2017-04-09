@@ -88,6 +88,12 @@ class DirectionsDetail extends Component {
     this.setState({ appointmentPopoverOpen: !this.state.appointmentPopoverOpen });
   }
 
+  outerClick(event) {
+    if (event.target.className && !event.target.className.match(/react-datepicker/)) {
+      this.setState({ appointmentPopoverOpen: !this.state.appointmentPopoverOpen });
+    }
+  }
+
   render() {
     const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
     const { appointmentPopoverOpen } = this.state;
@@ -100,6 +106,7 @@ class DirectionsDetail extends Component {
           <div className="appointment-handler">
             <Popover
               isOpen={appointmentPopoverOpen}
+              onOuterAction={this::this.outerClick}
               body={<AppointmentsForm direction={direction} />}
               preferPlace="left">
               <a onClick={this::this.togglePopover}>

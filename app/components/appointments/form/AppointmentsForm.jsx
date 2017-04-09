@@ -33,9 +33,9 @@ export class AppointmentsForm extends Component {
   };
 
   state = {
-    date: moment().utc(),
+    date: moment(),
     message: '',
-    time: moment().utc().format('HH:00'),
+    time: moment().format('HH:00'),
     repeats: 'never'
   };
 
@@ -62,14 +62,14 @@ export class AppointmentsForm extends Component {
 
   submitForm() {
     const { date, time } = this.state;
-    const validDate = `${date.format('YYYY-MM-DD')} ${time}`;
+    const formattedDate = `${date.format('YYYY-MM-DD')} ${time}:00`;
     const params = {
-      date: validDate,
+      date: moment(formattedDate).format('YYYY-MM-DD HH:mm ZZ'),
       message: this.state.message,
       repeats: this.state.repeats,
       direction_id: this.props.direction.id
     };
-
+    
     this.props.dispatch(createAppointment(params));
   }
 
