@@ -100,7 +100,7 @@ class DirectionsDetail extends Component {
           <div className="appointment-handler">
             <Popover
               isOpen={appointmentPopoverOpen}
-              body={<AppointmentsForm />}
+              body={<AppointmentsForm direction={direction} />}
               preferPlace="left">
               <a onClick={this::this.togglePopover}>
                 <SvgIcon icon="clock_icon" />

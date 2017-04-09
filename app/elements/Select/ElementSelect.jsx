@@ -19,6 +19,7 @@ export default class ElementSelect extends Component {
   };
 
   static propTypes = {
+    classValue: React.PropTypes.string,
     defaultValue: React.PropTypes.string,
     name: React.PropTypes.string,
     size: React.PropTypes.number,
@@ -49,7 +50,7 @@ export default class ElementSelect extends Component {
    */
   renderValue(item) {
     let keys = {};
-    
+
     if (item.disabled) {
       keys.disabled = 'disabled';
     }
@@ -79,6 +80,7 @@ export default class ElementSelect extends Component {
     let values = this.props.values;
     const defaultValue = this.props.defaultValue;
     const onChange = this.props.onChange;
+    const classValue = this.props.classValue;
 
     values = this.addPlaceholder(values);
 

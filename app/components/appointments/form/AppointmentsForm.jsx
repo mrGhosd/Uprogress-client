@@ -9,6 +9,7 @@ import Button from 'Button/ElementButton';
 
 import DatePicker from 'DatePicker/ElementDatePicker';
 import TimePicker from 'TimePicker/ElementTimePicker';
+import Select from 'Select/ElementSelect';
 
 export default class AppointmentsForm extends Component {
 
@@ -29,7 +30,8 @@ export default class AppointmentsForm extends Component {
   state = {
     date: moment(),
     message: '',
-    time: moment().format('HH:00')
+    time: moment().format('HH:00'),
+    repeats: 'never'
   };
 
   handleChange(event) {
@@ -54,10 +56,15 @@ export default class AppointmentsForm extends Component {
   }
 
   submitForm() {
-    // const params = {
-    //   title: this.state.title,
-    //   description: this.state.description
-    // };
+    const { date, time } = this.state;
+    const validDate = `${date.format('YYYY-MM-DD')} ${time}`;
+    const params = {
+      date: validDate,
+      message: this.state.message,
+      repeats: this.state.repeats,
+      direction_id: this.props.direction.id
+    };
+    console.log(params);
     // const { user  } = this.props;
     //
     // let func;
@@ -73,6 +80,10 @@ export default class AppointmentsForm extends Component {
   }
 
   render() {
+    const repeats = [
+      { title: 'Never', value: 'never' },
+      { title: 'Every day', value: 'every_day' }
+    ];
     const { date, time } = this.state;
     const { errors } = this.props;
 
@@ -81,6 +92,12 @@ export default class AppointmentsForm extends Component {
         <form>
           <DatePicker selected={date} onChange={ this::this.dateChange } />
           <TimePicker defaultValue={time} onChange={ this::this.timeChange } />
+          <Select
+            classValue="repeats-field"
+            ref="repeats"
+            name="repeats"
+            values={repeats}
+            onChange={this::this.handleChange} />
          <TextArea
            classValue="message-field"
            ref="message"
