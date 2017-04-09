@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import CN from 'classnames';
 import Popover from 'react-popover';
 
-import StepsList from 'steps/list/StepsList';
-import StepsForm from 'steps/form/StepsForm';
-
-import SvgIcon from 'SVGIcon/SVGIcon';
-
 import { getDirection } from 'actions/directions';
 import { isCurrentUser } from 'utils/currentUser';
+import SvgIcon from 'SVGIcon/SVGIcon';
+
+import StepsList from 'steps/list/StepsList';
+import StepsForm from 'steps/form/StepsForm';
+import AppointmentsForm from 'appointments/form/AppointmentsForm';
 
 class DirectionsDetail extends Component {
 
@@ -100,7 +100,7 @@ class DirectionsDetail extends Component {
           <div className="appointment-handler">
             <Popover
               isOpen={appointmentPopoverOpen}
-              body="BODY"
+              body={<AppointmentsForm />}
               preferPlace="left">
               <a onClick={this::this.togglePopover}>
                 <SvgIcon icon="clock_icon" />
