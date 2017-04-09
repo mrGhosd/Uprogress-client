@@ -1,8 +1,11 @@
 import css from './AppointmentForm.styl';
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import CN from 'classnames';
+
+import { createAppointment } from 'actions/appointments';
 
 import TextArea from 'TextArea/ElementTextArea';
 import Button from 'Button/ElementButton';
@@ -11,26 +14,28 @@ import DatePicker from 'DatePicker/ElementDatePicker';
 import TimePicker from 'TimePicker/ElementTimePicker';
 import Select from 'Select/ElementSelect';
 
-export default class AppointmentsForm extends Component {
+export class AppointmentsForm extends Component {
 
   static propTypes = {
     direction: PropTypes.object,
     dispatch: PropTypes.func,
     params: PropTypes.object,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    appointments: PropTypes.array
   };
 
   static defaultProps = {
     direction: {},
     dispatch: () => {},
     params: {},
-    errors: {}
+    errors: {},
+    appointments: []
   };
 
   state = {
-    date: moment(),
+    date: moment().utc(),
     message: '',
-    time: moment().format('HH:00'),
+    time: moment().utc().format('HH:00'),
     repeats: 'never'
   };
 
@@ -64,19 +69,8 @@ export default class AppointmentsForm extends Component {
       repeats: this.state.repeats,
       direction_id: this.props.direction.id
     };
-    console.log(params);
-    // const { user  } = this.props;
-    //
-    // let func;
-    //
-    // if (this.props.params && this.props.params.id) {
-    //   func = updateDirection(user.nick, this.props.params.id, params);
-    // }
-    // else {
-    //   func = createDirection(user.nick, params);
-    // }
-    //
-    // this.props.dispatch(func);
+
+    this.props.dispatch(createAppointment(params));
   }
 
   render() {
@@ -90,8 +84,14 @@ export default class AppointmentsForm extends Component {
     return (
       <div className={CN(css.appointmentForm)}>
         <form>
-          <DatePicker selected={date} onChange={ this::this.dateChange } />
-          <TimePicker defaultValue={time} onChange={ this::this.timeChange } />
+          <DatePicker
+            selected={date}
+            onChange={ this::this.dateChange }
+            error={errors.date} />
+          <TimePicker
+            defaultValue={time}
+            onChange={ this::this.timeChange }
+            error={errors.date} />
           <Select
             classValue="repeats-field"
             ref="repeats"
@@ -111,3 +111,17 @@ export default class AppointmentsForm extends Component {
     );
   }
 }
+
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return {
+    appointments: state.appointments.list,
+    errors: state.appointments.errors
+  };
+}
+
+export default connect(mapStateToProps)(AppointmentsForm);

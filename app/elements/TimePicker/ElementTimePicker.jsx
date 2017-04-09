@@ -10,11 +10,13 @@ export default class ElementTimePicker extends Component {
   }
 
   static propTypes = {
+    error: React.PropTypes.any,
     defaultValue: PropTypes.any,
     onChange: PropTypes.func
   };
 
   static defaultProps = {
+    error: false,
     defaultValue: moment().format('HH:00'),
     selected: moment(),
     placeholder: '',
@@ -36,8 +38,24 @@ export default class ElementTimePicker extends Component {
     return arr;
   }
 
+  getError() {
+    const error = this.props.error;
+
+    if (error) {
+      return (
+        <div className="errors-list">
+          {error.map((err, index) => {
+            return <p key={index} className="error">{err === true ? comment : err}</p>;
+          })
+        }
+        </div>
+      );
+    }
+  }
+
   render() {
     const fullTime = this.timeValues();
+    const error = this.getError();
     let { defaultValue, onChange } = this.props;
 
     if (!defaultValue) {
@@ -45,12 +63,15 @@ export default class ElementTimePicker extends Component {
     }
 
     return (
-      <Select
-        defaultValue={defaultValue}
-        ref="scope"
-        name="scope"
-        values={fullTime}
-        onChange={onChange} />
+      <div>
+        <Select
+          defaultValue={defaultValue}
+          ref="scope"
+          name="scope"
+          values={fullTime}
+          onChange={onChange} />
+        {error}
+      </div>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import { redirectFromRoot, checkMobileDevice,hideMobileNavigation } from 'routes/redirects';
+import { redirectFromRoot, checkMobileDevice, hideMobileNavigation } from 'routes/redirects';
 
 import App from 'App.js';
 import RootDashboard from 'root/dashboard/RootDashboard';

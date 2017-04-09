@@ -80,7 +80,6 @@ export default class ElementSelect extends Component {
     let values = this.props.values;
     const defaultValue = this.props.defaultValue;
     const onChange = this.props.onChange;
-    const classValue = this.props.classValue;
 
     values = this.addPlaceholder(values);
 

@@ -13,6 +13,7 @@ export default class ElementDatePicker extends Component {
   }
 
   static propTypes = {
+    error: React.PropTypes.any,
     startDate: PropTypes.any,
     selected: PropTypes.any,
     placeholder: PropTypes.string,
@@ -21,6 +22,7 @@ export default class ElementDatePicker extends Component {
   };
 
   static defaultProps = {
+    error: false,
     startDate: moment(),
     selected: moment(),
     placeholder: '',
@@ -28,9 +30,25 @@ export default class ElementDatePicker extends Component {
     onChange: () => {}
   };
 
+  getError() {
+    const error = this.props.error;
+
+    if (error) {
+      return (
+        <div className="errors-list">
+          {error.map((err, index) => {
+            return <p key={index} className="error">{err === true ? comment : err}</p>;
+          })
+        }
+        </div>
+      );
+    }
+  }
+
 
   render() {
     let { startDate, placeholder, selected, dateFormat, onChange } = this.props;
+    let error = this.getError();
 
     if (!selected) {
       selected = moment();
@@ -44,6 +62,7 @@ export default class ElementDatePicker extends Component {
           dateFormat={dateFormat}
           selected={selected}
           onChange={onChange} />
+        {error}
       </div>
     );
   }
