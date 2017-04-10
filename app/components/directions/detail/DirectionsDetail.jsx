@@ -132,7 +132,7 @@ class DirectionsDetail extends Component {
                    dispatch={this.props.dispatch}
         />}
         <div className="detail-widget">
-          <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
+          <WidgetTab tabs={tabs} className="horizontal-bottom direction-widget" />
           <div className={CN('Card', 'widget-content')}>
             {this.props.children}
           </div>
