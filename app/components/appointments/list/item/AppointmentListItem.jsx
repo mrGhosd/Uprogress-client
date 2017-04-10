@@ -26,7 +26,12 @@ export default class AppointmentListItem extends Component {
           <SvgIcon icon="sand_clock_icon" />
         </div>
         <div className="info">
-          {moment(appointment.date).format('dddd, MMMM Do, YYYY h:mm')}
+          <div className="date">
+            {moment(appointment.date).format('dddd, MMMM Do, YYYY h:mm')}
+          </div>
+          <div className="message">
+            {appointment.message && appointment.message}
+          </div>
         </div>
       </div>
     );
