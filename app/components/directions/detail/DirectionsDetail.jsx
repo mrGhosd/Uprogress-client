@@ -9,7 +9,6 @@ import { getDirection } from 'actions/directions';
 import { isCurrentUser } from 'utils/currentUser';
 import SvgIcon from 'SVGIcon/SVGIcon';
 
-import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
 import AppointmentsForm from 'appointments/form/AppointmentsForm';
 import WidgetTab from 'Widget/Tab/WidgetTab';
@@ -99,11 +98,17 @@ class DirectionsDetail extends Component {
 
   render() {
     let tabs = {};
-    const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
+    const { currentUser, user, editStep, stepErrors, direction } = this.props;
     const { appointmentPopoverOpen } = this.state;
     const progressBar = this.progressBar(direction);
+
+    tabs[`/${user.nick}/directions/${direction.slug}/steps`] = 'Steps';
     tabs[`/${user.nick}/directions/${direction.id}/steps`] = 'Steps';
-    tabs[`/${user.nick}/directions/${direction.id}/appointments`] = 'Appointments';
+    if (direction.appointments && direction.appointments.length > 0) {
+      tabs[`/${user.nick}/directions/${direction.slug}/appointments`] = 'Appointments';
+      tabs[`/${user.nick}/directions/${direction.id}/appointments`] = 'Appointments';
+    }
+    console.log();
 
     return (
       <div className={CN(css.directionsDetail)}>
@@ -150,7 +155,6 @@ class DirectionsDetail extends Component {
 function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
-    steps: state.steps.list,
     editStep: state.steps.edit,
     user: state.users.show,
     stepErrors: state.steps.errors,

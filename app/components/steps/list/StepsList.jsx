@@ -29,7 +29,6 @@ export class StepsList extends Component {
 
     return (
       <div className="steps-list">
-        <h3>Steps List</h3>
         <div className="list">
           {steps.map((item) => {
             return (<StepsListItem step={item} user={user} currentUser={currentUser} key={item.id} dispatch={this.props.dispatch} />);
