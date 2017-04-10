@@ -106,7 +106,6 @@ class DirectionsDetail extends Component {
     if (direction.appointments && direction.appointments.length > 0) {
       tabs[`/${user.nick}/directions/${direction.id}/appointments`] = 'Appointments';
     }
-    console.log();
 
     return (
       <div className={CN(css.directionsDetail)}>

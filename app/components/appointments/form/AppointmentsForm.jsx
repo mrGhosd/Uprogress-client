@@ -21,7 +21,8 @@ export class AppointmentsForm extends Component {
     dispatch: PropTypes.func,
     params: PropTypes.object,
     errors: PropTypes.object,
-    appointments: PropTypes.array
+    appointments: PropTypes.array,
+    appointment: PropTypes.object
   };
 
   static defaultProps = {
@@ -29,15 +30,27 @@ export class AppointmentsForm extends Component {
     dispatch: () => {},
     params: {},
     errors: {},
-    appointments: []
+    appointments: [],
+    appointment: {}
   };
 
   state = {
     date: moment(),
     message: '',
     time: moment().format('HH:00'),
-    repeats: 'never'
+    repeats: 'never',
+    create: true
   };
+
+  componentWillMount() {
+    if (!this.props.appointment.isEmpty) {
+      const date = moment(this.props.appointment.date);
+      const time = date.format('HH:00');
+      const { repeats, message } = this.props.appointment;
+
+      this.setState({ date, time, repeats, message, create: false });
+    }
+  }
 
   handleChange(event) {
     let lastState = this.state;
@@ -61,16 +74,24 @@ export class AppointmentsForm extends Component {
   }
 
   submitForm() {
+    let func;
     const { date, time } = this.state;
     const formattedDate = `${date.format('YYYY-MM-DD')} ${time}:00`;
     const params = {
       date: moment(formattedDate).format('YYYY-MM-DD HH:mm ZZ'),
       message: this.state.message,
       repeats: this.state.repeats,
-      direction_id: this.props.direction.id
+      direction_id: this.props.direction.id,
+      active: true
     };
-    
-    this.props.dispatch(createAppointment(params));
+
+    if (this.state.create) {
+        this.props.dispatch(createAppointment(params));
+    }
+    else {
+      console.log("UPDATE ACTION");
+    }
+
   }
 
   render() {

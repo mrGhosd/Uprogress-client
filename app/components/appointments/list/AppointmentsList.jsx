@@ -24,7 +24,7 @@ export class AppointmentsList extends Component {
 
 
   render() {
-    const { appointments, user, currentUser } = this.props;
+    const { appointments, user, currentUser, direction } = this.props;
 
     return (
       <div>
@@ -33,6 +33,7 @@ export class AppointmentsList extends Component {
                                        user={user}
                                        currentUser={currentUser}
                                        key={item.id}
+                                       direction={direction}
                                        dispatch={this.props.dispatch} />);
         })}
       </div>
@@ -50,7 +51,7 @@ function mapStateToProps(state) {
     appointments: state.appointments.list,
     user: state.users.show,
     currentUser: state.users.current,
-    direction: state.directions.show
+    direction: state.directions.detail
   };
 }
 
