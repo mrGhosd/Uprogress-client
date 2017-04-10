@@ -65,7 +65,7 @@ export default class AppointmentListItem extends Component {
   }
 
   deleteAppointment() {
-    
+
   }
 
   render() {

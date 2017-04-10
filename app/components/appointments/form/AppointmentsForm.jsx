@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import CN from 'classnames';
 
-import { createAppointment } from 'actions/appointments';
+import { createAppointment, updateAppointment } from 'actions/appointments';
 
 import TextArea from 'TextArea/ElementTextArea';
 import Button from 'Button/ElementButton';
@@ -83,22 +83,25 @@ export class AppointmentsForm extends Component {
       message: this.state.message,
       repeats: this.state.repeats,
       direction_id: this.props.direction.id,
-      active: true
+      available: true
     };
 
     if (this.state.create) {
       func = createAppointment(params);
     }
-
+    else {
+      func = updateAppointment(this.props.appointment.id, params);
+    }
+    console.log(params);
     this.props.dispatch(func);
   }
 
   render() {
-    const repeats = [
+    const repeatsList = [
       { title: 'Never', value: 'never' },
       { title: 'Every day', value: 'every_day' }
     ];
-    const { date, time } = this.state;
+    const { date, time, repeats } = this.state;
     const { errors } = this.props;
 
     return (
@@ -116,8 +119,9 @@ export class AppointmentsForm extends Component {
             classValue="repeats-field"
             ref="repeats"
             name="repeats"
-            values={repeats}
-            onChange={this::this.handleChange} />
+            values={repeatsList}
+            onChange={this::this.handleChange}
+            defaultValue={repeats} />
          <TextArea
            classValue="message-field"
            ref="message"

@@ -1,10 +1,9 @@
-import { post } from 'utils/ApiRequest';
+import { post, put } from 'utils/ApiRequest';
 import { Info } from 'actions/notifications';
-
 
 /**
  * Create a new appointment for direction
- * @param {Object} direction Direction parameters
+ * @param {Object} appointment Appointment parameters
  * @return {Dispatch} Dispatch function
  */
 export function createAppointment(appointment) {
@@ -18,6 +17,28 @@ export function createAppointment(appointment) {
       })
       .catch((error) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
+        dispatch({ type: 'APPOINTMENT_FAILED', errors: error.data.errors });
+      });
+  };
+}
+
+/**
+ * Updates an existent appointment
+ * @param {Object} appointment Appointment parameters
+ * @return {Dispatch} Dispatch function
+ */
+export function updateAppointment(id, appointment) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put(`/appointments/${id}`, { appointment })
+      .then((response) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        Info('appointmentSuccessUpdate');
+        dispatch({ type: 'UPDATE_APPOINTMENT', appointment: response.data.appointment });
+      })
+      .catch((error) => {
+        dispatch({ type: 'STOP_MAIN_LOADER' });
+        console.log(error);
         dispatch({ type: 'APPOINTMENT_FAILED', errors: error.data.errors });
       });
   };

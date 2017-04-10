@@ -54,6 +54,10 @@ const messages = {
   appointmentSuccessCreation: {
     title: 'Success',
     text: 'You succesfully create appointment for direction'
+  },
+  appointmentSuccessUpdate: {
+    title: 'Success',
+    text: 'Appointment was succesfully updated'
   }
 };
 
