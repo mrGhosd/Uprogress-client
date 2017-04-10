@@ -75,6 +75,7 @@ export class AppointmentsForm extends Component {
 
   submitForm() {
     let func;
+
     const { date, time } = this.state;
     const formattedDate = `${date.format('YYYY-MM-DD')} ${time}:00`;
     const params = {
@@ -86,12 +87,10 @@ export class AppointmentsForm extends Component {
     };
 
     if (this.state.create) {
-        this.props.dispatch(createAppointment(params));
-    }
-    else {
-      console.log("UPDATE ACTION");
+      func = createAppointment(params);
     }
 
+    this.props.dispatch(func);
   }
 
   render() {

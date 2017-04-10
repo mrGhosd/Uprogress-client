@@ -64,6 +64,10 @@ export default class AppointmentListItem extends Component {
     }
   }
 
+  deleteAppointment() {
+    
+  }
+
   render() {
     const { appointmentPopoverOpen } = this.state;
     const { appointment, direction } = this.props;
@@ -93,6 +97,9 @@ export default class AppointmentListItem extends Component {
               <SvgIcon icon="edit-step" />
             </a>
           </Popover>
+          <a onClick={this::this.deleteAppointment}>
+            <SvgIcon icon="delete-step" />
+          </a>
         </div>
       </div>
     );
