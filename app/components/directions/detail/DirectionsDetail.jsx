@@ -103,6 +103,7 @@ class DirectionsDetail extends Component {
     const { appointmentPopoverOpen } = this.state;
     const progressBar = this.progressBar(direction);
     tabs[`/${user.nick}/directions/${direction.id}/steps`] = 'Steps';
+    tabs[`/${user.nick}/directions/${direction.id}/appointments`] = 'Appointments';
 
     return (
       <div className={CN(css.directionsDetail)}>

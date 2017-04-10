@@ -6,6 +6,7 @@ import { removeErrorsFromForm } from './redirects';
 import DirectionsDetail from 'directions/detail/DirectionsDetail';
 import DirectionsForm from 'directions/form/DirectionsForm';
 import StepsList from 'steps/list/StepsList';
+import AppointmentsList from 'appointments/list/AppointmentsList';
 
 export default (
   <Route path="directions">
@@ -13,6 +14,7 @@ export default (
     <Route component={DirectionsDetail} path=":id">
       <IndexRedirect to="steps" />
       <Route component={StepsList} path="steps" />
+      <Route component={AppointmentsList} path="appointments" />
     </Route>
     <Route component={DirectionsForm} path=":id/edit" onLeave={removeErrorsFromForm}/>
   </Route>
