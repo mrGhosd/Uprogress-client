@@ -14,6 +14,8 @@ const initialState = {
  /*eslint-disable */
 export default function(state = initialState, action) {
   switch (action.type) {
+    case 'DIRECTION':
+      return { ...state, list: action.direction.appointments };
     case 'NEW_APPOINTMENT':
       return update(state, {
         list: { $push: [action.appointment] },
