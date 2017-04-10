@@ -12,6 +12,7 @@ import SvgIcon from 'SVGIcon/SVGIcon';
 import StepsList from 'steps/list/StepsList';
 import StepsForm from 'steps/form/StepsForm';
 import AppointmentsForm from 'appointments/form/AppointmentsForm';
+import WidgetTab from 'Widget/Tab/WidgetTab';
 
 class DirectionsDetail extends Component {
 
@@ -28,7 +29,8 @@ class DirectionsDetail extends Component {
     editStep: PropTypes.object,
     user: PropTypes.object,
     currentUser: PropTypes.object,
-    stepErrors: PropTypes.object
+    stepErrors: PropTypes.object,
+    children: PropTypes.object
   };
 
   static defaultProps = {
@@ -41,7 +43,8 @@ class DirectionsDetail extends Component {
     editStep: {},
     user: {},
     currentUser: {},
-    stepErrors: {}
+    stepErrors: {},
+    children: {}
   };
 
   componentWillMount() {
@@ -95,9 +98,11 @@ class DirectionsDetail extends Component {
   }
 
   render() {
+    let tabs = {};
     const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
     const { appointmentPopoverOpen } = this.state;
     const progressBar = this.progressBar(direction);
+    tabs[`/${user.nick}/directions/${direction.id}/steps`] = 'Steps';
 
     return (
       <div className={CN(css.directionsDetail)}>
@@ -125,7 +130,12 @@ class DirectionsDetail extends Component {
                    currentUser={currentUser}
                    dispatch={this.props.dispatch}
         />}
-        {!steps.isEmpty && <StepsList currentUser={currentUser} user={user} steps={steps} dispatch={dispatch} />}
+        <div className="detail-widget">
+          <WidgetTab tabs={tabs} className="horizontal-bottom dashboard-widget" />
+          <div className={CN('Card', 'widget-content')}>
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }

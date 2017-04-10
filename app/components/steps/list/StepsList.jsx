@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
+import { connect } from 'react-redux';
+
 import StepsListItem from 'steps/list/item/StepsListItem';
 
-export default class StepsList extends Component {
+export class StepsList extends Component {
 
   state = {
     steps: []
@@ -24,7 +26,7 @@ export default class StepsList extends Component {
 
   render() {
     const { steps, user, currentUser } = this.props;
-    
+
     return (
       <div className="steps-list">
         <h3>Steps List</h3>
@@ -37,3 +39,19 @@ export default class StepsList extends Component {
     );
   }
 }
+
+/**
+ * Mapping application state to properties
+ * @param  {Object} state Application state
+ * @return {Object} Mapped properties
+ */
+function mapStateToProps(state) {
+  return {
+    user: state.users.show,
+    currentUser: state.users.current,
+    direction: state.directions.detail,
+    steps: state.steps.list
+  };
+}
+
+export default connect(mapStateToProps)(StepsList);
