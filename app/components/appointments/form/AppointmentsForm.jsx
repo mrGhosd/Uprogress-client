@@ -92,7 +92,6 @@ export class AppointmentsForm extends Component {
     else {
       func = updateAppointment(this.props.appointment.id, params);
     }
-    console.log(params);
     this.props.dispatch(func);
   }
 

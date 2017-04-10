@@ -31,6 +31,10 @@ export default function(state = initialState, action) {
       return update(state, {
         list: { $splice: [[indexValue, 1, action.appointment]] }
       });
+    case 'DELETE_APPOINTMENT':
+      const ids = state.list.map(item => item.id);
+      const index = ids.indexOf(action.appointment.id);
+      return update(state, {list: {$splice: [[index, 1]]}});
     default:
       return state;
   }

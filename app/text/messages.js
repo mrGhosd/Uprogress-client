@@ -58,6 +58,10 @@ const messages = {
   appointmentSuccessUpdate: {
     title: 'Success',
     text: 'Appointment was succesfully updated'
+  },
+  appointmentSuccessDelete: {
+    title: 'Success',
+    text: 'Appointment was succesfully deleted'
   }
 };
 

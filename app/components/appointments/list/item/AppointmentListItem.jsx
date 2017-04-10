@@ -4,6 +4,8 @@ import React, { Component, PropTypes } from 'react';
 import CN from 'classnames';
 import moment from 'moment';
 
+import { deleteAppointment } from 'actions/appointments';
+
 import SvgIcon from 'SVGIcon/SVGIcon';
 import Popover from 'react-popover';
 
@@ -65,7 +67,9 @@ export default class AppointmentListItem extends Component {
   }
 
   deleteAppointment() {
-
+    const { appointment } = this.props;
+    
+    this.props.dispatch(deleteAppointment(appointment.id));
   }
 
   render() {
