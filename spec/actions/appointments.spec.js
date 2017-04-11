@@ -109,4 +109,27 @@ describe('Appointments actions', () => {
       });
     });
   });
+
+  describe('#deleteAppointment', () => {
+    it('deletes appointment', () => {
+      const params = { appointment: { id: 1 } };
+      
+      nock('http://localhost:3000')
+          .delete('/api/v1/appointments/1')
+          .reply(200, params);
+
+      const expectedActions = [
+        { type: 'START_MAIN_LOADER' },
+        { type: 'STOP_MAIN_LOADER' },
+        { type: 'DELETE_APPOINTMENT', appointment: { id: 1 } }
+      ];
+
+      const store = mockStore({});
+
+      return store.dispatch(deleteAppointment(1))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+  });
 });
