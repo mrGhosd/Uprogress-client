@@ -20,7 +20,7 @@ describe('Notifications actions', () => {
     it('fires ADD_INFO_NOTIFICATION action', () => {
       const content = messages['directionCreateSuccess'];
       const structure = {
-        id: 'id-4',
+        id: 'id-5',
         type: 'info',
         content
       };
@@ -35,7 +35,7 @@ describe('Notifications actions', () => {
     it('fires ADD_ALERT_NOTIFICATION action', () => {
       const content = messages['directionCreateSuccess'];
       const structure = {
-        id: 'id-5',
+        id: 'id-6',
         type: 'danger',
         content
       };

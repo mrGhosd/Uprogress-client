@@ -35,5 +35,78 @@ describe('Appointments actions', () => {
           });
       });
     });
+
+    context('with invalid attributes', () => {
+      it('fires APPOINTMENT_FAILED reducer action', () => {
+        const params = { appointment: { id: 1 } };
+        const errors = { errors: { email: ['Can\'t be blank'] } };
+
+        nock('http://localhost:3000')
+            .post('/api/v1/appointments', params)
+            .reply(422, errors);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'APPOINTMENT_FAILED', errors: errors.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(createAppointment(params.appointment))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+  });
+
+  describe('#updateAppointment', () => {
+    context('with valid attributes', () => {
+      it('fires UPDATE_APPOINTMENT action', () => {
+        const params = { appointment: { id: 1 } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/appointments/1', params)
+            .reply(200, params);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'UPDATE_APPOINTMENT', appointment: { id: 1 } }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(updateAppointment(1, params.appointment))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      it('fires APPOINTMENT_FAILED action', () => {
+        const params = { appointment: { id: 1 } };
+        const errors = { errors: { email: ['Can\'t be blank'] } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/appointments/1', params)
+            .reply(422, errors);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'APPOINTMENT_FAILED', errors: errors.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(updateAppointment(1, params.appointment))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
   });
 });
