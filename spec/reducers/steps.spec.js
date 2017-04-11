@@ -1,12 +1,6 @@
 import reducer from 'reducers/steps';
 import expect from 'expect';
 
-const initialState = {
-  list: [],
-  errors: {},
-  edit: {}
-};
-
 describe('Steps reducers', () => {
   describe('DIRECTION', () => {
     it('return updated steps list key', () => {
@@ -14,7 +8,7 @@ describe('Steps reducers', () => {
 
       expect(
         reducer([], { type: 'DIRECTION', direction: list })
-      ).toEqual({ list: list.steps });
+      ).toEqual({ list: list.steps, edit: {} });
     });
   });
 
