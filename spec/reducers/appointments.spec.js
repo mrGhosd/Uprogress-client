@@ -18,7 +18,13 @@ describe('Appointments reducer', () => {
   });
 
   describe('NEW_APPOINTMENT', () => {
+    it('returns updated list', () => {
+      const appointment = { id: 1 };
 
+      expect(
+        reducer(initialState, { type: 'NEW_APPOINTMENT', appointment })
+      ).toEqual({ list: [appointment], errors: {} });
+    })
   });
 
   describe('APPOINTMENT_FAILED', () => {

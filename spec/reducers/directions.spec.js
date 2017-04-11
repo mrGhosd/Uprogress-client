@@ -45,10 +45,7 @@ describe('Directions reducer', () => {
   describe('DIRECTION_FAILED', () => {
     it('return updated direction_failed key', () => {
       const errors = { title: 'Error', description: 'Error' };
-
-      // initialState.errors = errors;
-      // initialState.isUpdated = false;
-      // initialState.isCreated = false;
+      
       expect(
         reducer({}, { type: 'DIRECTION_FAILED', errors })
       ).toEqual({ errors, isCreated: false, isUpdated: false });
