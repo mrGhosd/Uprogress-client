@@ -1,5 +1,3 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import nock from 'nock';
 import expect from 'expect';
 import messages from 'text/messages';
@@ -7,10 +5,8 @@ import {
   Info, Alert, DropNotification
 } from 'actions/notifications';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-
 describe('Notifications actions', () => {
+
   afterEach(() => {
     nock.cleanAll();
   });
@@ -19,7 +15,7 @@ describe('Notifications actions', () => {
     it('fires ADD_INFO_NOTIFICATION action', () => {
       const content = messages['directionCreateSuccess'];
       const structure = {
-        id: `id-3`,
+        id: 'id-6',
         type: 'info',
         content
       };
@@ -34,7 +30,7 @@ describe('Notifications actions', () => {
     it('fires ADD_ALERT_NOTIFICATION action', () => {
       const content = messages['directionCreateSuccess'];
       const structure = {
-        id: `id-4`,
+        id: 'id-7',
         type: 'danger',
         content
       };

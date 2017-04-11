@@ -50,6 +50,18 @@ const messages = {
   resetPasswordSuccess: {
     title: 'Success',
     text: 'You succesfully update password'
+  },
+  appointmentSuccessCreation: {
+    title: 'Success',
+    text: 'You succesfully create appointment for direction'
+  },
+  appointmentSuccessUpdate: {
+    title: 'Success',
+    text: 'Appointment was succesfully updated'
+  },
+  appointmentSuccessDelete: {
+    title: 'Success',
+    text: 'Appointment was succesfully deleted'
   }
 };
 

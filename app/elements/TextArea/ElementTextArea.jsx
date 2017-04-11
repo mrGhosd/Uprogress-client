@@ -8,6 +8,7 @@ import { StripSpecialSymbols } from 'utils/CommonUtils';
 
 export default class ElementTextArea extends Component {
   static propTypes = {
+    classValue: PropTypes.string,
     name: PropTypes.string,
     onChange: React.PropTypes.func,
     type: React.PropTypes.string,
@@ -18,6 +19,7 @@ export default class ElementTextArea extends Component {
   }
 
   static defaultProps = {
+    classValue: '',
     name: '',
     onChange: () => {},
     type: 'text',
@@ -52,9 +54,10 @@ export default class ElementTextArea extends Component {
     const listener = this.props.onChange;
     const value = this.props.value;
     const error = this.getError();
+    const classValue = this.props.classValue;
 
     return (
-      <div className={CN(css.textArea)}>
+      <div className={CN(css.textArea, classValue)}>
         <Label htmlFor={id}>{this.props.label}</Label>
         <textarea name={name} ref="textarea" rows="3"
         placeholder={this.props.placeholder} value={value} onChange={listener}/>

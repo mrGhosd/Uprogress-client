@@ -151,6 +151,7 @@ export function getUser(user) {
       .catch((error) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         Alert('user_404');
+        console.log(error.data);
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };

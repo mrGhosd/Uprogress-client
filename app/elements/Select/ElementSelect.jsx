@@ -11,6 +11,7 @@ export default class ElementSelect extends Component {
   optionsGroupId = 0;
 
   static defaultProps = {
+    defaultValue: '',
     name: '',
     size: 1,
     values: [],
@@ -18,7 +19,8 @@ export default class ElementSelect extends Component {
   };
 
   static propTypes = {
-    default: React.PropTypes.string,
+    classValue: React.PropTypes.string,
+    defaultValue: React.PropTypes.string,
     name: React.PropTypes.string,
     size: React.PropTypes.number,
     placeholder: React.PropTypes.string,
@@ -49,9 +51,6 @@ export default class ElementSelect extends Component {
   renderValue(item) {
     let keys = {};
 
-    if (item.value == this.props.default) {
-      keys.selected = 'selected';
-    }
     if (item.disabled) {
       keys.disabled = 'disabled';
     }
@@ -79,6 +78,7 @@ export default class ElementSelect extends Component {
     let required = this.props.required;
     let disabled = this.props.disabled;
     let values = this.props.values;
+    const defaultValue = this.props.defaultValue;
     const onChange = this.props.onChange;
 
     values = this.addPlaceholder(values);
@@ -86,7 +86,7 @@ export default class ElementSelect extends Component {
     return (
       <div className={css.Select}>
         <Label htmlFor={id}>{this.props.label}</Label>
-        <select name={name} {...{ id, size, required, disabled, onChange }}>
+        <select name={name} {...{ id, size, required, disabled, onChange, defaultValue }}>
           {values.map((item) => {
             if (item.value) {
               return this.renderValue(item);

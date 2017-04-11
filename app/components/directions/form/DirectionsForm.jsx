@@ -85,7 +85,7 @@ class DirectionsForm extends Component {
       title: this.state.title,
       description: this.state.description
     };
-    const { user  } = this.props;
+    const { user } = this.props;
 
     let func;
 

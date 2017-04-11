@@ -3,17 +3,21 @@ import css from './directionsDetail.styl';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CN from 'classnames';
-
-import StepsList from 'steps/list/StepsList';
-import StepsForm from 'steps/form/StepsForm';
+import Popover from 'react-popover';
 
 import { getDirection } from 'actions/directions';
 import { isCurrentUser } from 'utils/currentUser';
+import SvgIcon from 'SVGIcon/SVGIcon';
+
+import StepsForm from 'steps/form/StepsForm';
+import AppointmentsForm from 'appointments/form/AppointmentsForm';
+import WidgetTab from 'Widget/Tab/WidgetTab';
 
 class DirectionsDetail extends Component {
 
   state = {
-    directionLoad: true
+    directionLoad: true,
+    appointmentPopoverOpen: false
   };
 
   static propTypes = {
@@ -24,7 +28,8 @@ class DirectionsDetail extends Component {
     editStep: PropTypes.object,
     user: PropTypes.object,
     currentUser: PropTypes.object,
-    stepErrors: PropTypes.object
+    stepErrors: PropTypes.object,
+    children: PropTypes.object
   };
 
   static defaultProps = {
@@ -37,7 +42,8 @@ class DirectionsDetail extends Component {
     editStep: {},
     user: {},
     currentUser: {},
-    stepErrors: {}
+    stepErrors: {},
+    children: {}
   };
 
   componentWillMount() {
@@ -80,13 +86,44 @@ class DirectionsDetail extends Component {
     return template;
   }
 
+  togglePopover() {
+    this.setState({ appointmentPopoverOpen: !this.state.appointmentPopoverOpen });
+  }
+
+  outerClick(event) {
+    if (event.target.className && !event.target.className.match(/react-datepicker/)) {
+      this.setState({ appointmentPopoverOpen: !this.state.appointmentPopoverOpen });
+    }
+  }
+
   render() {
-    const { currentUser, user, dispatch, editStep, stepErrors, direction, steps } = this.props;
+    let tabs = {};
+    const { currentUser, user, editStep, stepErrors, direction } = this.props;
+    const { appointmentPopoverOpen } = this.state;
     const progressBar = this.progressBar(direction);
+
+    tabs[`/${user.nick}/directions/${direction.id}/steps`] = 'Steps';
+    if (direction.appointments && direction.appointments.length > 0) {
+      tabs[`/${user.nick}/directions/${direction.id}/appointments`] = 'Appointments';
+    }
 
     return (
       <div className={CN(css.directionsDetail)}>
-        <h1>{direction.title}</h1>
+        <div className="direction-detail-header">
+          <h1>{direction.title}</h1>
+          <div className="appointment-handler">
+            <Popover
+              isOpen={appointmentPopoverOpen}
+              onOuterAction={this::this.outerClick}
+              body={<AppointmentsForm direction={direction} />}
+              preferPlace="left">
+              <a onClick={this::this.togglePopover}>
+                <SvgIcon icon="clock_icon" />
+              </a>
+            </Popover>
+          </div>
+        </div>
+
         <p>{direction.description}</p>
         {progressBar}
         {isCurrentUser(currentUser, user) && <StepsForm direction={direction}
@@ -96,7 +133,12 @@ class DirectionsDetail extends Component {
                    currentUser={currentUser}
                    dispatch={this.props.dispatch}
         />}
-        {!steps.isEmpty && <StepsList currentUser={currentUser} user={user} steps={steps} dispatch={dispatch} />}
+        <div className="detail-widget">
+          <WidgetTab tabs={tabs} className="horizontal-bottom direction-widget" />
+          <div className={CN('Card', 'widget-content')}>
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }
@@ -110,7 +152,6 @@ class DirectionsDetail extends Component {
 function mapStateToProps(state) {
   return {
     direction: state.directions.detail,
-    steps: state.steps.list,
     editStep: state.steps.edit,
     user: state.users.show,
     stepErrors: state.steps.errors,

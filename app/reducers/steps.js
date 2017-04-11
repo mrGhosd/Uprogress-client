@@ -16,7 +16,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case 'DIRECTION':
-      return { ...state, list: action.direction.steps };
+      return { ...state, list: action.direction.steps, edit: {} };
     case 'EDIT_STEP':
       return { ...state, edit: action.step };
     case 'CREATE_STEP':
