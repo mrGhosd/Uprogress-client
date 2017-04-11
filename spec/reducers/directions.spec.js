@@ -45,7 +45,7 @@ describe('Directions reducer', () => {
   describe('DIRECTION_FAILED', () => {
     it('return updated direction_failed key', () => {
       const errors = { title: 'Error', description: 'Error' };
-      
+
       expect(
         reducer({}, { type: 'DIRECTION_FAILED', errors })
       ).toEqual({ errors, isCreated: false, isUpdated: false });
@@ -77,7 +77,7 @@ describe('Directions reducer', () => {
   describe('UPDATE_STEP', () => {
     it('return updated detailed and list key', () => {
       const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
-      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' }};
+      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' } };
 
       expect(
         reducer(defaultState, { type: 'UPDATE_STEP', step })
@@ -88,7 +88,7 @@ describe('Directions reducer', () => {
   describe('CREATE_STEP', () => {
     it('return updated detailed and list key', () => {
       const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
-      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' }};
+      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' } };
 
       expect(
         reducer(defaultState, { type: 'CREATE_STEP', step })
@@ -99,7 +99,7 @@ describe('Directions reducer', () => {
   describe('DELETE_STEP', () => {
     it('return updated detailed and list key', () => {
       const defaultState = { list: [{ id: 1, title: 'Title', description: 'Desc' }] };
-      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' }};
+      const step = { direction: { id: 1, title: 'Title1', description: 'Desc1' } };
 
       expect(
         reducer(defaultState, { type: 'DELETE_STEP', step })
@@ -109,7 +109,7 @@ describe('Directions reducer', () => {
 
   describe('USER_INFO', () => {
     it('return updated list key', () => {
-      const user = { directions: [{ id: 1, title: 'Title1', description: 'Desc1' }]};
+      const user = { directions: [{ id: 1, title: 'Title1', description: 'Desc1' }] };
 
       expect(
         reducer({}, { type: 'USER_INFO', user })
@@ -119,7 +119,7 @@ describe('Directions reducer', () => {
 
   describe('REMOVE_FORM_ERRORS', () => {
     it('return updated errors key', () => {
-      const defaultState = {errors: { title: 'Error', description: 'Error' }};
+      const defaultState = { errors: { title: 'Error', description: 'Error' } };
 
       expect(
         reducer(defaultState, { type: 'REMOVE_FORM_ERRORS' })
