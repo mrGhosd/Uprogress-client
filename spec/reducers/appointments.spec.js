@@ -24,11 +24,17 @@ describe('Appointments reducer', () => {
       expect(
         reducer(initialState, { type: 'NEW_APPOINTMENT', appointment })
       ).toEqual({ list: [appointment], errors: {} });
-    })
+    });
   });
 
   describe('APPOINTMENT_FAILED', () => {
+    it('returns updated error', () => {
+      const errors = { email: [] };
 
+      expect(
+        reducer(initialState, { type: 'APPOINTMENT_FAILED', errors })
+      ).toEqual({ list: [], errors });
+    });
   });
 
   describe('UPDATE_APPOINTMENT', () => {
