@@ -49,6 +49,13 @@ describe('Appointments reducer', () => {
   });
 
   describe('DELETE_APPOINTMENT', () => {
+    it('returns updated list', () => {
+      const defaultState = { list: [{ id: 1, title: 'Title' }] };
+      const appointment = { id: 1 };
 
+      expect(
+        reducer(defaultState, { type: 'DELETE_APPOINTMENT', appointment })
+      ).toEqual({ list: [] });
+    });
   });
 });
