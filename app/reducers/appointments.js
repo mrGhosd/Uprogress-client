@@ -15,6 +15,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case 'DIRECTION':
+      console.log(action.direction, action.direction.appointments);
       return { ...state, list: action.direction.appointments };
     case 'NEW_APPOINTMENT':
       return update(state, {
