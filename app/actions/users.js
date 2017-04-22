@@ -151,7 +151,6 @@ export function getUser(user) {
       .catch((error) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         Alert('user_404');
-        console.log(error.data);
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };
@@ -264,6 +263,24 @@ export function removeAuthorization(id) {
        .then((response) => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
          dispatch({ type: 'REMOVE_AUTHORIZATION', authorization: response.data.authorization });
+       })
+       .catch(() => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+       });
+  };
+}
+
+/**
+ * Load notification settings
+ * @return {Dispatch} Dispatch function
+ */
+export function loadUserNotification(userId) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return get(`/users/${userId}/notification_settings`)
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         dispatch({ type: 'LOAD_NOTIFICATION_SETTING', setting: response.data.setting });
        })
        .catch(() => {
          dispatch({ type: 'STOP_MAIN_LOADER' });

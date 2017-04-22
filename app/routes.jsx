@@ -15,6 +15,7 @@ import UserProfile from 'user/profile/UserProfile';
 import UserAuthorizations from 'user/authorizations/UserAuthorizations';
 import UserSecurity from 'user/security/UserSecurity';
 import LandingMobile from 'landing/mobile/LandingMobile';
+import UserNotification from 'user/notification/UserNotification';
 
 import { Provider } from 'react-redux';
 
@@ -37,6 +38,7 @@ export default (
           <IndexRoute component={UserProfile} />
           <Route path="authorizations" component={UserAuthorizations} />
           <Route path="security" component={UserSecurity} />
+          <Route path="notifications" component={UserNotification} />
         </Route>
 
         {Users}

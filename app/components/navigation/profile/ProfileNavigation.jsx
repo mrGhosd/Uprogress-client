@@ -22,13 +22,15 @@ class ProfileNavigation extends Component {
   static propTypes = {
     currentUser: PropTypes.object,
     dispatch: PropTypes.func,
-    location: PropTypes.object
+    location: PropTypes.object,
+    isShow: PropTypes.bool
   };
 
   static defaultProps = {
     currentUser: {},
     dispatch: () => {},
-    location: {}
+    location: {},
+    isShow: false
   };
 
   itemSelected(item) {
@@ -46,7 +48,8 @@ class ProfileNavigation extends Component {
     const tabs = [
       { name: 'Profile settings', path: '/profile' },
       { name: 'Authorizations', path: '/profile/authorizations' },
-      { name: 'Security', path: '/profile/security' }
+      { name: 'Security', path: '/profile/security' },
+      { name: 'Notifications', path: '/profile/notifications' }
     ];
 
     return (

@@ -10,7 +10,9 @@ const initialState = {
   authorizations: [],
   resetPasswordErrors: {},
   resetPassword: false,
-  changePasswordErrors: {}
+  changePasswordErrors: {},
+  notificationSetting: {},
+  notificationSettingError: {}
 };
 
 /**
@@ -76,6 +78,8 @@ export default function(state = initialState, action) {
       return { ...state, changePasswordErrors: {} };
     case 'PASSWORD_CHANGE_FAILED':
       return { ...state, changePasswordErrors: action.errors };
+    case 'LOAD_NOTIFICATION_SETTING':
+      return { ...state, notificationSetting: action.setting };
     default:
       return state;
   }
