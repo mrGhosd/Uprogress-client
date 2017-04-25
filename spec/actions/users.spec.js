@@ -6,7 +6,8 @@ import {
   signIn, signUp, signOut, currentUser,
   getUser, updateUser, getCurrentUserAuthorizations,
   removeAuthorization, removeAuthorizations, restorePassword,
-  resetPassword, removeResetPassword, changePassword
+  resetPassword, removeResetPassword, changePassword,
+  loadUserNotification
 } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
@@ -566,6 +567,29 @@ describe('Users actions', () => {
             expect(store.getActions()).toEqual(expectedActions);
           });
       });
+    });
+  });
+
+  describe('#loadUserNotification()', () => {
+    it('fires LOAD_NOTIFICATION_SETTING action', () => {
+      const responseParams = { setting: { id: 1 } };
+
+      nock('http://localhost:3000')
+          .get('/api/v1/users/1/notification_settings')
+          .reply(200, responseParams);
+
+      const expectedActions = [
+        { type: 'START_MAIN_LOADER' },
+        { type: 'STOP_MAIN_LOADER' },
+        { type: 'LOAD_NOTIFICATION_SETTING', setting: responseParams.setting }
+      ];
+
+      const store = mockStore({});
+
+      return store.dispatch(loadUserNotification(1))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
   });
 });
