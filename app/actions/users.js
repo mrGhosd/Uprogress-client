@@ -304,7 +304,7 @@ export function updateUserNotification(userId, id, setting) {
        .catch((error) => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
          Alert('failedNotificationUpdate');
-         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING_ERROR', setting: error.data.errors });
+         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING_ERROR', errors: error.data.errors });
        });
   };
 }

@@ -7,7 +7,7 @@ import {
   getUser, updateUser, getCurrentUserAuthorizations,
   removeAuthorization, removeAuthorizations, restorePassword,
   resetPassword, removeResetPassword, changePassword,
-  loadUserNotification
+  loadUserNotification, updateUserNotification
 } from 'actions/users';
 import { initLocalStorage } from 'utils/localStorage';
 import { getAuthorizationParams } from 'utils/browser';
@@ -590,6 +590,62 @@ describe('Users actions', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });
+    });
+  });
+
+  describe('#updateUserNotification()', () => {
+    context('with valid attributes', () => {
+      it('fires UPDATE_NOTIFICATION_SETTING action', () => {
+        const requestParams = {
+          pushEnabled: true,
+          mailEnabled: true
+        };
+        const responseParams = { setting: { id: 1 } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/users/1/notification_settings/1', { setting: requestParams })
+            .reply(200, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'UPDATE_NOTIFICATION_SETTING', setting: responseParams.setting }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(updateUserNotification(1, 1, requestParams))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
+    });
+
+    context('with invalid attributes', () => {
+      it('fires UPDATE_NOTIFICATION_SETTING_FAILEd action', () => {
+        const requestParams = {
+          pushEnabled: true,
+          mailEnabled: true
+        };
+        const responseParams = { errors: { smth: 'Invalid' } };
+
+        nock('http://localhost:3000')
+            .put('/api/v1/users/1/notification_settings/1', { setting: requestParams })
+            .reply(403, responseParams);
+
+        const expectedActions = [
+          { type: 'START_MAIN_LOADER' },
+          { type: 'STOP_MAIN_LOADER' },
+          { type: 'UPDATE_NOTIFICATION_SETTING_ERROR', errors: responseParams.errors }
+        ];
+
+        const store = mockStore({});
+
+        return store.dispatch(updateUserNotification(1, 1, requestParams))
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+          });
+      });
     });
   });
 });
