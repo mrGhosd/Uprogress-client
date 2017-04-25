@@ -289,6 +289,27 @@ export function loadUserNotification(userId) {
 }
 
 /**
+ * Load notification settings
+ * @return {Dispatch} Dispatch function
+ */
+export function updateUserNotification(userId, id, setting) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put(`/users/${userId}/notification_settings/${id}`, { setting })
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         Info('successNotificationUpdate');
+         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING', setting: response.data.setting });
+       })
+       .catch((error) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         Alert('failedNotificationUpdate');
+         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING_ERROR', setting: error.data.errors });
+       });
+  };
+}
+
+/**
  * Remove authorizations list
  * @return {Dispatch} Dispatch function
  */

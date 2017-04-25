@@ -5,16 +5,17 @@ import CN from 'classnames';
 import { connect } from 'react-redux';
 import Loader from 'react-loader';
 
-import { loadUserNotification } from 'actions/users';
+import { loadUserNotification, updateUserNotification } from 'actions/users';
 
 import CheckBox from 'CheckBox/ElementCheckBox';
+import Button from 'Button/ElementButton';
 
 export class UserNotification extends Component {
 
   state = {
     setting: {
-      pushNotification: false,
-      mailNotification: false
+      pushEnabled: false,
+      mailEnabled: false
     }
   }
 
@@ -43,10 +44,7 @@ export class UserNotification extends Component {
       let prevState = this.state;
 
       prevState = {
-        setting: {
-          pushNotification: props.setting.pushEnabled,
-          mailNotification: props.setting.mailEnabled
-        }
+        setting: props.setting
       };
       this.setState(prevState);
     }
@@ -59,6 +57,14 @@ export class UserNotification extends Component {
     this.setState(lastState);
   }
 
+  submitForm() {
+    const { setting } = this.state;
+
+    this.props.dispatch(
+      updateUserNotification(setting.userId, setting.id, setting)
+    );
+  }
+
   render() {
     const { setting } = this.state;
     const { loader } = this.props;
@@ -67,17 +73,20 @@ export class UserNotification extends Component {
       <div className={CN(css.userNotification)}>
         <Loader loaded={loader} />
           <div className="setting-item">
-            <CheckBox name="pushNotification"
-              checked={setting.pushNotification}
+            <CheckBox name="pushEnabled"
+              checked={setting.pushEnabled}
               onChange={this::this.handleChanges} />
             <p>Receive notifications via mobile pushes</p>
           </div>
 
           <div className="setting-item">
-            <CheckBox name="mailNotification"
-              checked={setting.mailNotification}
+            <CheckBox name="mailEnabled"
+              checked={setting.mailEnabled}
               onChange={this::this.handleChanges} />
             <p>Receive notifications via email</p>
+          </div>
+          <div className="setting-item submit">
+            <Button onClick={this::this.submitForm} color="blue">Save</Button>
           </div>
       </div>
     );
