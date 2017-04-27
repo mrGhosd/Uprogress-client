@@ -223,4 +223,39 @@ describe('Users reducers', () => {
       ).toEqual({ changePasswordErrors: { email: ['Can\'t be blank'] } });
     });
   });
+
+  describe('LOAD_NOTIFICATION_SETTING', () => {
+    it('return filled notificationSetting', () => {
+      const defaultState = { notificationSetting: {} };
+
+      expect(
+        reducer(defaultState, { type: 'LOAD_NOTIFICATION_SETTING', setting: { id: 1 } })
+      ).toEqual({ notificationSetting: { id: 1 } });
+    });
+  });
+
+  describe('UPDATE_NOTIFICATION_SETTING', () => {
+    it('return new notificationSetting', () => {
+      const defaultState = {
+        notificationSetting: {},
+        notificationSettingError: { email: [] }
+      };
+
+      expect(
+        reducer(defaultState, { type: 'UPDATE_NOTIFICATION_SETTING', setting: { id: 1 } })
+      ).toEqual({ notificationSetting: { id: 1 }, notificationSettingError: {} });
+    });
+  });
+
+  describe('UPDATE_NOTIFICATION_SETTING_ERROR', () => {
+    it('return updated notificationSettingError', () => {
+      const defaultState = {
+        notificationSettingError: { }
+      };
+
+      expect(
+        reducer(defaultState, { type: 'UPDATE_NOTIFICATION_SETTING_ERROR', errors: { email: [] } })
+      ).toEqual({ notificationSettingError: { email: [] } });
+    });
+  });
 });
