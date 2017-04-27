@@ -151,7 +151,6 @@ export function getUser(user) {
       .catch((error) => {
         dispatch({ type: 'STOP_MAIN_LOADER' });
         Alert('user_404');
-        console.log(error.data);
         dispatch({ type: 'USER_INFO_FAILED', errors: error.data.errors });
       });
   };
@@ -267,6 +266,45 @@ export function removeAuthorization(id) {
        })
        .catch(() => {
          dispatch({ type: 'STOP_MAIN_LOADER' });
+       });
+  };
+}
+
+/**
+ * Load notification settings
+ * @return {Dispatch} Dispatch function
+ */
+export function loadUserNotification(userId) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return get(`/users/${userId}/notification_settings`)
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         dispatch({ type: 'LOAD_NOTIFICATION_SETTING', setting: response.data.setting });
+       })
+       .catch(() => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+       });
+  };
+}
+
+/**
+ * Load notification settings
+ * @return {Dispatch} Dispatch function
+ */
+export function updateUserNotification(userId, id, setting) {
+  return (dispatch) => {
+    dispatch({ type: 'START_MAIN_LOADER' });
+    return put(`/users/${userId}/notification_settings/${id}`, { setting })
+       .then((response) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         Info('successNotificationUpdate');
+         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING', setting: response.data.setting });
+       })
+       .catch((error) => {
+         dispatch({ type: 'STOP_MAIN_LOADER' });
+         Alert('failedNotificationUpdate');
+         dispatch({ type: 'UPDATE_NOTIFICATION_SETTING_ERROR', errors: error.data.errors });
        });
   };
 }

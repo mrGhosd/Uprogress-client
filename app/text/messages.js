@@ -62,6 +62,14 @@ const messages = {
   appointmentSuccessDelete: {
     title: 'Success',
     text: 'Appointment was succesfully deleted'
+  },
+  successNotificationUpdate: {
+    title: 'Success',
+    text: 'Notification was succesfully updated'
+  },
+  failedNotificationUpdate: {
+    title: 'Failure',
+    text: 'A problem has occured'
   }
 };
 
